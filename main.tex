@@ -56,7 +56,7 @@
 为了克服这些挑战，人们正在探索利用深度学习技术来改善图像编辑系统。
 深度学习，特别是扩散模型，已经在图像生成领域显示出了巨大的潜力。
 这些技术能够学习大量图像数据，自动提取复杂的特征，并生成高质量的图像。
-此外，结合最新的GPT4等性能优异的大语言模型，可以进一步提升系统的交互性，实现更加自然和直观的用户界面。
+此外，结合最新的GPT4Turbo等性能优异的大语言模型，可以进一步提升系统的交互性，实现更加自然和直观的用户界面。
 
 图像生成模型是深度学习领域中一个活跃的研究方向，主要致力于通过机器学习技术生成高质量的图像。这些模型在多种应用场景中均有广泛应用，包括艺术创作、游戏开发、电影制作等。目前，图像生成模型主要包括生成对抗网络（GANs）、变分自编码器（VAEs）和扩散模型等。
 
@@ -155,7 +155,7 @@ middleware是项目的核心组件，通过整合多个平台的API，为GUI提�
 		\hline GetLoras & /v1/pics/loras & 获取可用的LoRa模型列表  \\
 		\hline PostHuggingFaceImgSegment & /v1/pics/huggingface/segment & 获取图像分割结果  \\
 		\hline PostGPT3Dot5Turbo & /v1/chat/gpt3dot5turbo & 调用GPT3.5Turbo  \\
-		\hline PostGPT4 & /v1/chat/gpt4 & 调用GPT4  \\
+		\hline PostGPT4Turbo & /v1/chat/gpt4 & 调用GPT4Turbo  \\
 		\hline PostChatGLM2\_6B & /v1/chat/glm2\_6b & 调用ChatGLM2-6B  \\
 		\hline PostGPT4V & /v1/chat/gpt4v & 调用GPT4V  \\
         \hline
@@ -179,7 +179,7 @@ sd-webui-roop\footnote{https://github.com/s0md3v/sd-webui-roop}基于DeepFake\ci
 结合sd-webui-controlnet和sd-webui-roop等扩展，通过 API 为middleware提供服务。
 
 \section{OpenAI}
-本项目使用了OpenAI\footnote{https://openai.com}的GPT3.5Turo、GPT4、GPT4V、DALL-E2等模型，通过 API 调用OpenAI的模型。
+本项目使用了OpenAI\footnote{https://openai.com}的GPT3.5Turo、GPT4Turbo、GPT4V、DALL-E2等模型，通过 API 调用OpenAI的模型。
 
 GPT-3.5 Turbo 是 OpenAI 开发的一款先进的自然语言处理模型，属于 GPT-3 系列的增强版本。这个模型在处理大量文本和生成文本方面表现出色，适用于聊天机器人、内容创作、文本摘要等应用。GPT-3.5 Turbo 优化了处理速度和响应时间，提高了交互效率。
 
@@ -316,7 +316,7 @@ JSON（JavaScript Object Notation）是一种轻量级的数据交换格式，�
 在JSON中，数据以键值对的形式存在，可以表示数组、布尔值、数字、对象或字符串。由于其简洁性和易于交互的特性，JSON已成为Web应用中数据交换的主流技术。
 由于JSON应用范围广且大语言模型JSON处理能力较强，本项目采用此格式来承载大语言模型和图像生成模型的联系。
 
-通过特定的prompt和图像分割结果以及用户输入的修改意图，本项目可使用GPT3.5Turbo、GPT4、
+通过特定的prompt和图像分割结果以及用户输入的修改意图，本项目可使用GPT3.5Turbo、GPT4Turbo、
 微调后的ChatGLM2-6B生成JSON指令。例：当图像分割结果为$Background, Hair, Upper-clothes, Dress, Face, Right-arm$，用户输入为
 “将背景更换为蓝天白云，将衣服更改为白色的T-shirt”时，生成的JSON指令如 代码3-1 所示。
 
@@ -448,9 +448,9 @@ middleware组件提供了多个API服务，以便GUI可以高效地使用各种�
 $PostSDTxt2Img$和$PostSDImg2Img$是通过Stable Diffusion模型来生成或修改图像的API，这使得用户能够通过简单的API调用，进行复杂的图像生成和编辑操作。$GetLoras$这个API用于获取Stable Diffusion模型可用的LoRa模型列表。
 $PostDALLE2Edit$提供了利用DALL-E2模型修改图片的功能，这进一步扩展了图像处理的能力，在Stable Diffusion模型不可用时作为替代。
 $PostHuggingFaceImgSegment$ API通过可在部署在本地的分割模型不可用时通过调用Hugging Face上的图像分割模型API来实现图像分割。
-在文本处理方面，$PostGPT3Dot5Turbo$、$PostGPT4$和$PostGPT4V$等API利用OpenAI的不同版本GPT模型来处理指令理解和生成任务，$PostChatGLM2\_6B$可调用微调后的ChatGLM2-6B模型来进行指令生成。
+在文本处理方面，$PostGPT3Dot5Turbo$、$PostGPT4Turbo$和$PostGPT4V$等API利用OpenAI的不同版本GPT模型来处理指令理解和生成任务，$PostChatGLM2\_6B$可调用微调后的ChatGLM2-6B模型来进行指令生成。
 
-\chapter{LLM的微调}
+\chapter{LLM的微调} % 1127 + 109 + 187 = 1483
 大语言模型（LLM）的微调是一种调整预训练模型以更好地适应特定任务或应用场景的过程。
 原始的ChatGLM2-6B模型已经通过大规模数据预训练，具备了强大的语言理解和生成能力，
 通过针对特定任务的微调，可以进一步提升模型在指令生成任务的表现。
@@ -461,11 +461,47 @@ $PostHuggingFaceImgSegment$ API通过可在部署在本地的分割模型不可�
 通过利用ATR Dataset\footnote{https://github.com/lemondan/HumanParsing-Dataset}调用多个模型和一定的校验规则来生成所需的数据并整合为一个数据集。数据集生成的流程如 图5-1。
 同时，在系统使用过程中产生的数据可设置是否保存，这些数据也会在运行数据集生成脚本添加到数据集中。
 \buptfigure[width=0.65\textwidth]{pictures/dataset.png}{}{dataset_TMP}
-\subsection{LLM指令生成任性能评估方法}
-由于需要一种直观的性能评估方法来对不同的大语言模型在指令生成任务上的性能进行评估，本项目设计了算法对模型性能进行量化。
+
+通过建立的自动化工作流程，本项目创建了一个包含3000个样本的数据集。
+\subsection{LLM指令生成任务性能评估方法}
+由于需要一种直观的性能评估方法来对不同的大语言模型在指令生成任务上的性能进行评估，本项目采用生成指令的合法率对不同的大语言模型在指令生成任务上的性能进行评估。
+
 
 \section{ChatGLM2-6B针对指令生成任务的微调}
+LoRA: Low-Rank Adaptation of Large Language Models\cite{hu2021lora}这篇论文提出了一种新颖且高效的$LoRa$微调方法，用于微调大型预训练语言模型以适应特定任务。传统的微调方法往往需要重新训练模型的所有参数，而全参数训练的方法在模型参数规模庞大时需要巨大的量。
+$LoRA$保持预训练模型权重不变，通过仅修改模型参数的一个小子集来进行微调，在模型的每层插入可训练的秩分解矩阵，只优化代表适应模型所需的最小可能变化的秩分解矩阵，大大减少了显存和计算开销。与全参数微调相比可训练参数的数量显著减少，并将显存需求减少了三倍。
+
+本项目使用生成的指令生成任务数据集结合$LoRa$方法，通过开源项目LLaMA-Factory\footnote{https://github.com/hiyouga/LLaMA-Factory}对ChatGLM2-6B模型进行微调。
+LoRA微调在大语言模型上的训练损失随训练步数变化的情况如 图5-2所示。从图中可以看出，最初损失值很高，但随着训练步数的增加，损失值迅速下降，特别是在前50步之内下降最为显著。
+在经过约50步之后，损失下降的速度开始放缓，但仍然持续下降，表明模型继续从训练数据中学习。在约200步之后，损失曲线趋于平缓，说明模型已经接近收敛，额外的训练步骤在减少损失方面的效果变得有限。
+图中还展示了一个平滑处理的损失曲线，更清晰地显示了训练过程的整体趋势，而不是每一步的波动。
+\buptfigure[width=0.6\textwidth]{pictures/training_loss}{step-loss图}{pic_step_loss}
+
 \section{各个LLM在本任务下的性能评估}
+结合本项目的LLM指令生成任务性能评估方法，本项目对不同的大语言模型进行了指令生成任务性能评估。各个模型的性能表现如 表5-1所示。
+\begin{bupttable}{LLM 指令生成性能}{table_llm_scores}
+    \begin{tabular}{|l|l|l|}
+        \hline \textbf{模型} & \textbf{测试样本数} & \textbf{合格率} \\
+        \hline GPT3.5Turbo & 100 & 97\% \\
+        \hline GPT4Turbo & 100 & 99\% \\
+        \hline GhatGLM-6B(Origin) & 100 & 6\% \\
+        \hline GhatGLM-6B(LoRa trained 50 steps) & 1000 & 19.1\% \\
+        \hline GhatGLM-6B(LoRa trained 60 steps) & 1000 & 43.7\% \\
+        \hline GhatGLM-6B(LoRa trained 80 steps) & 1000 & 77.8\% \\
+        \hline GhatGLM-6B(LoRa trained 100 steps) & 1000 & 88.1\% \\
+        \hline GhatGLM-6B(LoRa trained 150 steps) & 1000 & 93.9\% \\
+        \hline GhatGLM-6B(LoRa trained 200 steps) & 1000 & 95.8\% \\
+        \hline GhatGLM-6B(LoRa trained 250 steps) & 1000 & 95.2\% \\
+        \hline GhatGLM-6B(LoRa trained 300 steps) & 1000 & 96.7\% \\
+        \hline
+    \end{tabular}
+\end{bupttable}
+
+可观察到原始的ChatGLM2-6B模型在未经过微调时，在指令生成任务中的合格率仅为6\%。
+这一低下的性能表现暴露了ChatGLM2-6B模型在没有针对性训练的情况下难以完成需要高紧准度指令生成任务。
+通过使用LoRA方法进行微调，模型性能随着微调步骤的增加显著提升。当微调步骤增至80步时，合格率提升至77.8\%；
+而在经过200步的微调后，合格率达到95.8\%，并在300步训练后稳定在96\%左右。
+与ChatGLM2-6B相比，GPT3.5Turbo和GPT4Turbo在无需额外训练的情况下即可达到分别为97\%和99\%的高合格率。
 
 \chapter{Stable Diffusion及扩展的使用}
 \section{Stable Diffusion API的使用}
@@ -476,10 +512,53 @@ $PostHuggingFaceImgSegment$ API通过可在部署在本地的分割模型不可�
 \section{系统实现效果}
 \section{系统使用方法}
 
-\chapter{项目管理与维护}
+\chapter{项目管理与维护} % 1755 + 149 + 26 = 1930
 \section{代码管理}
+Git是一个开源的分布式版本控制系统，它允许多个开发者在共同的代码基础上工作，同时能够追踪和记录所有文件的历史变更。
+其兼具高性能与灵活性，能处理从小到大的项目，让开发者能够在本地机器上工作，并保持代码的多个版本，
+以便在不同的分支上进行试验和开发新功能的同时不影响主代码库。
+
+GitHub\footnote{https://github.com}作为一个基于Git的代码托管和协作平台，为开发者提供了一个强大而便捷的环境来管理代码和协作。
+它不仅能够追踪和记录代码的变更历史，确保代码的完整性和回溯能力，还能通过分支管理支持多线程的工作流，允许多个开发者同时推进不同的功能。
+GitHub的pull请求机制促进了团队成员之间的代码审查和讨论，这不仅提高了代码质量，也加强了团队协作。此外，GitHub的集成系统支持持续集成和持续部署流程，
+与各种开发工具链的无缝连接，使得项目管理更加高效。通过开源项目的公开，GitHub还为开发者提供了一个展示和交流的平台，促进了知识共享和技术交流。
+
+为了便于进行代码管理和版本控制，本项目在GitHub上创建了一个仓库\footnote{https://github.com/BinciLuo/multimodal-service}，结合GitHub的其他功能，将其发展成了功能完整、文档详细的开源项目。
+
+
 \section{自动化测试}
+自动化测试是一种利用软件来控制执行测试的过程，它自动比较实际的运行结果与预期结果，以此来验证被测软件功能的一种测试方法。
+自动化测试的主要功能是提高测试的效率和覆盖率，它可以快速地执行大量的测试用例，并且可以反复运行这些测试，确保软件在新的开发迭代中未引入回归错误。
+此外，自动化测试可以在软件开发的早期发现缺陷，从而减少修复缺陷的成本。自动化测试还可以释放测试人员从繁琐的手动测试工作中解脱出来，使他们有更多时间专注于更复杂的测试任务和质量保障活动。
+在持续集成和持续部署（CI/CD）的实践中，自动化测试是不可或缺的一环，它提高了软件交付的速度和质量，是现代软件开发流程中的关键组成部分。
+
+GitHub Actions是GitHub提供的一个持续集成与持续部署（CI/CD）的平台，允许用户在代码仓库中直接自动化、自定义和执行软件开发工作流程。
+通过定义一系列的事件和操作，当指定事件发生时，如代码推送、合并请求或者发布时，GitHub Actions会自动运行这些工作流程。
+这可以包括构建代码、运行测试、部署到生产环境等任务。GitHub Actions的出现使得开发者无需离开GitHub环境就能自动化处理软件的构建、测试和部署过程，从而大幅提升开发的效率。它支持多种操作系统，提供了大量现成的Actions供用户使用，
+并且允许创建私有的、自定义的Actions。作为CI/CD的解决方案，GitHub Actions简化了开发流程，加快了从编写代码到部署产品的过程，同时还提高了软件的质量和交付的可靠性。
+
+本项目使用GitHub Actions对代码中的部分模块进行自动化测试以保证代码的正确性和项目的稳定性。当有新的pull请求对main或dev分支进行更新时，自动化测试工作将在最新版本的Ubuntu运行环境上执行。
+其首先会使用actions/checkout@v3获取最新的仓库代码，利用actions/setup-python@v3来设置Python 3.10版本的Python环境。
+当设置好Python环境后，需要安装测试所需的依赖。在gradio\_web目录下首先升级pip，然后安装本项目自动化测试所需的代码检查和测试框架flake8和pytest，
+如果存在requirements.txt文件，还会安装该文件中列出的依赖。最后，流程将继续在gradio\_web目录下执行名为test\_utils.py的测试脚本。
+
 \section{持续集成与持续部署}
+持续集成（Continuous Integration, CI）和持续部署（Continuous Deployment, CD）是现代软件开发中关键的实践，用于自动化软件开发和发布过程。
+CI的核心是自动化地将代码变更频繁地合并到主分支，每次合并后自动运行构建和测试流程，这样可以迅速发现并解决集成错误，提高代码质量，缩短反馈周期。
+CD扩展了CI的概念，不仅自动化测试，还包括自动化部署过程，确保经过测试的代码可以被自动且频繁地部署到生产环境中。这使得产品能够快速迭代，
+缩短从开发到产品投放市场的时间，同时减少了部署过程中的人为错误，提升了软件交付的速度和安全性。CI/CD通过自动化的流程减少了手动工作，
+允许开发团队更加专注于功能开发和创新，而不是部署过程。
+
+本项目使用GitHub Actions进行CI和CD流程。除了测试外，本项目还有几个关键的CI/CD流程，主要包括部署将项目部署到Azure Web应用和Docker镜像构建。
+
+名为“Build and deploy container app to Azure Web App - gradio-app”的Action通过在代码推送到main分支或手动触发，自动化了在Azure Web App上的部署过程。
+其首先构建gradio\_web的Docker镜像，并将其推送到DockerHub，随后将镜像部署到Azure的生产环境，从而实现高效和一致的应用发布。
+名为“Build and deploy container app to Azure Web App - middleware-app”的Action以相同的方式实现了middleware在Azure Web App上的自动化部署。
+
+名为“Docker Image CI”的Action主要用于构建和推送Docker镜像到DockerHub。当代码被推送到main分支时，此工作流程触发并执行以下操作：
+使用最新的Ubuntu环境，首先通过GitHub Secrets进行Docker登录，然后分别从docker/Dockerfile和docker/DockerfileMini两个文件构建构建两个Docker镜像——标准镜像和更小的Mini镜像，
+其区别为标准镜像使用本地的模型进行图像分割而Mini模型使用HuggingFace\footnote{https://huggingface.co}的API进行图像分割。
+这些镜像将在构建完成后被标记并推送到DockerHub上的账户下，确保最新的容器镜像版本可供部署和分发。此自动化流程加快了软件的交付速度，保证了镜像的最新状态和可用性。名为“Docker Image CI for ARM64”的Action通过相同的方式实现了适用于arm64架构的镜像的构建与发布。
 
 
 
