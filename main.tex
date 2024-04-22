@@ -13,21 +13,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% Begin Documents %%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-% 封面
-\blankmatter
-\includepdf[pages=-]{docs/cover.pdf}  
+% % 封面
+% \blankmatter
+% \includepdf[pages=-]{docs/cover.pdf}  
 
-% 任务书
-\blankmatter
-\includepdf[pages=-]{docs/task.pdf}  
+% % 任务书
+% \blankmatter
+% \includepdf[pages=-]{docs/task.pdf}  
 
-% 成绩评定表
-\blankmatter
-\includepdf[pages=-]{docs/scoreTable.pdf}  
+% % 成绩评定表
+% \blankmatter
+% \includepdf[pages=-]{docs/scoreTable.pdf}  
 
-% 诚信声明
-\blankmatter
-\includepdf[pages=-]{docs/statement.pdf} 
+% % 诚信声明
+% \blankmatter
+% \includepdf[pages=-]{docs/statement.pdf} 
 
 \input{main.cfg}    % Main items 
 \include{abstract}  % Abstract
@@ -111,8 +111,10 @@
 
 middleware部分使用Golang语言构建了一个后端服务。这个服务不仅接入了Stable Diffusion、ChatGLM2-6B、OpenAI的API，还将这些API进行了有效的整合，向GUI提供了一致风格的API接口。这种设计不仅提升了GUI调用多方API的便利性，也通过统一的配置和管理，极大地增强了系统的可维护性和稳定性。
 
-\chapter{总体方案设计} % 1575+250 + 207 + 108 = 2140
+\chapter{总体方案设计} % 2300
 \section{GUI}
+图形用户界面是现代软件项目中不可或缺的组成部分，它极大地提升了应用程序的可访问性和用户体验。GUI通过可视化元素如按钮、图标和菜单等，允许用户以直观的方式与系统进行交互，简化了操作过程并降低了用户的使用门槛。
+本项目所构建的GUI为用户提供了一个交互方式简单且功能强大的图形用户界面，通过图形化的方式展示信息和选择，使得用户能够通过简单的点击或触摸来执行命令或更改设置。它减少了对复杂指令的依赖，从而使用户可以通过直观的方式与系统进行交互，对于非技术用户尤为重要。
 GUI虽然承担计算任务较少，但却是承载本项目结构与逻辑的关键部分。通过使用符合规则的指令作为中枢，
 GUI打通了大语言模型和图像生成模型之间的壁垒，使基于LLM的创新交互式图像编辑系统成为可能。GUI的模块构成如 表2-1 ：
 \begin{bupttable}{GUI模块}{table_gui_modules}
@@ -179,11 +181,14 @@ sd-webui-roop\footnote{https://github.com/s0md3v/sd-webui-roop}基于DeepFake\ci
 结合sd-webui-controlnet和sd-webui-roop等扩展，通过 API 为middleware提供服务。
 
 \section{OpenAI}
-本项目使用了OpenAI\footnote{https://openai.com}的GPT3.5Turo、GPT4Turbo、GPT4V、DALL-E2等模型，通过 API 调用OpenAI的模型。
+OpenAI\footnote{https://openai.com}是一家成立于2015年的非盈利人工智能研究机构，由Elon Musk、Sam Altman等人联合创立，总部位于美国旧金山。该机构的主要目标是推进人工智能的安全发展，并确保AI技术的利益能够普及全人类，
+其在AI领域具有多项突破性成就，其中最著名的产品当属GPT（Generative Pre-trained Transformer）系列，这是一系列的自然语言处理模型，能够生成连贯和相关性强的文本。GPT模型已经更新多代，目前最新的为GPT-4。此外，OpenAI还推出了DALL·E系列，这是一种基于GPT的图像生成模型，能够根据文本描述生成图像。
+
+本项目使用了OpenAI的GPT3.5Turo、GPT4Turbo、GPT4V、DALL-E2等模型，通过 API 调用OpenAI的模型。
 
 GPT-3.5 Turbo 是 OpenAI 开发的一款先进的自然语言处理模型，属于 GPT-3 系列的增强版本。这个模型在处理大量文本和生成文本方面表现出色，适用于聊天机器人、内容创作、文本摘要等应用。GPT-3.5 Turbo 优化了处理速度和响应时间，提高了交互效率。
 
-GPT-4 是 GPT-3 的后续版本，代表了最新一代的语言预测和生成技术。它在模型结构和训练数据量上进行了大幅扩展，使其能够更准确地理解和生成复杂的文本。GPT-4 在理解上下文、维持一致性以及生成更自然的语言方面具有显著优势。
+GPT-4\cite{achiam2023gpt} 是 GPT-3 的后续版本，代表了最新一代的语言预测和生成技术。它在模型结构和训练数据量上进行了大幅扩展，使其能够更准确地理解和生成复杂的文本。GPT-4 在理解上下文、维持一致性以及生成更自然的语言方面具有显著优势。
 
 GPT-4V 是 GPT-4 的一个特殊版本，专门优化用于视觉任务，比如图像标注、视觉问答等。这个版本结合了文本和视觉处理能力，能够更好地理解和生成与图像相关的文本内容。
 
@@ -198,8 +203,7 @@ ChatGLM2-6B支持更长的对话上下文，并提高了推理速度和降低了
 本项目使用ChatGLM2-6B模型，使用开源项目LLaMA-Factory\footnote{https://github.com/hiyouga/LLaMA-Factory}，
 利用本项目提供的数据自动生成功能所生成的数据集，使用LoRa\cite{hu2021lora}方法对模型进行微调以在本项目所需的任务中获得更佳的表现。微调后的模型通过fastapi提供 API 服务。
 
-
-\chapter{GUI的构建} % 1674 + 257 + 139 = 2070
+\chapter{GUI的构建} % 1674+226 + 257 + 139 = 2296
 在本项目中，GUI作为关键组成部分，虽仅承担极少的计算任务，却在结构与逻辑上起着至关重要的作用。
 它通过使用标准化的指令连接大语言模型和图像生成模型，实现了基于LLM的创新交互式图像编辑系统。
 用户首先上传原始图片至BaseImage模块进行预览，之后可通过Chat模块与大语言模型进行交互，获取编辑指令。
@@ -263,7 +267,11 @@ ChatGLM2-6B支持更长的对话上下文，并提高了推理速度和降低了
     \label{Fig:Point} 
 \end{figure}
 
-\newpage
+\subsection{图像遮罩性能优化}
+LRU（Least Recently Used）缓存是一种常用的缓存淘汰算法，用于在有限的缓存空间中管理数据。它的核心思想是优先淘汰最长时间未被使用的数据项。
+functools.lru\_cache是python标准库中functools模块提供的一个装饰器，它实现了LRU缓存机制。该装饰器可以非常方便地被添加到任何想要进行缓存的参数可哈希的函数上，自动地保存最近执行的函数调用结果并在后续相同的调用中直接返回缓存的结果，避免重复计算的开销。
+
+由于在本项目中图像遮罩存在一张图片多次调用的特点，本项目使用了LRU缓存实现性能优化。由于python中PIL.Image.Image对象不可哈希，缓存分割结果时将图像转为base64字符串进行映射。
 \subsection{对自动生成的遮罩进行优化}
 由于分割模型性能的限制，生成的原始遮罩可能在某些细节上表现不佳而影响图像编辑模型的结果，因此设计了一个算法对自动生成的遮罩
 进行优化。该算法可以根据配置文件的设置，对特定的未被遮罩的部分在遮罩的边缘进行收缩。
@@ -305,6 +313,7 @@ ChatGLM2-6B支持更长的对话上下文，并提高了推理速度和降低了
     \label{Fig:MaskOptimize} % 整个组图的标签名
 \end{figure}
 \newpage
+
 \section{多模态}
 如何打通大语言模型和图像生成模型是本项目的关键。本项目通过特定的prompt和图像分割结果，使用大语言模型生成JSON格式的指令并校验，并支持多轮对话。
 用户可有选择性地执行生成的指令或执行全部指令。系统首先会按照给定的规则对指令进行预处理和排序，然后通过指令生成请求参数来调用图像生成模型。多模态任务的实现方式如图3-5。
@@ -431,7 +440,7 @@ GPT-4V是由OpenAI开发的多模态大型语言模型，是GPT系列基础模�
 
 用户通过GUI界面的Advise按键，可以生成建议并将其转换为指令。
 
-\chapter{middleware的构建} % 550 + 78 + 21 = 649
+\chapter{middleware的构建} % 641 + 94 + 19 = 754
 在本项目中，middleware作为核心组件，通过整合来自不同平台的API，为GUI提供了统一且易于接入的API服务。
 其整合了多个图像生成和大语言语言模型，通过统一的接口设计，使得GUI能够方便地调用所需的功能。
 此外，middleware采用了Golang语言和Beego框架，不仅保证了API服务的高并发处理能力和稳定性，
@@ -444,26 +453,37 @@ GUI都能通过相同的结构化请求方式访问不同的服务。
 
 
 \section{使用beego框架提供API服务}
-middleware组件提供了多个API服务，以便GUI可以高效地使用各种模型和工具。
+beego是一个使用Go语言开发的开源Web框架，它支持快速开发各种应用程序，包括API、Web应用和后端服务。该框架设计灵感来源于Tornado、Sinatra和Flask，但结合了Go的特定特性如接口（interface）和结构体嵌入（struct embedding），从而提供了高效的性能和简便的操作​ 。
+
+本项目使用beego框架构建了middleware组件提供了多个API服务，以便GUI可以高效地使用各种模型和工具。
 $PostSDTxt2Img$和$PostSDImg2Img$是通过Stable Diffusion模型来生成或修改图像的API，这使得用户能够通过简单的API调用，进行复杂的图像生成和编辑操作。$GetLoras$这个API用于获取Stable Diffusion模型可用的LoRa模型列表。
 $PostDALLE2Edit$提供了利用DALL-E2模型修改图片的功能，这进一步扩展了图像处理的能力，在Stable Diffusion模型不可用时作为替代。
 $PostHuggingFaceImgSegment$ API通过可在部署在本地的分割模型不可用时通过调用Hugging Face上的图像分割模型API来实现图像分割。
 在文本处理方面，$PostGPT3Dot5Turbo$、$PostGPT4Turbo$和$PostGPT4V$等API利用OpenAI的不同版本GPT模型来处理指令理解和生成任务，$PostChatGLM2\_6B$可调用微调后的ChatGLM2-6B模型来进行指令生成。
 
-\chapter{LLM的微调} % 1127 + 109 + 187 = 1483
-大语言模型（LLM）的微调是一种调整预训练模型以更好地适应特定任务或应用场景的过程。
-原始的ChatGLM2-6B模型已经通过大规模数据预训练，具备了强大的语言理解和生成能力，
-通过针对特定任务的微调，可以进一步提升模型在指令生成任务的表现。
+\chapter{LLM的微调} % 1820 + 119 + 197 = 2136
+大语言模型（LLM）的微调是一种在预训练模型基础上通过特定数据集进一步训练的过程，用于优化模型在特定任务或场景中的表现。特别是对于参数量较小的LLM，微调不仅可以提升其性能，还能增强其针对具体任务的适应性和泛化能力。
+微调的一个主要优势是性能提升，即使是较小的模型，通过针对性的微调，可以在特定任务上实现甚至超过大型模型未经微调时的性能，可见微调能够根据具体需求调整模型的行为，使其更加专注于特定的输出目标。
+微调技术提供了一种有效途径，通过少量的定制化数据提升模型的应用性能，特别是在参数量较小的模型中，这种优势尤为显著。
+
+原始的ChatGLM2-6B模型已经通过大规模数据预训练，具备了强大的语言理解和生成能力，但受制于参数量较小，其在本项目需要高精准度的指令生成任务上表现不佳，因此本项目通过自动生成并进行筛选的高质量指令生成微调数据集对ChatGLM2-6B进行微调以进一步提升模型在指令生成任务的表现。
+
 本项目利用开源项目LLaMA-Factory\footnote{https://github.com/hiyouga/LLaMA-Factory}和本项目中自动生成的指令生成任务数据集对ChatGLM2-6B模型进行微调。
 \section{LLM微调数据集生成与性能评估方法}
 \subsection{微调数据集生成}
+在大语言模型（LLM）的微调过程中，数据集的功能和作用至关重要。微调数据集不仅提供了模型训练所需的具体数据，还直接影响了模型微调后的性能和适应性。
+对于参数量较小的模型，高质量的微调数据集尤其重要，因为这些模型通常缺乏足够的参数量来从大规模数据中学习复杂的特征。通过高质量的微调数据集，参数量较小的大语言模型可以有效地提高这些模型的学习效率和最终性能。
+构造高质量的微调数据集涉及两个关键步骤：数据收集和数据预处理。数据收集需要确保获得足够多的、具有代表性的数据，这些数据能够覆盖模型在实际应用中可能遇到的各种情况。数据预处理是将收集到的原始数据转换成模型可以直接处理的格式，这可能包括数据清洗、特征提取、标签编码等。
+
 由于没有适用于本任务的开源数据集，本项目尝试建立一个自动化工作流程，
 通过利用ATR Dataset\footnote{https://github.com/lemondan/HumanParsing-Dataset}调用多个模型和一定的校验规则来生成所需的数据并整合为一个数据集。数据集生成的流程如 图5-1。
 同时，在系统使用过程中产生的数据可设置是否保存，这些数据也会在运行数据集生成脚本添加到数据集中。
 \buptfigure[width=0.65\textwidth]{pictures/dataset.png}{}{dataset_TMP}
 
-通过建立的自动化工作流程，本项目创建了一个包含3000个样本的数据集。
+通过建立的自动化工作流程，本项目创建了一个包含3000个样本的数据集，数据集中的每一项数据都经过合法性校验以保证数据集的质量。数据集的格式满足LLaMA-Factory的要求并可使用此数据集对ChatGLM2-6B进行微调。
 \subsection{LLM指令生成任务性能评估方法}
+性能评估是大语言模型（LLM）开发和应用的关键环节，尤其是在模型的实用性和可靠性方面。有效的评估方法可以帮助研究者和开发者了解模型在特定任务上的表现，从而进行进一步的优化和调整。
+
 由于需要一种直观的性能评估方法来对不同的大语言模型在指令生成任务上的性能进行评估，本项目采用生成指令的合法率对不同的大语言模型在指令生成任务上的性能进行评估。
 
 
@@ -478,7 +498,7 @@ LoRA微调在大语言模型上的训练损失随训练步数变化的情况如 
 \buptfigure[width=0.6\textwidth]{pictures/training_loss}{step-loss图}{pic_step_loss}
 
 \section{各个LLM在本任务下的性能评估}
-结合本项目的LLM指令生成任务性能评估方法，本项目对不同的大语言模型进行了指令生成任务性能评估。各个模型的性能表现如 表5-1所示。
+结合本项目的LLM指令生成任务性能评估方法，本项目对不同的大语言模型进行了指令生成任务性能评估。各个模型的性能表现如 表5-1 和 图5-3 所示。
 \begin{bupttable}{LLM 指令生成性能}{table_llm_scores}
     \begin{tabular}{|l|l|l|}
         \hline \textbf{模型} & \textbf{测试样本数} & \textbf{合格率} \\
@@ -497,20 +517,144 @@ LoRA微调在大语言模型上的训练损失随训练步数变化的情况如 
     \end{tabular}
 \end{bupttable}
 
+\buptfigure[width=0.7\textwidth]{pictures/model_performance}{LLM 指令生成性能}{model_performance_TMP}
+
+
 可观察到原始的ChatGLM2-6B模型在未经过微调时，在指令生成任务中的合格率仅为6\%。
 这一低下的性能表现暴露了ChatGLM2-6B模型在没有针对性训练的情况下难以完成需要高紧准度指令生成任务。
 通过使用LoRA方法进行微调，模型性能随着微调步骤的增加显著提升。当微调步骤增至80步时，合格率提升至77.8\%；
 而在经过200步的微调后，合格率达到95.8\%，并在300步训练后稳定在96\%左右。
 与ChatGLM2-6B相比，GPT3.5Turbo和GPT4Turbo在无需额外训练的情况下即可达到分别为97\%和99\%的高合格率。
 
-\chapter{Stable Diffusion及扩展的使用}
+\chapter{Stable Diffusion及扩展的使用} % 439 + 106 + 37 = 582
 \section{Stable Diffusion API的使用}
+本项目通过将开源项目stable-diffusion-webui\footnote{https://github.com/AUTOMATIC1111/stable-diffusion-webui}部署在揽睿星舟机器学习平台\footnote{https://www.lanrui-ai.com}，通过API来调用Stable Diffusion模型，
+主要使用的参数见表6-1。
+\begin{bupttable}{主要使用的Stable Diffusion webui img2img API 参数}{sdapi_params}
+    \begin{tabular}{|l|l|l|}
+        \hline \textbf{参数} & \textbf{描述} & \textbf{形式} \\
+        \hline \texttt{prompt} & 输出图像的期望修改或主题 & str \\
+        \hline \texttt{negative\_prompt} & 生成图像中应避免的内容 & str(base64 Image) \\
+        \hline \texttt{mask} & 选择性编辑或生成的区域的图像遮罩 & str \\
+        \hline \texttt{inpainting\_fill} & 修补时的填充方法 & int \\
+        \hline \texttt{inpaint\_full\_res} & 是否在图像的全分辨率下应用修补 & bool \\
+        \hline \texttt{inpaint\_full\_res\_padding} & 使用全分辨率时修补区域周围的填充 & int \\
+        \hline \texttt{inpainting\_mask\_invert} & 是否反转修补遮罩 & bool \\
+        \hline \texttt{mask\_blur} & 遮罩边缘的模糊量 & float \\
+        \hline \texttt{denoising\_strength} & 去噪强度 & float \\
+        \hline \texttt{sampler\_index} & 采样算法 & str \\
+        \hline \texttt{seed} & 初始化随机数生成器的值 & int \\
+        \hline \texttt{steps} & 生成图像时的步骤数 & int \\
+        \hline \texttt{width} & 输出图像的宽度 & int \\
+        \hline \texttt{height} & 输出图像的高度 & float \\
+        \hline \texttt{cfg\_scale} & 输入提示的权重 & float \\
+        \hline \texttt{restore\_faces} & 是否修复生成图像中的面部 & bool \\
+        \hline \texttt{alwayson\_scripts} & 插件参数 & dict \\
+        \hline
+    \end{tabular}
+\end{bupttable}
+\newpage
 \section{ControlNet的使用及效果}
+sd-webui-controlnet\footnote{https://github.com/Mikubill/sd-webui-controlnet}是一个用于stable-diffusion-webui的扩展，允许用户通过添加额外的条件来控制扩散模型的行为，从而增强生成图像的精确度和控制性。这一扩展可以实时添加到原始的 Stable Diffusion 模型中，不需要进行合并处理。
+本项目使用该插件以保持原始图像的主要轮廓和布局不受改变，其实现的效果如图6-1。
+\begin{figure}[!htbp]
+    \centering
+    \subfloat[]{ %[]对齐方式，t为top，b为bottom，留空即可
+	\label{Fig:InitImage} % 子图1标签名
+    	\includegraphics[width=0.24\textwidth]{pictures/253cdd65-d088-4fd2-9ccf-bcb85e909ada} %插入图片命令，格式为[配置]{图片路径}
+    }
+    \quad %空格
+    \subfloat[]{ %[]对齐方式，t为top，b为bottom，留空即可
+	\label{Fig:NoCanny} % 子图1标签名
+    	\includegraphics[width=0.24\textwidth]{pictures/00010-43719289} %插入图片命令，格式为[配置]{图片路径}
+    }
+    \quad %空格
+    \subfloat[]{
+	\label{Fig:Canny} % 子图2标签名
+    	\includegraphics[width=0.24\textwidth]{pictures/00013-743295153}
+    }
+    \caption{ControNet效果：\protect\subref{Fig:InitImage}原始图像，\protect\subref{Fig:NoCanny}未使用ControlNet，\protect\subref{Fig:Canny}使用ControlNet} %注意须使用\protect\subref{}进行标号引用
+    \label{Fig:ControlNet} % 整个组图的标签名
+\end{figure}
 \section{roop的使用及效果}
+roop\footnote{https://github.com/s0md3v/sd-webui-roop}是一个用于stable-diffusion-webui的扩展，提供面部替换的功能。这个扩展需要一张原始图像和目标图像，并能将原始图像的面部替换到目标图像上。
+其实现的效果如图6-2。
+\begin{figure}[!htbp]
+    \centering
+    \subfloat[]{ %[]对齐方式，t为top，b为bottom，留空即可
+	\label{Fig:init} % 子图1标签名
+    	\includegraphics[width=0.26\textwidth]{pictures/00003-736437415} %插入图片命令，格式为[配置]{图片路径}
+    }
+    \quad %空格
+    \subfloat[]{
+	\label{Fig:target} % 子图2标签名
+    	\includegraphics[width=0.2\textwidth]{pictures/253cdd65-d088-4fd2-9ccf-bcb85e909ada}
+    }
+    \quad %空格
+    \subfloat[]{
+	\label{Fig:result} % 子图3标签名
+    	\includegraphics[width=0.2\textwidth]{pictures/image-10}
+    }
+    \caption{roop效果：\protect\subref{Fig:init}原始图像，\protect\subref{Fig:target}目标图像，\protect\subref{Fig:result}结果} %注意须使用\protect\subref{}进行标号引用
+    \label{Fig:Roop} % 整个组图的标签名
+\end{figure}
 
-\chapter{系统实现效果与使用}
+\chapter{系统实现效果与使用} % 1196
 \section{系统实现效果}
+系统实现了一个简单易用的GUI，可通过特定端口进行访问。GUI的总体效果如图7-1所示。
+\buptfigure[width=0.8\textwidth]{pictures/gui}{GUI总体效果}{gui_TMP}
+
+可使用GUI的Auto模块进行LLM微调数据生成和LLM指令生成任务性能测试，其实现效果如图7-2所示。
+\buptfigure[width=0.7\textwidth]{pictures/gui_auto}{Auto模块}{gui_auto_TMP}
+
+可使用GUI的Manual模块查看GUI使用方法，其实现效果如图7-3所示。
+\buptfigure[width=0.7\textwidth]{pictures/gui_manual}{Manual模块}{gui_manual_TMP}
+
+使用GUI进行基于LLM的交互式图像编辑时，系统主要模块效果如图7-4所示。
+\buptfigure[width=0.7\textwidth]{pictures/gui_multimodal}{交互式图像编辑}{gui_multimodal_TMP}
+
+
+
+\newpage
+
 \section{系统使用方法}
+\subsection{系统部署}
+本项目提供了多种常用的项目部署方式，包括使用Docker、Kubernetes，以适应不同的用户需求和操作环境。
+如果选择通过Docker进行部署，用户可以根据需求选择不同的镜像。通过运行命令\texttt{docker run --name multimodal -p 27777:80 binciluo/multimodal:latest}，可以在本地部署图像分割模型。
+如果希望通过Hugging Face API使用图像分割功能以在性能受限的设备上运行，则可以使用命令\texttt{docker run --name multimodal -p 27777:80 binciluo/multimodal:mini\_latest}。
+部署完成后，用户可通过访问本地地址\texttt{127.0.0.1:27777}来使用服务。
+对于Kubernetes部署，用户需要先切换到包含Kubernetes配置文件的目录，使用\texttt{kubectl apply -f pod.yaml}命令部署服务（对于使用Arm架构的用户，则需使用\texttt{kubectl apply -f pod\_arm.yaml}）。非Linux用户需运行\texttt{kubectl port-forward mm-service-pod -n default 27777:27777}以访问服务。服务可通过\texttt{127.0.0.1:27777}地址访问。
+
+项目还支持本地直接运行。用户需要先安装Golang和Beego框架，然后安装Python所需的依赖包。首先安装Golang，接着通过命令\texttt{go install github.com/beego/bee/v2@latest}安装Beego，然后运行\texttt{pip install -r gradio\_web/requirements.txt}安装Python依赖。最终，通过运行脚本\texttt{runner.sh}启动服务，或者设置环境变量\texttt{SEG\_MODEL\_ENV='local'}并运行\texttt{runner\_local.sh}脚本以在本地使用图像分割模型。
+
+\subsection{GUI使用说明}
+1. 上传基础图像：
+您可以上传您的基础图像，或者使用在Base Image中的Examples提供的示例图像。图像上传后，系统会自动地进行图像分割任务并在Chat界面显示分割结果。
+
+2. 与LLM对话
+您可以就如何编辑基础图像提出您的看法，或者使用在Chat中的Examples提供的示例。LLM的回复会被识别是否含有指令，若有指令存在则会对指令进行提取并自动添加至Operation Board中。
+
+3. 选择指令来修改基础图像
+您可以在Operation Board中选择单个或多个指令，并有两个按钮可供选择：Exec Selected Commands和Exec All Commands。Exec Selected Commands会执行选中的指令，而Exec All Commands会执行所有指令。系统会对这些指令进行合并与排序等预处理，然后生成对应的参数向图像编辑模型发起请求。
+
+4. 预览编辑后的图像并设置为基础图像
+您可以在Edited Image标签中预览编辑后的图像，并点击Set as Base Image将其设置为新的基础图像。
+
+5. 替换面部
+您可以使用Edit Image标签中的Change Face功能，将基础图像的面部（仅支持单一面部）替换为特定面部。
+
+6. 编辑遮罩
+如果您对自动生成的遮罩不满意，可以在Edit Image标签的Editor中手动编辑，然后重新运行之前的指令。
+
+7. 检查服务器状态
+您可以点击Check Server Status来确认所有服务是否可用。系统会在大约三秒后弹出提示框显示哪些服务目前不可用。
+
+8. 自动生成LLM微调数据
+您可在Auto模块中的Gen Data选择图片，输入OpenAI的API Key并指定生成数量和线程数以生成LLM微调数据。
+
+9. 对LLM指令生成合格率进行测试
+您可在Auto模块中的Test LLM选择测试集并指定测试样本数量和线程数以对LLM指令生成合格率进行测试。
+
 
 \chapter{项目管理与维护} % 1755 + 149 + 26 = 1930
 \section{代码管理}
@@ -561,268 +705,290 @@ CD扩展了CI的概念，不仅自动化测试，还包括自动化部署过程�
 这些镜像将在构建完成后被标记并推送到DockerHub上的账户下，确保最新的容器镜像版本可供部署和分发。此自动化流程加快了软件的交付速度，保证了镜像的最新状态和可用性。名为“Docker Image CI for ARM64”的Action通过相同的方式实现了适用于arm64架构的镜像的构建与发布。
 
 
+\chapter{总结及未来展望} % 1555
+\section{总结}
+本系统的研发始于对当前图像编辑工具的局限性，这些工具往往需要用户具备专业知识和技能，且操作复杂，难以满足非专业用户的需求。为了解决这些问题，该项目通过打通最新的大语言模型和图像生成模型，开发了一个既强大又用户友好的图像编辑系统。
+系统的核心在于其能够通过简单的与大语言模型聊天的方式来自动化地生成图像编辑的指令从而调用图像生成模型来执行复杂的图像编辑任务。从系统架构层面，打通大语言模型和图像生成模型需要两个主要组件的协同工作：一个直观的图形用户界面（GUI）和一个功能强大的中间件（middleware）。
+
+图形用户界面（GUI）的设计充分考虑了易用性和高效性，使得即使是没有图像编辑经验的用户也能够轻松地进行复杂的图像操作。通过各个简洁明了的模块，用户可以执行包括指令生成、图像自动遮罩、更换面部、参数设置等多种编辑任务。
+GUI既为用户提供了足够简单易用的自动化操作，也能让用户对如遮罩生成等高精度要求的操作进行手动的调整。GUI不仅提高了操作的直观性，还通过其与中间件（middlreware）的高效交互，极大地降低了对用户设备性能的需求。
+
+项目的中间件（middleware）部分是整个系统的枢纽。它整合了多个不同平台、不同请求格式、不同返回格式的API，包括图像生成模型如Stable Diffusion、DALL-E2和大语言模型如ChatGLM2-6B、GPT-3.5 Turbo和GPT-4 Turbo。
+中间件（middleware）的设计保证了这些模型的高效协同工作，支持了GUI所需的从文本交互到图像编辑的一系列高级功能。此外，中间件（middleware）还处理所有后端逻辑，包括图像数据的处理、一对多且互相隔离的服务、以及用户请求的响应，确保了系统的快速响应和高可靠性。
+
+系统创新地引入了基于LoRa的大语言模型微调，通过训练专门的LoRa模型，原在本任务下表现较差的ChatGLM2-6B模型能够理解复杂的用户输入并精准地将其转化为指令，然后自动对指令进行抽取并执行高质量的图像编辑任务。
+微调数据集的自动生成是其中的一个重要环节，系统采用了结合多个模型输出和验证规则的自动化工作流程。在已有的图像数据集下，利用现有的图像分割模型和文本生成模型，自动地生成图像编辑的要求、指令，并进行数据合格校验，生成了大量高质量的训练数据。
+系统设计了自动化的测试流程对各个大语言模型的指令生成能力进行评估，并对ChatGLM2-6B的多个微调模型和GPT3.5 turbo、GPT4 Turbo进行评估，以便对不同的模型的指令生成能力进行量化。从结果中可观察到GPT3.5 turbo、GPT4 Turbo在不进行微调的情况下就已经具有很强的能力，而参数量较小、初始能力极弱的ChatGLM2-6B模型在微调后在指令生成上也能达到接近GPT3.5 turbo的能力。
+
+\section{未来展望}
+最近几年，深度学习在许多领域都取得了显著进展，尤其是在图像和语音识别、自然语言处理和自动驾驶等技术中。在文本生成和图像生成任务上，深度学习技术已从理论探索逐步过渡到实际应用，随着GPU和TPU等专用硬件的发展，深度学习的训练和推理速度得到了极大的提升，使得复杂模型的实时应用成为可能。
+图像生成技术已经实现了从简单的图像生成到复杂的场景重构的跨越。在这一领域，生成对抗网络（GANs）和最新的扩散模型都已经能够生成高质量的图像内容。而大语言模型，如OpenAI的GPT系列和清华大学的ChatGLM2-6B，已经能够理解并生成复杂的自然语言文本。
+在这些新技术的加持下，通过一定的方法对大语言模型和图像生成模型进行链接，从而使基于LLM的交互式图像编辑系统成为可能。
+本项目尝试了基于特定指令链接大语言模型和图像生成模型的方法，并搭建了基础框架且得到了优异的效果。
+
+尽管大语言模型和图像生成技术的结合带来了许多机遇，但也存在不少技术和伦理方面的挑战。如何确保生成的内容的准确性和适当性，防止生成有偏见或不当信息的风险，是需要重点关注的问题。数据的隐私和安全问题也必须得到妥善处理，确保用户信息的保护同时不妨碍技术的有效应用。
+
+随着深度学习技术的继续发展和优化，未来的交互式技术将更加智能和高效。大语言模型和图像生成技术的结合不仅能提升用户体验，还将开启全新的应用领域，为创新和改进现有服务提供强大动力。面对这些前景，行业和研究者需要共同努力，解决挑战，释放这些技术的全部潜力。
 
 
+% \chapter{基础模块示例}
+
+% \section{特殊文本类型}
+% \subsection{脚注}
+% % 如果你的项目来源于科研项目，可以使用以下指令插入无编号脚注于正文第一页
+% \blfootnote{本项目来源于科研项目“基于\LaTeX{}的本科毕业设计”，项目编号1124}
+% 社交媒体是一种供用户创建在线社群来分享信息、观点、个人信息和其它内容（如视频）的电子化交流平台，社交网络服务（social network service, SNS）和微博客（microblogging）都属于社交媒体的范畴\cite{webster_social_media}，国外较为知名的有Facebook\footnote{http://www.facebook.com/}、Instagram\footnote{https://www.instagram.com/}、Twitter\footnote{http://www.twitter.com/}、LinkedIn\footnote{http://www.linkedin.com/}等，国内较为知名的有新浪微博\footnote{http://www.weibo.com/}。
+
+% 在社交媒体的强覆盖下，新闻信息的传播渠道也悄然了发生变化。\cite{false_news_spread_2018}
+
+% \subsection{定义、定理与引理等}
+% \begin{definition}
+% 这是一条我也不知道在说什么的定义，反正我就是写在这里做个样子罢了，也没人会仔细读。\cite{周兴2017基于深度学习的谣言检测及模式挖掘}
+% \end{definition}
+
+% \begin{theorem}
+% 这是一条我也不知道在说什么的定理，反正我就是写在这里做个样子罢了，也没人会仔细读。
+% \end{theorem}
+
+% \begin{axiom}
+% 这是一条我也不知道在说什么的公理，反正我就是写在这里做个样子罢了，也没人会仔细读。
+% \end{axiom}
+
+% \begin{lemma}
+% 这是一条我也不知道在说什么的引理，反正我就是写在这里做个样子罢了，也没人会仔细读。
+% \end{lemma}
+
+% \begin{proposition}
+% 这是一条我也不知道在说什么的命题，反正我就是写在这里做个样子罢了，也没人会仔细读。
+% \end{proposition}
+
+% \begin{corollary}
+% 这是一条我也不知道在说什么的推论，反正我就是写在这里做个样子罢了，也没人会仔细读。
+% \end{corollary}
+
+% \subsection{中英文文献、学位论文引用}
+% 根据美国皮尤研究中心的2017年9月发布的调查结果\cite{pew_news_use_2017}，67\%的美国民众会从社交媒体上获取新闻信息，其中高使用频率用户占20\%。在国内，中国互联网信息中心《2016年中国互联网新闻市场研究报告》\cite{internet_news_2016}也显示，社交媒体已逐渐成为新闻获取、评论、转发、跳转的重要渠道，在2016年下半年，曾经通过社交媒体获取过新闻资讯的用户比例高达90.7\%，在微信、微博等社交媒体参与新闻评论的比例分别为62.8\%和50.2\%。社交媒体正在成为网络上热门事件生成并发酵的源头，在形成传播影响力后带动传统媒体跟进报道，最终形成更大规模的舆论浪潮。\cite{Yang2012Automatic}
+
+% 在国内，新浪微博由于其发布方便、传播迅速、受众广泛且总量大的特点，成为了虚假信息传播的重灾区：《中国新媒体发展报告（2013）》\cite{唐绪军2013中国新媒体发展报告}显示，2012年的100件微博热点舆情案例中，有超过1/3出现谣言；《中国新媒体发展报告（2015）》\cite{唐绪军2015中国新媒体发展报告}对2014年传播较广、比较典型的92条假新闻进行了多维度分析，发现有59\%的虚假新闻首发于新浪微博。
+
+% 此等信息的传播严重损害了有关公众人物的名誉权，降低了社交媒体服务商的商业美誉度，扰乱了网络空间秩序，冲击着网民的认知，极易对民众造成误导，带来诸多麻烦和经济损失，甚至会导致社会秩序的混乱。针对社交媒体谣言采取行动成为了有关部门、服务提供商和广大民众的共同选择。\cite{周兴2017基于深度学习的谣言检测及模式挖掘}
+
+% \section{图表及其引用}
+% 此处引用了简单的表\ref{crowdwisdom_TMP}。
+
+% 请注意，\LaTeX{}的图表排版规则决定了图表\textbf{不一定会乖乖呆在你插入的地方}，这是为了避免Word中由于图片尺寸不匹配在页面下部出现的的空白，所以请不要使用“下图”“下表”作为指向文字，应使用“图1-1所示”这样的表述。
+
+% \begin{bupttable}{基于浏览者行为的特征}{crowdwisdom_TMP}
+
+%     \begin{tabular}{l|l|l}
+% 		\hline \textbf{特征} & \textbf{描述} & \textbf{形式与理论范围}\\
+% 		\hline 点赞量 & 微博的点赞数量 & 数值，$\mathbb{N}$ \\
+% 		\hline 评论量 & 微博的评论数量 & 数值，$\mathbb{N}$ \\
+% 		\hline 转发量 & 微博的转发数量 & 数值，$\mathbb{N}$ \\
+% 		\hline
+%     \end{tabular}
+% \end{bupttable}
+
+% 此处引用了复杂的表\ref{complexcrowdwisdom_TMP}。
 
 
-\chapter{基础模块示例}
+% \begin{bupttable}{基于浏览者行为的复杂特征}{complexcrowdwisdom_TMP}
+%     \begin{tabular}{l|l|l|l}
+%         \hline
+%         \multicolumn{1}{c|}{\multirow{2}{*}{\textbf{类别}}} & \multicolumn{1}{c|}{\multirow{2}{*}{\textbf{特征}}} & \multicolumn{2}{c}{\textbf{不知道叫什么的表头}} \\
+%         \cline{3-4}
+%         & & \multicolumn{1}{c|}{\textbf{描述}} & \multicolumn{1}{c}{\textbf{形式与理论范围}} \\
+%         \hline
+%         \multirow{3}{*}{正常互动} & 点赞量 & 微博的点赞数量 & 数值，$\mathbb{N}$ \\
+%         \cline{2-4}
+%         & 评论量 & 微博的评论数量 & 数值，$\mathbb{N}$ \\
+%         \cline{2-4}
+%         & 转发量 & 微博的转发数量 & 数值，$\mathbb{N}$ \\
+%         \hline
+%         非正常互动 & 羡慕量 & 微博的羡慕数量 & 数值，$\mathbb{N}$ \\
+%         \hline
+%     \end{tabular}
+% \end{bupttable}
 
-\section{特殊文本类型}
-\subsection{脚注}
-% 如果你的项目来源于科研项目，可以使用以下指令插入无编号脚注于正文第一页
-\blfootnote{本项目来源于科研项目“基于\LaTeX{}的本科毕业设计”，项目编号1124}
-社交媒体是一种供用户创建在线社群来分享信息、观点、个人信息和其它内容（如视频）的电子化交流平台，社交网络服务（social network service, SNS）和微博客（microblogging）都属于社交媒体的范畴\cite{webster_social_media}，国外较为知名的有Facebook\footnote{http://www.facebook.com/}、Instagram\footnote{https://www.instagram.com/}、Twitter\footnote{http://www.twitter.com/}、LinkedIn\footnote{http://www.linkedin.com/}等，国内较为知名的有新浪微博\footnote{http://www.weibo.com/}。
+% 此处展示了更专业的表\ref{tab:abbr_table}，一个好的表格没有竖线。
+% % 请注意1）tabularx环境对多行文本的处理；2）booktabs宏包中支持的更粗的顶端和底端表格边界线，边界线与文本间更大的间距。
+% \begin{bupttable}{红警2名词解释}{tab:abbr_table}
+%     \begin{tabularx}{\textwidth}{llX}
+%         \toprule
+%         \textbf{术语类别} & \textbf{缩略语} & \textbf{解释} \\ \midrule
+%         & 兵营 & 兵营（Barracks），《命令与征服\ 红色警戒2：尤里的复仇》游戏中的一种生产建筑，用以生产步兵单位 \\ \cmidrule(l){2-3}
+%         & 建造场 & 建造场（Construction Yard），《命令与征服\ 红色警戒2：尤里的复仇》游戏中的一种基础建筑，用以支持其他建筑的建造 \\ \cmidrule(l){2-3}
+%         & 矿厂 & 矿石精炼厂（Ore Refinery），《命令与征服\ 红色警戒2：尤里的复仇》游戏中的一种资源建筑，用以将矿车采集的矿石转化为游戏资金 \\ \cmidrule(l){2-3}
+%         游戏 & 空指 & 空指部（Airforce Command Headquarters），《命令与征服\ 红色警戒2：尤里的复仇》游戏中的一种资源建筑，用以提供雷达功能和T2科技及生产部分空军单位 \\ \cmidrule(l){2-3}
+%         & 相机 & 游戏术语，特指游戏内的观察区域和视角 \\ \cmidrule(l){2-3}
+%         & 重工 & 战车工厂（War Factory），《命令与征服\ 红色警戒2：尤里的复仇》游戏中的一种生产建筑，用以生产载具单位 \\ \cmidrule(l){2-3}
+%         & 战争迷雾 & 游戏术语，《命令与征服\ 红色警戒2：尤里的复仇》中指黑色的未探索区域 \\ \bottomrule
+%     \end{tabularx}
+% \end{bupttable}
 
-在社交媒体的强覆盖下，新闻信息的传播渠道也悄然了发生变化。\cite{false_news_spread_2018}
+% 此处引用了一张图。图\ref{autoencoder_TMP}表示的是一个由含有4个神经元的输入层、含有3个神经元的隐藏层和含有4个神经元的输出层组成的自编码器，$+1$代表偏置项。
 
-\subsection{定义、定理与引理等}
-\begin{definition}
-这是一条我也不知道在说什么的定义，反正我就是写在这里做个样子罢了，也没人会仔细读。\cite{周兴2017基于深度学习的谣言检测及模式挖掘}
-\end{definition}
+% %图片宽度设置为文本宽度的75%，可以调整为合适的比例
+% \buptfigure[width=0.7\textwidth]{pictures/autoencoder}{自编码器结构}{autoencoder_TMP}
 
-\begin{theorem}
-这是一条我也不知道在说什么的定理，反正我就是写在这里做个样子罢了，也没人会仔细读。
-\end{theorem}
+% %组图示例，已按照指导手册要求设计，由于子图数量不同，无法压缩成\buptfigure那样，大家对照示例即可
+% \begin{figure}[!htbp]
+%     \centering
+%     \subfloat[]{ %[]对齐方式，t为top，b为bottom，留空即可
+% 	\label{Fig:R1} % 子图1标签名
+%     	\includegraphics[width=0.45\textwidth]{pictures/autoencoder} %插入图片命令，格式为[配置]{图片路径}
+%     }
+%     \quad %空格
+%     \subfloat[]{
+% 	\label{Fig:R2} % 子图2标签名
+%     	\includegraphics[width=0.45\textwidth]{pictures/autoencoder}
+%     }
+%     \caption{这是两个自编码器结构，我就是排一下子图的效果：\protect\subref{Fig:R1}左边的自编码器，\protect\subref{Fig:R2}右边的自编码器} %注意须使用\protect\subref{}进行标号引用
+%     \label{Fig:RecAccuracy} % 整个组图的标签名
+% \end{figure}
 
-\begin{axiom}
-这是一条我也不知道在说什么的公理，反正我就是写在这里做个样子罢了，也没人会仔细读。
-\end{axiom}
+% \section{公式与算法表示}
 
-\begin{lemma}
-这是一条我也不知道在说什么的引理，反正我就是写在这里做个样子罢了，也没人会仔细读。
-\end{lemma}
+% \subsection{例子：基于主成分分析}
 
-\begin{proposition}
-这是一条我也不知道在说什么的命题，反正我就是写在这里做个样子罢了，也没人会仔细读。
-\end{proposition}
+% \subsubsection{主成分分析算法}
 
-\begin{corollary}
-这是一条我也不知道在说什么的推论，反正我就是写在这里做个样子罢了，也没人会仔细读。
-\end{corollary}
+% 下面对主成分分析进行介绍。
 
-\subsection{中英文文献、学位论文引用}
-根据美国皮尤研究中心的2017年9月发布的调查结果\cite{pew_news_use_2017}，67\%的美国民众会从社交媒体上获取新闻信息，其中高使用频率用户占20\%。在国内，中国互联网信息中心《2016年中国互联网新闻市场研究报告》\cite{internet_news_2016}也显示，社交媒体已逐渐成为新闻获取、评论、转发、跳转的重要渠道，在2016年下半年，曾经通过社交媒体获取过新闻资讯的用户比例高达90.7\%，在微信、微博等社交媒体参与新闻评论的比例分别为62.8\%和50.2\%。社交媒体正在成为网络上热门事件生成并发酵的源头，在形成传播影响力后带动传统媒体跟进报道，最终形成更大规模的舆论浪潮。\cite{Yang2012Automatic}
+% 主成分分析是一种简单的机器学习算法，其功能可以从两方面解释：一方面可以认为它提供了一种压缩数据的方式，另一方面也可以认为它是一种学习数据表示的无监督学习算法。\cite{Goodfellow2016DeepLearning}
+% 通过PCA，我们可以得到一个恰当的超平面及一个投影矩阵，通过投影矩阵，样本点将被投影在这一超平面上，且满足最大可分性（投影后样本点的方差最大化），直观上讲，也就是能尽可能分开。
 
-在国内，新浪微博由于其发布方便、传播迅速、受众广泛且总量大的特点，成为了虚假信息传播的重灾区：《中国新媒体发展报告（2013）》\cite{唐绪军2013中国新媒体发展报告}显示，2012年的100件微博热点舆情案例中，有超过1/3出现谣言；《中国新媒体发展报告（2015）》\cite{唐绪军2015中国新媒体发展报告}对2014年传播较广、比较典型的92条假新闻进行了多维度分析，发现有59\%的虚假新闻首发于新浪微博。
+% 对中心化后的样本点集$\bm{X}=\{\bm{x}_1,\bm{x}_2,\ldots,\bm{x}_i,\ldots,\bm{x}_m\}$（有$\sum_{i=1}^{m}\bm{x}_i = 0$），考虑将其最大可分地投影到新坐标系\ $\bm{W}= \{\bm{w}_1,\bm{w}_2,\ldots,\bm{w}_i,\ldots,\bm{w}_d\} $，其中$\bm{w}_i$是标准正交基向量，满足$\|\bm{w}_i\|_2 = 1$， $\bm{w}_i^T\bm{w}_j = 0$（$i \not= j$）。假设我们需要$d^\prime$（$d^\prime < d$）个主成分，那么样本点$\bm{x}_i$在低维坐标系中的投影是$\bm{z}_i = (z_{i1};z_{i2};\ldots;z_{id^\prime})$，其中$z_{ij} = \bm{w}_j^\mathrm{T}\bm{x}_i$，是$\bm{x}_i$在低维坐标系下第$j$维的坐标。
+% 对整个样本集，投影后样本点的方差是
+% \begin{equation}
+% \begin{aligned}
+%     & \frac{1}{m}\sum_{i=1}^m \bm{z}_i^\mathrm{T}\bm{z}_i \\
+% = & \frac{1}{m}\sum_{i=1}^m (\bm{x}_i^\mathrm{T}\bm{W})^\mathrm{T}(\bm{x}_i^\mathrm{T}\bm{W}) \\
+% = & \frac{1}{m}\sum_{i=1}^m \bm{W}^\mathrm{T}\bm{x}_i\bm{x}_i^\mathrm{T}\bm{W} \\
+% = & \frac{1}{m} \bm{W}^\mathrm{T}\bm{X}\bm{X}^\mathrm{T}\bm{W} \\
+% \end{aligned}
+% \end{equation}
 
-此等信息的传播严重损害了有关公众人物的名誉权，降低了社交媒体服务商的商业美誉度，扰乱了网络空间秩序，冲击着网民的认知，极易对民众造成误导，带来诸多麻烦和经济损失，甚至会导致社会秩序的混乱。针对社交媒体谣言采取行动成为了有关部门、服务提供商和广大民众的共同选择。\cite{周兴2017基于深度学习的谣言检测及模式挖掘}
+% 由于我们知道新坐标系$\bm{W}$的列向量是标准正交基向量，且样本点集$\bm{X}$已经过中心化，则PCA的优化目标可以写为
+% \begin{equation}
+% \label{PCA_goal_TMP}
+% \begin{aligned}
+% & \max_{\substack{\bm{W}}}  &  tr(\bm{W}^\mathrm{T}\bm{X}\bm{X}^ \mathrm{T}\bm{W}) \\
+% & \operatorname{ s.t. }  &  \bm{W}^\mathrm{T}\bm{W} = \bm{I} \\
+% \end{aligned}
+% \end{equation}
 
-\section{图表及其引用}
-此处引用了简单的表\ref{crowdwisdom_TMP}。
+% 由于$\bm{X}\bm{X}^ \mathrm{ T }$是协方差矩阵，那么只需对它做特征值分解，即
+% \begin{equation}
+% \label{PCA_eigenvalue}
+% \bm{X}^ \mathrm{ T }\bm{X} = \bm{W}\bm{\Lambda}\bm{W}^ \mathrm{ T } \\
+% \end{equation}
+% 其中$\bm{\Lambda}=diag(\bm{\lambda})$，$\bm{\lambda} = \{\lambda_1,\lambda_2,\ldots,\lambda_m\}$。
 
-请注意，\LaTeX{}的图表排版规则决定了图表\textbf{不一定会乖乖呆在你插入的地方}，这是为了避免Word中由于图片尺寸不匹配在页面下部出现的的空白，所以请不要使用“下图”“下表”作为指向文字，应使用“图1-1所示”这样的表述。
+% 具体地，考虑到它是半正定矩阵的二次型，存在最大值，可对\eqref{PCA_goal_TMP}使用拉格朗日乘数法
+% \begin{equation}
+% \bm{X}\bm{X}^ \mathrm{ T }\bm{w}_i  = \lambda_i \bm{w}_i \\
+% \end{equation}
 
-\begin{bupttable}{基于浏览者行为的特征}{crowdwisdom_TMP}
+% 之后将求得的特征值降序排列，取前$d^\prime$个特征值对应的特征向量组成所需的投影矩阵$\bm{W}^\prime =(\bm{w}_1,\bm{w}_2,\ldots,\bm{w}_{d^\prime})$，即可得到PCA的解。PCA算法的描述如算法\ref{PCA_algorithm}所示。
 
-    \begin{tabular}{l|l|l}
-		\hline \textbf{特征} & \textbf{描述} & \textbf{形式与理论范围}\\
-		\hline 点赞量 & 微博的点赞数量 & 数值，$\mathbb{N}$ \\
-		\hline 评论量 & 微博的评论数量 & 数值，$\mathbb{N}$ \\
-		\hline 转发量 & 微博的转发数量 & 数值，$\mathbb{N}$ \\
-		\hline
-    \end{tabular}
-\end{bupttable}
+% \begin{algorithm} 
+% 	\begin{spacing}{1.3}
+% 		\floatname{algorithm}{算法}
+% 		\caption{主成分分析（PCA）} 
+% 		\label{PCA_algorithm}
+% 		\renewcommand{\algorithmicrequire}{\textbf{输入：}}
+% 		\renewcommand{\algorithmicensure}{\textbf{输出：}} 
+% 		\begin{algorithmic}[1] 
+% 			\Require 样本集$\bm{x}=\{\bm{x}_1,\bm{x}_2,\ldots,\bm{x}_i,\ldots,\bm{x}_m\}$，低维空间维数$d^\prime$ 
+% 			\Ensure 投影矩阵  $\bm{W}^\prime =(\bm{w}_1,\bm{w}_2,\ldots,\bm{w}_{d^\prime})$
+% 			\State 对所有样本中心化$\bm{x}_i \gets \bm{x}_i - \frac{1}{m}\sum_{i=1}^m \bm{x}_i$
+% 			\State  计算样本的协方差$\bm{X}\bm{X}^ \mathrm{T}$
+% 			\State 对协方差矩阵$\bm{X}\bm{X}^ \mathrm{T}$做特征值分解
+% 			\State 取最大的$d^\prime$个特征值所对应的特征向量$\bm{w}_1,\bm{w}_2,\ldots,\bm{w}_{d^\prime}$
+% 		\end{algorithmic}  
+% 	\end{spacing}
+% \end{algorithm}
 
-此处引用了复杂的表\ref{complexcrowdwisdom_TMP}。
+% \subsubsection{主成分分析可信度评估方法}
+% 记待判定微博$\bm{w}_0$的经典特征向量为$\bm{f}^{c}_{0}$，它的发布者在$\bm{w_0}$前发布的$k$条微博为$\bm{W} = \bm{w}_1,\bm{w}_2,\ldots,\bm{w}_k$，这$k$条微博对应的经典特征向量集为$\bm{F}^{c}_{W} = \{ \bm{f}^{c}_{1},\bm{f}^{c}_{2},\ldots,\bm{f}^{c}_{k} \}$。令$label = 1$代表谣言，$label = 0$代表非谣言。算法的具体流程如算法\ref{PCA_model}所示。
 
+% \begin{algorithm}
+% 	\begin{spacing}{1.3}
+% 		\floatname{algorithm}{算法}
+% 		\caption{基于PCA的信息可信度评估} 
+% 		\label{PCA_model}
+% 		\renewcommand{\algorithmicrequire}{\textbf{输入：}}
+% 		\renewcommand{\algorithmicensure}{\textbf{输出：}} 
+% 			\begin{algorithmic}[1] 
+% 				\Require $\bm{f}^{c}_{0}$，$\bm{F}^{c}_{W}$，保留主成分数$n$
+% 				\Ensure 标签$label\in \{0,1\}$
+% 				\State 对所有特征向量应用PCA，保留前$n$个主成分$\bm{o}^{c}_{i} \gets PCA(\bm{f}^{c}_{i}, n)$（$i = 0,1,\ldots,k$）
+% 				\State 计算$\bm{F}^{c}_{W}$中各向量的平均距离$\mu$和标准差$\sigma$
+% 				\State 计算阈值$thr = {\mu} / {\sigma}$
+% 				\If {$\min_{1<j\le k} \|\bm{o}^{c}_{0} - \bm{o}^{c}_{j} \|_2 > thr$}
+% 					\State $ label \gets 1 $
+% 				\Else
+% 					\State $ label \gets 0 $
+% 				\EndIf
+% 			\end{algorithmic}
+% 	\end{spacing}
+% \end{algorithm}
 
-\begin{bupttable}{基于浏览者行为的复杂特征}{complexcrowdwisdom_TMP}
-    \begin{tabular}{l|l|l|l}
-        \hline
-        \multicolumn{1}{c|}{\multirow{2}{*}{\textbf{类别}}} & \multicolumn{1}{c|}{\multirow{2}{*}{\textbf{特征}}} & \multicolumn{2}{c}{\textbf{不知道叫什么的表头}} \\
-        \cline{3-4}
-        & & \multicolumn{1}{c|}{\textbf{描述}} & \multicolumn{1}{c}{\textbf{形式与理论范围}} \\
-        \hline
-        \multirow{3}{*}{正常互动} & 点赞量 & 微博的点赞数量 & 数值，$\mathbb{N}$ \\
-        \cline{2-4}
-        & 评论量 & 微博的评论数量 & 数值，$\mathbb{N}$ \\
-        \cline{2-4}
-        & 转发量 & 微博的转发数量 & 数值，$\mathbb{N}$ \\
-        \hline
-        非正常互动 & 羡慕量 & 微博的羡慕数量 & 数值，$\mathbb{N}$ \\
-        \hline
-    \end{tabular}
-\end{bupttable}
+% \section{代码表示}
 
-此处展示了更专业的表\ref{tab:abbr_table}，一个好的表格没有竖线。
-% 请注意1）tabularx环境对多行文本的处理；2）booktabs宏包中支持的更粗的顶端和底端表格边界线，边界线与文本间更大的间距。
-\begin{bupttable}{红警2名词解释}{tab:abbr_table}
-    \begin{tabularx}{\textwidth}{llX}
-        \toprule
-        \textbf{术语类别} & \textbf{缩略语} & \textbf{解释} \\ \midrule
-        & 兵营 & 兵营（Barracks），《命令与征服\ 红色警戒2：尤里的复仇》游戏中的一种生产建筑，用以生产步兵单位 \\ \cmidrule(l){2-3}
-        & 建造场 & 建造场（Construction Yard），《命令与征服\ 红色警戒2：尤里的复仇》游戏中的一种基础建筑，用以支持其他建筑的建造 \\ \cmidrule(l){2-3}
-        & 矿厂 & 矿石精炼厂（Ore Refinery），《命令与征服\ 红色警戒2：尤里的复仇》游戏中的一种资源建筑，用以将矿车采集的矿石转化为游戏资金 \\ \cmidrule(l){2-3}
-        游戏 & 空指 & 空指部（Airforce Command Headquarters），《命令与征服\ 红色警戒2：尤里的复仇》游戏中的一种资源建筑，用以提供雷达功能和T2科技及生产部分空军单位 \\ \cmidrule(l){2-3}
-        & 相机 & 游戏术语，特指游戏内的观察区域和视角 \\ \cmidrule(l){2-3}
-        & 重工 & 战车工厂（War Factory），《命令与征服\ 红色警戒2：尤里的复仇》游戏中的一种生产建筑，用以生产载具单位 \\ \cmidrule(l){2-3}
-        & 战争迷雾 & 游戏术语，《命令与征服\ 红色警戒2：尤里的复仇》中指黑色的未探索区域 \\ \bottomrule
-    \end{tabularx}
-\end{bupttable}
+% %据悉以下语言被lstlisting支持：Awk, bash, Basi4, C#, C++, C, Delphi, erlang, Fortran, GCL, Haskell, HTML, Java, JVMIS, Lisp, Logo, Lua, make, Mathematica, Matlab, Objective C , Octave, Pascal, Perl, PHP, Prolog,  Python, R, Ruby, SAS, Scilab, sh, SHELXL, Simula, SQL, tcl, TeX, VBScript, Verilog, VHDL, XML, XSLT
+% %遗憾的是，JavaScript不被支持，请上网搜索支持该语言的方法
 
-此处引用了一张图。图\ref{autoencoder_TMP}表示的是一个由含有4个神经元的输入层、含有3个神经元的隐藏层和含有4个神经元的输出层组成的自编码器，$+1$代表偏置项。
+% \subsection{直接书写代码在.tex中}
+% 下面的代码\ref{plus}是用Python编写的加法函数。
 
-%图片宽度设置为文本宽度的75%，可以调整为合适的比例
-\buptfigure[width=0.7\textwidth]{pictures/autoencoder}{自编码器结构}{autoencoder_TMP}
+% \begin{lstlisting}[language=Python, caption=加法, label=plus, tabsize=2]  
+% def plusFunc(a, b):
+% 	return a + b 
+% \end{lstlisting}  
 
-%组图示例，已按照指导手册要求设计，由于子图数量不同，无法压缩成\buptfigure那样，大家对照示例即可
-\begin{figure}[!htbp]
-    \centering
-    \subfloat[]{ %[]对齐方式，t为top，b为bottom，留空即可
-	\label{Fig:R1} % 子图1标签名
-    	\includegraphics[width=0.45\textwidth]{pictures/autoencoder} %插入图片命令，格式为[配置]{图片路径}
-    }
-    \quad %空格
-    \subfloat[]{
-	\label{Fig:R2} % 子图2标签名
-    	\includegraphics[width=0.45\textwidth]{pictures/autoencoder}
-    }
-    \caption{这是两个自编码器结构，我就是排一下子图的效果：\protect\subref{Fig:R1}左边的自编码器，\protect\subref{Fig:R2}右边的自编码器} %注意须使用\protect\subref{}进行标号引用
-    \label{Fig:RecAccuracy} % 整个组图的标签名
-\end{figure}
+% \subsection{引用代码文件}
+% 下面的代码\ref{recursion}是用Python文件中引入的倒序打印$x$到$1$的函数，请查看code文件夹。
 
-\section{公式与算法表示}
+% \lstinputlisting[language=Python, caption=倒序打印数字, label=recursion, tabsize=2]{code/recursion.py}
 
-\subsection{例子：基于主成分分析}
+% \section{列表样式}
 
-\subsubsection{主成分分析算法}
+% \subsection{使用圆点作为项目符号}
 
-下面对主成分分析进行介绍。
+% \begin{itemize}
+% \item \textbf{第一章为基础模块示例}，是的，本章的名字就是基础模块示例，正如你看到这个样子。
+% \item \textbf{第二章为不存在}，是的，其实它不存在。
+% \end{itemize}
 
-主成分分析是一种简单的机器学习算法，其功能可以从两方面解释：一方面可以认为它提供了一种压缩数据的方式，另一方面也可以认为它是一种学习数据表示的无监督学习算法。\cite{Goodfellow2016DeepLearning}
-通过PCA，我们可以得到一个恰当的超平面及一个投影矩阵，通过投影矩阵，样本点将被投影在这一超平面上，且满足最大可分性（投影后样本点的方差最大化），直观上讲，也就是能尽可能分开。
+% \subsection{使用数字作为项目符号}
 
-对中心化后的样本点集$\bm{X}=\{\bm{x}_1,\bm{x}_2,\ldots,\bm{x}_i,\ldots,\bm{x}_m\}$（有$\sum_{i=1}^{m}\bm{x}_i = 0$），考虑将其最大可分地投影到新坐标系\ $\bm{W}= \{\bm{w}_1,\bm{w}_2,\ldots,\bm{w}_i,\ldots,\bm{w}_d\} $，其中$\bm{w}_i$是标准正交基向量，满足$\|\bm{w}_i\|_2 = 1$， $\bm{w}_i^T\bm{w}_j = 0$（$i \not= j$）。假设我们需要$d^\prime$（$d^\prime < d$）个主成分，那么样本点$\bm{x}_i$在低维坐标系中的投影是$\bm{z}_i = (z_{i1};z_{i2};\ldots;z_{id^\prime})$，其中$z_{ij} = \bm{w}_j^\mathrm{T}\bm{x}_i$，是$\bm{x}_i$在低维坐标系下第$j$维的坐标。
-对整个样本集，投影后样本点的方差是
-\begin{equation}
-\begin{aligned}
-    & \frac{1}{m}\sum_{i=1}^m \bm{z}_i^\mathrm{T}\bm{z}_i \\
-= & \frac{1}{m}\sum_{i=1}^m (\bm{x}_i^\mathrm{T}\bm{W})^\mathrm{T}(\bm{x}_i^\mathrm{T}\bm{W}) \\
-= & \frac{1}{m}\sum_{i=1}^m \bm{W}^\mathrm{T}\bm{x}_i\bm{x}_i^\mathrm{T}\bm{W} \\
-= & \frac{1}{m} \bm{W}^\mathrm{T}\bm{X}\bm{X}^\mathrm{T}\bm{W} \\
-\end{aligned}
-\end{equation}
+% \begin{enumerate}
+% \item \textbf{第一章为基础模块示例}，是的，本章的名字就是基础模块示例，正如你看到这个样子。
+% \item \textbf{第二章为不存在}，是的，其实它不存在。
+% \end{enumerate}
 
-由于我们知道新坐标系$\bm{W}$的列向量是标准正交基向量，且样本点集$\bm{X}$已经过中心化，则PCA的优化目标可以写为
-\begin{equation}
-\label{PCA_goal_TMP}
-\begin{aligned}
-& \max_{\substack{\bm{W}}}  &  tr(\bm{W}^\mathrm{T}\bm{X}\bm{X}^ \mathrm{T}\bm{W}) \\
-& \operatorname{ s.t. }  &  \bm{W}^\mathrm{T}\bm{W} = \bm{I} \\
-\end{aligned}
-\end{equation}
+% \subsection{句中数字编号列表样式}
 
-由于$\bm{X}\bm{X}^ \mathrm{ T }$是协方差矩阵，那么只需对它做特征值分解，即
-\begin{equation}
-\label{PCA_eigenvalue}
-\bm{X}^ \mathrm{ T }\bm{X} = \bm{W}\bm{\Lambda}\bm{W}^ \mathrm{ T } \\
-\end{equation}
-其中$\bm{\Lambda}=diag(\bm{\lambda})$，$\bm{\lambda} = \{\lambda_1,\lambda_2,\ldots,\lambda_m\}$。
+% \begin{enumerate*}
+%     \item \textbf{第一章为基础模块示例}，是的，本章的名字就是基础模块示例，正如你看到这个样子；
+%     \item \textbf{第二章为不存在}，是的，其实它不存在。
+% \end{enumerate*}
 
-具体地，考虑到它是半正定矩阵的二次型，存在最大值，可对\eqref{PCA_goal_TMP}使用拉格朗日乘数法
-\begin{equation}
-\bm{X}\bm{X}^ \mathrm{ T }\bm{w}_i  = \lambda_i \bm{w}_i \\
-\end{equation}
-
-之后将求得的特征值降序排列，取前$d^\prime$个特征值对应的特征向量组成所需的投影矩阵$\bm{W}^\prime =(\bm{w}_1,\bm{w}_2,\ldots,\bm{w}_{d^\prime})$，即可得到PCA的解。PCA算法的描述如算法\ref{PCA_algorithm}所示。
-
-\begin{algorithm} 
-	\begin{spacing}{1.3}
-		\floatname{algorithm}{算法}
-		\caption{主成分分析（PCA）} 
-		\label{PCA_algorithm}
-		\renewcommand{\algorithmicrequire}{\textbf{输入：}}
-		\renewcommand{\algorithmicensure}{\textbf{输出：}} 
-		\begin{algorithmic}[1] 
-			\Require 样本集$\bm{x}=\{\bm{x}_1,\bm{x}_2,\ldots,\bm{x}_i,\ldots,\bm{x}_m\}$，低维空间维数$d^\prime$ 
-			\Ensure 投影矩阵  $\bm{W}^\prime =(\bm{w}_1,\bm{w}_2,\ldots,\bm{w}_{d^\prime})$
-			\State 对所有样本中心化$\bm{x}_i \gets \bm{x}_i - \frac{1}{m}\sum_{i=1}^m \bm{x}_i$
-			\State  计算样本的协方差$\bm{X}\bm{X}^ \mathrm{T}$
-			\State 对协方差矩阵$\bm{X}\bm{X}^ \mathrm{T}$做特征值分解
-			\State 取最大的$d^\prime$个特征值所对应的特征向量$\bm{w}_1,\bm{w}_2,\ldots,\bm{w}_{d^\prime}$
-		\end{algorithmic}  
-	\end{spacing}
-\end{algorithm}
-
-\subsubsection{主成分分析可信度评估方法}
-记待判定微博$\bm{w}_0$的经典特征向量为$\bm{f}^{c}_{0}$，它的发布者在$\bm{w_0}$前发布的$k$条微博为$\bm{W} = \bm{w}_1,\bm{w}_2,\ldots,\bm{w}_k$，这$k$条微博对应的经典特征向量集为$\bm{F}^{c}_{W} = \{ \bm{f}^{c}_{1},\bm{f}^{c}_{2},\ldots,\bm{f}^{c}_{k} \}$。令$label = 1$代表谣言，$label = 0$代表非谣言。算法的具体流程如算法\ref{PCA_model}所示。
-
-\begin{algorithm}
-	\begin{spacing}{1.3}
-		\floatname{algorithm}{算法}
-		\caption{基于PCA的信息可信度评估} 
-		\label{PCA_model}
-		\renewcommand{\algorithmicrequire}{\textbf{输入：}}
-		\renewcommand{\algorithmicensure}{\textbf{输出：}} 
-			\begin{algorithmic}[1] 
-				\Require $\bm{f}^{c}_{0}$，$\bm{F}^{c}_{W}$，保留主成分数$n$
-				\Ensure 标签$label\in \{0,1\}$
-				\State 对所有特征向量应用PCA，保留前$n$个主成分$\bm{o}^{c}_{i} \gets PCA(\bm{f}^{c}_{i}, n)$（$i = 0,1,\ldots,k$）
-				\State 计算$\bm{F}^{c}_{W}$中各向量的平均距离$\mu$和标准差$\sigma$
-				\State 计算阈值$thr = {\mu} / {\sigma}$
-				\If {$\min_{1<j\le k} \|\bm{o}^{c}_{0} - \bm{o}^{c}_{j} \|_2 > thr$}
-					\State $ label \gets 1 $
-				\Else
-					\State $ label \gets 0 $
-				\EndIf
-			\end{algorithmic}
-	\end{spacing}
-\end{algorithm}
-
-\section{代码表示}
-
-%据悉以下语言被lstlisting支持：Awk, bash, Basi4, C#, C++, C, Delphi, erlang, Fortran, GCL, Haskell, HTML, Java, JVMIS, Lisp, Logo, Lua, make, Mathematica, Matlab, Objective C , Octave, Pascal, Perl, PHP, Prolog,  Python, R, Ruby, SAS, Scilab, sh, SHELXL, Simula, SQL, tcl, TeX, VBScript, Verilog, VHDL, XML, XSLT
-%遗憾的是，JavaScript不被支持，请上网搜索支持该语言的方法
-
-\subsection{直接书写代码在.tex中}
-下面的代码\ref{plus}是用Python编写的加法函数。
-
-\begin{lstlisting}[language=Python, caption=加法, label=plus, tabsize=2]  
-def plusFunc(a, b):
-	return a + b 
-\end{lstlisting}  
-
-\subsection{引用代码文件}
-下面的代码\ref{recursion}是用Python文件中引入的倒序打印$x$到$1$的函数，请查看code文件夹。
-
-\lstinputlisting[language=Python, caption=倒序打印数字, label=recursion, tabsize=2]{code/recursion.py}
-
-\section{列表样式}
-
-\subsection{使用圆点作为项目符号}
-
-\begin{itemize}
-\item \textbf{第一章为基础模块示例}，是的，本章的名字就是基础模块示例，正如你看到这个样子。
-\item \textbf{第二章为不存在}，是的，其实它不存在。
-\end{itemize}
-
-\subsection{使用数字作为项目符号}
-
-\begin{enumerate}
-\item \textbf{第一章为基础模块示例}，是的，本章的名字就是基础模块示例，正如你看到这个样子。
-\item \textbf{第二章为不存在}，是的，其实它不存在。
-\end{enumerate}
-
-\subsection{句中数字编号列表样式}
-
-\begin{enumerate*}
-    \item \textbf{第一章为基础模块示例}，是的，本章的名字就是基础模块示例，正如你看到这个样子；
-    \item \textbf{第二章为不存在}，是的，其实它不存在。
-\end{enumerate*}
-
-\chapter{为了目录撑到第二页}
-\section{我不得不再添加一点内容}
-\section{尽管这些章节一点正文都没有}
-\section{是的}
-\section{真的没有}
-\section{我已经不知道说什么了}
-\section{如果有，我们就祝愿一下学校教务处什么时候转变一下思维}
-\section{把控制格式这种事情往前做}
-\section{不要总是觉得折磨学生是合理的}
-\section{你拿着教学管理岗位的工资}
-\section{你需要折磨一下你自己才对}
-\section{不要觉得我对别人要求太高，对自己太低}
-\section{我对自己要求低的话也不至于想要修订这份模板}
+% \chapter{为了目录撑到第二页}
+% \section{我不得不再添加一点内容}
+% \section{尽管这些章节一点正文都没有}
+% \section{是的}
+% \section{真的没有}
+% \section{我已经不知道说什么了}
+% \section{如果有，我们就祝愿一下学校教务处什么时候转变一下思维}
+% \section{把控制格式这种事情往前做}
+% \section{不要总是觉得折磨学生是合理的}
+% \section{你拿着教学管理岗位的工资}
+% \section{你需要折磨一下你自己才对}
+% \section{不要觉得我对别人要求太高，对自己太低}
+% \section{我对自己要求低的话也不至于想要修订这份模板}
 %%%%%%%%%%%%%%%%%%%%%%% Main Area ENDs Here %%%%%%%%%%%%%%%%%%%%%%%%
 %\let\cleardoublepage=\cleardoublepagebak
 
@@ -852,167 +1018,167 @@ def plusFunc(a, b):
 
 
 \chapter*{附\qquad{}录}
-\phantomsection\addcontentsline{toc}{chapter}{附\qquad{}录}
+% \phantomsection\addcontentsline{toc}{chapter}{附\qquad{}录}
 
-\phantomsection\addcontentsline{toc}{section}{附录1\quad{}缩略语表}
-\section*{附录1\quad{}缩略语表}
+% \phantomsection\addcontentsline{toc}{section}{附录1\quad{}缩略语表}
+% \section*{附录1\quad{}缩略语表}
 
-\begin{bupttable}{基于浏览者行为的特征}{crowdwisdom2}
-    \begin{tabular}{l|l|l}
-        \hline \textbf{特征} & \textbf{描述} & \textbf{形式与理论范围}\\
-        \hline 点赞量 & 微博的点赞数量 & 数值，$\mathbb{N}$ \\
-        \hline 评论量 & 微博的评论数量 & 数值，$\mathbb{N}$ \\
-        \hline 转发量 & 微博的转发数量 & 数值，$\mathbb{N}$ \\
-        \hline
-    \end{tabular}
-\end{bupttable}
+% \begin{bupttable}{基于浏览者行为的特征}{crowdwisdom2}
+%     \begin{tabular}{l|l|l}
+%         \hline \textbf{特征} & \textbf{描述} & \textbf{形式与理论范围}\\
+%         \hline 点赞量 & 微博的点赞数量 & 数值，$\mathbb{N}$ \\
+%         \hline 评论量 & 微博的评论数量 & 数值，$\mathbb{N}$ \\
+%         \hline 转发量 & 微博的转发数量 & 数值，$\mathbb{N}$ \\
+%         \hline
+%     \end{tabular}
+% \end{bupttable}
 
-\begin{bupttable}{基于浏览者行为的复杂特征}{complexcrowdwisdom2}
-    \begin{tabular}{l|l|l|l}
-		\hline
-        \multicolumn{1}{c|}{\multirow{2}{*}{\textbf{类别}}} & \multicolumn{1}{c|}{\multirow{2}{*}{\textbf{特征}}} & \multicolumn{2}{c}{\textbf{不知道叫什么的表头}} \\
-        \cline{3-4}
-         & & \multicolumn{1}{c|}{\textbf{描述}} & \multicolumn{1}{c}{\textbf{形式与理论范围}} \\
-		\hline
-        \multirow{3}{*}{正常互动} & 点赞量 & 微博的点赞数量 & 数值，$\mathbb{N}$ \\
-		\cline{2-4}
-         & 评论量 & 微博的评论数量 & 数值，$\mathbb{N}$ \\
-		\cline{2-4}
-         & 转发量 & 微博的转发数量 & 数值，$\mathbb{N}$ \\
-		\hline
-        非正常互动 & 羡慕量 & 微博的羡慕数量 & 数值，$\mathbb{N}$ \\
-        \hline
-    \end{tabular}
-\end{bupttable}
-\buptfigure[width=0.15\textheight]{pictures/autoencoder}{自编码器结构}{autoencoder}
+% \begin{bupttable}{基于浏览者行为的复杂特征}{complexcrowdwisdom2}
+%     \begin{tabular}{l|l|l|l}
+% 		\hline
+%         \multicolumn{1}{c|}{\multirow{2}{*}{\textbf{类别}}} & \multicolumn{1}{c|}{\multirow{2}{*}{\textbf{特征}}} & \multicolumn{2}{c}{\textbf{不知道叫什么的表头}} \\
+%         \cline{3-4}
+%          & & \multicolumn{1}{c|}{\textbf{描述}} & \multicolumn{1}{c}{\textbf{形式与理论范围}} \\
+% 		\hline
+%         \multirow{3}{*}{正常互动} & 点赞量 & 微博的点赞数量 & 数值，$\mathbb{N}$ \\
+% 		\cline{2-4}
+%          & 评论量 & 微博的评论数量 & 数值，$\mathbb{N}$ \\
+% 		\cline{2-4}
+%          & 转发量 & 微博的转发数量 & 数值，$\mathbb{N}$ \\
+% 		\hline
+%         非正常互动 & 羡慕量 & 微博的羡慕数量 & 数值，$\mathbb{N}$ \\
+%         \hline
+%     \end{tabular}
+% \end{bupttable}
+% \buptfigure[width=0.15\textheight]{pictures/autoencoder}{自编码器结构}{autoencoder}
 
-\begin{lstlisting}[language=Python, caption=减法, label=minus, tabsize=2]  
-def minusFunc(a, b):
-	return a - b 
-\end{lstlisting}  
+% \begin{lstlisting}[language=Python, caption=减法, label=minus, tabsize=2]  
+% def minusFunc(a, b):
+% 	return a - b 
+% \end{lstlisting}  
 
-\begin{equation}
-\label{PCA_goal}
-\begin{aligned}
-\max_{\substack{\bm{W}}}  &  tr(\bm{W}^\mathrm{T}\bm{X}\bm{X}^ \mathrm{T}\bm{W})
-\end{aligned}
-\end{equation}
+% \begin{equation}
+% \label{PCA_goal}
+% \begin{aligned}
+% \max_{\substack{\bm{W}}}  &  tr(\bm{W}^\mathrm{T}\bm{X}\bm{X}^ \mathrm{T}\bm{W})
+% \end{aligned}
+% \end{equation}
 
-\clearpage
-\phantomsection\addcontentsline{toc}{section}{附录2\quad{}数学符号}
-\section*{附录2\quad{}数学符号}
-\begin{center}
-	\begin{tabular}{ccc}
-		\multicolumn{2}{c}{\textbf{数和数组}} \\
-		\\
-		$a$ & 标量（整数或实数）\\
-		$\bm{a}$ & 向量\\
-		$dim()$ & 向量的维数\\
-		$\bm{A}$ & 矩阵\\
-		$\bm{A}^\mathrm{T}$ & 矩阵$\textbf{A}$的转置\\
-		$\bm{I}$ & 单位矩阵（维度依据上下文而定） \\
- 		$diag(\bm{a})$ & 对角方阵，其中对角元素由向量$\bm{a}$确定 \\
+% \clearpage
+% \phantomsection\addcontentsline{toc}{section}{附录2\quad{}数学符号}
+% \section*{附录2\quad{}数学符号}
+% \begin{center}
+% 	\begin{tabular}{ccc}
+% 		\multicolumn{2}{c}{\textbf{数和数组}} \\
+% 		\\
+% 		$a$ & 标量（整数或实数）\\
+% 		$\bm{a}$ & 向量\\
+% 		$dim()$ & 向量的维数\\
+% 		$\bm{A}$ & 矩阵\\
+% 		$\bm{A}^\mathrm{T}$ & 矩阵$\textbf{A}$的转置\\
+% 		$\bm{I}$ & 单位矩阵（维度依据上下文而定） \\
+%  		$diag(\bm{a})$ & 对角方阵，其中对角元素由向量$\bm{a}$确定 \\
 
-	\end{tabular}
-\end{center}
-
-
-% Translated Article
-\newpage\backmatter
-\thispagestyle{empty}
-\phantomsection\addcontentsline{toc}{chapter}{外\quad{}文\quad{}资\quad{}料}
-% 原文第一页，PDF缩放比例为0.95，可以自行调整
-\includepdf[pages=1, scale=0.95, pagecommand=\begin{center}\translationtitlefont{外\quad{}文\quad{}资\quad{}料}\end{center}]{docs/translation.pdf}
-% 原文剩余部分
-\includepdf[pages=2-, scale=0.95]{docs/translation.pdf}
-
-% Translation
-\setcounter{chapter}{0}
-\renewcommand{\thefigure}{~外\arabic{chapter}-\arabic{figure}~}
-\renewcommand{\theequation}{~外\arabic{chapter}-\arabic{equation}~}
-\renewcommand{\thetable}{~外\arabic{chapter}-\arabic{table}~}
-\renewcommand{\thelstlisting}{~外\arabic{chapter}-\arabic{lstlisting}~}
-
-\begin{center}
-\phantomsection\addcontentsline{toc}{chapter}{外\quad{}文\quad{}译\quad{}文}
-\translationtitlefont{外\quad{}文\quad{}译\quad{}文}
-\end{center}
-\vspace{8mm}
-\thispagestyle{empty}
+% 	\end{tabular}
+% \end{center}
 
 
-\begin{center}
-\sanhao\heiti\textbf{真假新闻的在线传播}
+% % Translated Article
+% \newpage\backmatter
+% \thispagestyle{empty}
+% \phantomsection\addcontentsline{toc}{chapter}{外\quad{}文\quad{}资\quad{}料}
+% % 原文第一页，PDF缩放比例为0.95，可以自行调整
+% \includepdf[pages=1, scale=0.95, pagecommand=\begin{center}\translationtitlefont{外\quad{}文\quad{}资\quad{}料}\end{center}]{docs/translation.pdf}
+% % 原文剩余部分
+% \includepdf[pages=2-, scale=0.95]{docs/translation.pdf}
 
-\xiaosihao\songti{Soroush Vosoughi, Deb Roy, Sinan Aral}
+% % Translation
+% \setcounter{chapter}{0}
+% \renewcommand{\thefigure}{~外\arabic{chapter}-\arabic{figure}~}
+% \renewcommand{\theequation}{~外\arabic{chapter}-\arabic{equation}~}
+% \renewcommand{\thetable}{~外\arabic{chapter}-\arabic{table}~}
+% \renewcommand{\thelstlisting}{~外\arabic{chapter}-\arabic{lstlisting}~}
 
-\xiaosihao\songti{麻省理工学院}
-\end{center}
+% \begin{center}
+% \phantomsection\addcontentsline{toc}{chapter}{外\quad{}文\quad{}译\quad{}文}
+% \translationtitlefont{外\quad{}文\quad{}译\quad{}文}
+% \end{center}
+% \vspace{8mm}
+% \thispagestyle{empty}
 
-\songti{}
-\begingroup % 限制两个let语句的作用范围在外文译文部分
-\let\clearpage\relax
-\let\cleardoublepage\relax
+
+% \begin{center}
+% \sanhao\heiti\textbf{真假新闻的在线传播}
+
+% \xiaosihao\songti{Soroush Vosoughi, Deb Roy, Sinan Aral}
+
+% \xiaosihao\songti{麻省理工学院}
+% \end{center}
+
+% \songti{}
+% \begingroup % 限制两个let语句的作用范围在外文译文部分
+% \let\clearpage\relax
+% \let\cleardoublepage\relax
 
 %以下是排版示例，在这里为了使章节编号不出现在目录中，使用了无编号的样式，代价是这些数字都要自己书写。
 
-\chapter*{第一章\quad{}概述}
-%每一个chapter后记得以下两行
-\newtranschapter
+% \chapter*{第一章\quad{}概述}
+% %每一个chapter后记得以下两行
+% \newtranschapter
 
-\section*{1.1\quad{}概述}
-决策、合作、通信和市场领域的基础理论全都将对真实或准确度的概念化作为几乎一切人类努力的核心。然而，不论是真实信息还是虚假信息都会于在线媒体上迅速传播。定义什么是真、什么是假成了一种常见的政治策略，而不是基于一些各方同意的事实的争论。我们的经济也难免遭受虚假信息传播的影响。虚假流言会影响股价和大规模投资的动向，例如，在一条声称巴拉克·奥巴马在爆炸中受伤的推文发布后，股市市值蒸发了1300亿美元。的确，从自然灾害到恐怖袭击，我们对一切事情的反应都受到了扰乱。
+% \section*{1.1\quad{}概述}
+% 决策、合作、通信和市场领域的基础理论全都将对真实或准确度的概念化作为几乎一切人类努力的核心。然而，不论是真实信息还是虚假信息都会于在线媒体上迅速传播。定义什么是真、什么是假成了一种常见的政治策略，而不是基于一些各方同意的事实的争论。我们的经济也难免遭受虚假信息传播的影响。虚假流言会影响股价和大规模投资的动向，例如，在一条声称巴拉克·奥巴马在爆炸中受伤的推文发布后，股市市值蒸发了1300亿美元。的确，从自然灾害到恐怖袭击，我们对一切事情的反应都受到了扰乱。
 
-新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
+% 新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
 
-\begin{equation}
-\label{PCA_goal_appx1}
-\begin{aligned}
-\max_{\substack{\bm{W}}}  &  tr(\bm{W}^\mathrm{T}\bm{X}\bm{X}^ \mathrm{T}\bm{W})
-\end{aligned}
-\end{equation}
+% \begin{equation}
+% \label{PCA_goal_appx1}
+% \begin{aligned}
+% \max_{\substack{\bm{W}}}  &  tr(\bm{W}^\mathrm{T}\bm{X}\bm{X}^ \mathrm{T}\bm{W})
+% \end{aligned}
+% \end{equation}
 
-我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字s。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。
+% 我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字s。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。
 
-\newpage %每一章需要另起一页，为了灵活，我没有把它固定在样式中，你可以根据需求添加分页符
-\chapter*{第二章\quad{}我也不知道是什么}
-\newtranschapter
+% \newpage %每一章需要另起一页，为了灵活，我没有把它固定在样式中，你可以根据需求添加分页符
+% \chapter*{第二章\quad{}我也不知道是什么}
+% \newtranschapter
 
-新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
+% 新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
 
-新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
+% 新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
 
-新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
+% 新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
 
-\begin{equation}
-\label{PCA_goal_appx2}
-\begin{aligned}
-\max_{\substack{\bm{W}}}  &  tr(\bm{W}^\mathrm{T}\bm{X}\bm{X}^ \mathrm{T}\bm{W})
-\end{aligned}
-\end{equation}
+% \begin{equation}
+% \label{PCA_goal_appx2}
+% \begin{aligned}
+% \max_{\substack{\bm{W}}}  &  tr(\bm{W}^\mathrm{T}\bm{X}\bm{X}^ \mathrm{T}\bm{W})
+% \end{aligned}
+% \end{equation}
 
-新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
+% 新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
 
-新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
+% 新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
 
-新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
+% 新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
 
-\endgroup
+% \endgroup
 
-% 开题报告
-\blankmatter
-\phantomsection\addcontentsline{toc}{chapter}{开\quad{}题\quad{}报\quad{}告}
-\includepdf[pages=-]{docs/openingReport.pdf}
+% % % 开题报告
+% % \blankmatter
+% % \phantomsection\addcontentsline{toc}{chapter}{开\quad{}题\quad{}报\quad{}告}
+% % \includepdf[pages=-]{docs/openingReport.pdf}
 
-% 中期检查表
-\blankmatter
-\phantomsection\addcontentsline{toc}{chapter}{中\quad{}期\quad{}检\quad{}查\quad{}表}
-\includepdf[pages=-]{docs/interimReport.pdf}
+% % % 中期检查表
+% % \blankmatter
+% % \phantomsection\addcontentsline{toc}{chapter}{中\quad{}期\quad{}检\quad{}查\quad{}表}
+% % \includepdf[pages=-]{docs/interimReport.pdf}
 
-% 教师指导毕业设计（论文）记录表
-\blankmatter
-\phantomsection\addcontentsline{toc}{chapter}{教师指导毕业设计（论文）记录表}
-\includepdf[pages=-]{docs/guidance.pdf}
+% % % 教师指导毕业设计（论文）记录表
+% % \blankmatter
+% % \phantomsection\addcontentsline{toc}{chapter}{教师指导毕业设计（论文）记录表}
+% % \includepdf[pages=-]{docs/guidance.pdf}
 
 \end{nopagenumber}
 
