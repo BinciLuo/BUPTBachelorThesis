@@ -46,39 +46,69 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Main Area %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{绪论} % 2085 + 66 + 25 = 2176
-\section{项目背景}
+\section{项目背景与意义}
+\subsection{项目背景}
 随着技术的迅速发展，图像生成技术在多个行业中发挥着越来越重要的作用，尤其是在媒体娱乐、数字营销和智能医疗等领域。
 然而，尽管其应用广泛，传统的图像编辑技术仍面临许多挑战，尤其是在交互性和生成图像质量上的限制。
 
-传统图像编辑工具往往依赖于专业的技术知识和复杂的操作界面，这对于普通用户来说是一个较大的门槛。
-用户需要花费大量时间学习如何使用这些工具，这限制了工具的普及性和易用性。这些工具的交互性通常较差，不能很好地根据用户的具体需求进行灵活调整和响应。
+传统图像编辑工具往往依赖于专业的技术知识和复杂的操作界面，交互性通常较差，不能很好地根据用户的具体需求进行灵活调整和响应，对于普通用户来说门槛较高，
+用户需要花费大量时间学习如何使用这些工具，限制了工具的普及性和易用性。
 
-为了克服这些挑战，人们正在探索利用深度学习技术来改善图像编辑系统。
-深度学习，特别是扩散模型，已经在图像生成领域显示出了巨大的潜力。
-这些技术能够学习大量图像数据，自动提取复杂的特征，并生成高质量的图像。
-此外，结合最新的GPT4Turbo等性能优异的大语言模型，可以进一步提升系统的交互性，实现更加自然和直观的用户界面。
+为了改善图像编辑的交互性和灵活性，人们正在探索利用深度学习技术来改善图像编辑系统。
+目前的研究显示扩散模型已经在图像生成领域具有巨大的潜力，其能够学习大量图像数据，自动提取复杂的特征，并生成高质量的图像。
+而对于交互性，若将最新的GPT4Turbo等性能优异的大语言模型融入到图像编辑系统中，可以进一步提升系统的交互性，实现更加自然和直观的交互。
 
 图像生成模型是深度学习领域中一个活跃的研究方向，主要致力于通过机器学习技术生成高质量的图像。这些模型在多种应用场景中均有广泛应用，包括艺术创作、游戏开发、电影制作等。目前，图像生成模型主要包括生成对抗网络（GANs）、变分自编码器（VAEs）和扩散模型等。
 
-扩散模型是近年来发展起来的一种新型生成模型，与传统的生成对抗网络（GANs）和变分自编码器（VAEs）相比，扩散模型在生成图像的质量和多样性方面展现出了卓越的性能。其基本原理是模拟从高质量数据分布到高熵噪声分布的逐步转变过程，然后再逆向这一过程以生成新的数据。
-扩散模型的工作流程可以分为两个阶段：前向扩散过程和反向生成过程。在前向扩散过程中，模型逐渐将数据中的信息转化为噪声，这一过程通常通过向数据中逐步加入高斯噪声来实现。在反向生成过程中，模型则需要学习如何从噪声状态恢复出原始数据的分布，这一过程通常通过训练一个参数化的神经网络来完成，网络的目标是最小化原始数据与生成数据之间的差异。
-扩散模型的关键优势在于其生成的图像具有较高的质量和自然性，这是因为模型在生成过程中能够更好地控制噪声的去除过程，并逐步精细化图像的细节。此外，扩散模型在训练过程中相对稳定，不易出现生成对抗网络中常见的模式崩溃问题。
-
-大语言模型是人工智能领域中的一项核心技术，主要用于处理和理解自然语言。这些模型通过学习大量文本数据，能够生成文本、回答问题、翻译语言等。随着算力的提升和语料的增加，大语言模型已经取得了显著的进步，并在多个应用场景中展现出了巨大的潜力。
-近几年，随着深度学习技术的发展，尤其是Transformers架构的提出，大语言模型的性能得到了质的飞跃。Transformers架构能够有效处理长距离依赖问题，并在许多自然语言处理任务中设定了新的性能标准，GPT（Generative Pre-trained Transformer）、BERT（Bidirectional Encoder Representations from Transformers）等主流模型，通过大规模的语料进行预训练，对语言的深层次结构和语义的理解能力有了显著的提升，在应用方面展现出广泛的适用性，包括但不限于文本生成、对话系统、语言翻译、内容摘要和情感分析等。
-
-通过图像生成模型与大语言模型的结合，可以创建一个更加灵活且易用性强的图像编辑系统。
-这样的系统不仅能够提供更加直观的编辑界面，降低用户的操作难度，还能够根据用户的描述自动生成或修改图像，
-极大地提升生成图像的质量和编辑效率。例如，用户可以通过简单的语言指令，如“增加图片亮度”或“改变背景为海滩”，
+通过将图像生成模型与大语言模型结合，可以创建一个更加灵活且易用性强的图像编辑系统，
+这样的系统不仅能够提供更加直观的编辑界面，降低用户的操作难度，还能根据用户的描述自动生成或修改图像，
+极大地提升生成图像的质量和编辑效率。用户可以通过简单的语言指令，如“增加图片亮度”或“改变背景为海滩”，
 直接与编辑系统交互，系统能够理解这些指令并即时作出响应。
 
-通过整合深度学习和语言模型技术，我们有望构建出一个全新的交互式图像编辑系统。
-这种系统不仅能够提供更高质量的图像编辑结果，更能够提供给用户更加自然的交互方式，为该领域的专业人士和普通用户都带来更多的可能性。
-\section{项目意义}
+通过整合深度学习和语言模型技术，我们有望构建出一个全新的交互式图像编辑系统，其不仅能够提供更高质量的图像编辑结果，更能够提供给用户更加自然的交互方式，为该领域的专业人士和普通用户都带好的图像编辑体验。
+\subsection{项目意义}
 通过融合先进的图像生成技术与大语言模型，本项目希望能搭建一个基于LLM的交互式图像编辑系统，提供更为易用、精准且高效的图像编辑工具，提升媒体娱乐、数字营销以及智能医疗等多个行业的图像处理能力。
 通过实现更加智能化和用户友好型的编辑系统，为广大用户带来前所未有的图像编辑体验，并为促进技术创新做出贡献。这样的研究与开发，为图像编辑技术的未来提供了一种可能性和一条新的探索和实践路径。
+\section{国内外研究现状}
+Multimodal image synthesis and editing: A survey\cite{zhan2022multimodal}这篇论文对多模态图像合成和编辑的进展进行了综述，讨论如何有效地结合多种模态信息来创造和编辑图像。该论文提出了一种分类体系，根据数据模态和模型架构进行分类，并详细介绍了多模态图像合成和编辑的各种方法。该论文还讨论了基准数据集、评价指标以及当前研究中的挑战，并提出了未来的研究方向，强调在图像合成和编辑任务中引入跨模态指导的重要性和潜力。
+\subsection{图像编辑}
+ImageBART\cite{esser2021imagebart}是一种基于自回归变换的图像生成和编辑模型，灵感来源于自然语言处理中的 BART(Bidirectional and Auto-Regressive Transformers)\cite{lewis2019bart},其结合了自回归和编码-解码架构，用于高效地生成和编辑图像。
+EditGAN\cite{ling2021editgan}提出了一种高精度的语义图像编辑方法，允许用户通过修改图像的详细部分分割掩模来编辑图像，其基于生成对抗网络（GAN）构建，只需要少量标记样本即可进行训练，实现了高效的编辑。
+Generating images from captions with attention\cite{mansimov2015generating}介绍了一个能从自然语言描述中生成图像的模型，这个模型在关注描述中的相关词汇的同时利用深度循环注意力编写器（DRAW）迭代地在画布上绘制图像。
+Object-based image editing\cite{barrett2002object}介绍了基于对象的图像编辑技术，允许用户直接在对象层面而不是像素层面进行编辑。
+Faceshop: Deep sketch-based face image editing\cite{portenier2018faceshop}提供了一种利用深度学习来进行面部图像编辑的方法。
+Image-based modeling and photo editing\cite{oh2001image}探讨了基于图像的建模与照片编辑技术，特别强调了分层编辑和实体分离技术的应用。
+Invertible conditional gans for image editing\cite{perarnau2016invertible}探索了可逆条件GANs在图像编辑中的应用，这种模型结合了编码器和cGAN，可对真实图像进行精确修改。
+In-domain gan inversion for real image editing\cite{zhu2020domain}研究了在领域GAN反转技术在真实图像编辑中的应用，通过GAN学习特定图像域的编辑操作。
+Poisson image editing\cite{di2016poisson}探讨了泊松图像编辑技术，该技术能够无缝地将图像区域融合和编辑，并提供高质量的编辑效果。
+Image editing in the contour domain\cite{elder1998image}提出了一种在轮廓域进行图像编辑的方法，这种方法直接在轮廓层面而不是像素层面进行操作。
+Diffusion maps for edge-aware image editing\cite{farbman2010diffusion}使用扩散映射技术进行边缘感知图像编辑以在保持边缘清晰的同时平滑颜色和纹理。
+\subsection{大语言模型微调}
+Parameter-efficient fine-tuning of large-scale pre-trained language models\cite{ding2023parameter}介绍了Delta-tuning技术，它在不改变预训练大模型（PLMs）架构的基础上，通过微调少量参数来适应新任务。其主要包括以下方法：增加式、指定式和重新参数化方法，以及在变换器层添加适配器模块的实际应用，这些方法比全参数微调更节省计算资源，提高了模型的适应性和效率。
+How fine can fine-tuning be? learning efficient language models\cite{radiya2020fine}分析了微调过程的效率，对在保持性能的同时减少计算成本的方法进行探索。
+\# InsTag: Instruction Tagging for Analyzing Supervised Fine-tuning of Large Language Models\cite{lu2023instag}使用指令标签分析监督式微调过程，以提高大型语言模型在特定任务上的性能。
+Scaling federated learning for fine-tuning of large language models\cite{hilmkil2021scaling}应用联邦学习方法来微调大型语言模型，以提高模型在多个数据源上的通用性和隐私保护。
+Longlora: Efficient fine-tuning of long-context large language models\cite{chen2023longlora}针对长上下文的大型语言模型进行高效微调，以提升模型对长距离依赖信息的处理能力。
+Fine-tuning pre-trained language models effectively by optimizing subnetworks adaptively\cite{zhang2022fine}通过自适应优化子网络来有效微调预训练语言模型，以提高模型的灵活性和适应新任务的能力。
+Llm-adapters: An adapter family for parameter-efficient fine-tuning of large language models\cite{hu2023llm}提出一种用于大型语言模型参数高效微调的适配器家族，以减少模型调整过程中的资源消耗。
+Language models are few-shot learners\cite{brown2020language}探讨语言模型在小样本学习中的表现，并分析其微调和适应新任务的能力。
+Fine-tuning language models with just forward passes\cite{malladi2024fine}提出一种仅通过前向传播进行微调的新方法，以简化语言模型的调整过程。
+\subsection{已有的多模态图像编辑方法}
+PixelTone: A Multimodal Interface for Image Editing\cite{laput2013pixeltone}介绍了一种结合语音和直接操作的多模态照片编辑界面，旨在简化移动设备上的图像编辑任务，通过自然语言和草图来定位图像中的具体更改区域。研究还开发了一个定制的自然语言解释器，将用户的语言指令映射到具体的图像处理操作上。通过用户研究，验证了接口的有效性，展示了其在简化编辑流程和提高用户互动体验方面的潜力。
+DiffusionCLIP\cite{kim2022diffusionclip}是一种结合了扩散模型和CLIP\cite{radford2021learning}模型的新型图像编辑方法。这种方法利用了扩散模型的生成能力和CLIP的语义理解能力，以实现通过文本描述来精确控制图像的内容和属性的编辑。
+Language-based image editing with recurrent attentive models\cite{chen2018language}提出一种基于语言的图像编辑方法，通过递归注意模型允许用户用自然语言描述来指导图像编辑过程。
+Imagic: Text-based real image editing with diffusion models\cite{kawar2023imagic}利用扩散模型和文本描述来进行真实图像的编辑，并允许细粒度控制和高度个性化的编辑。
+Sequential attention GAN for interactive image editing\cite{cheng2020sequential}介绍了一个用于交互式图像编辑的顺序注意力GAN模型，允许用户通过多轮对话逐步指导图像编辑。
+Towards automatic image editing: Learning to see another you\cite{ghodrati2015towards}研究了自动图像编辑的可能性，通过机器学习方法让系统能够根据用户的需求生成或修改图像。
+Instructpix2pix: Learning to follow image editing instructions\cite{brooks2023instructpix2pix}使用pix2pix模型学习遵循图像编辑指令，使得模型能够根据文字描述自动进行图像编辑。
+Blended diffusion for text-driven editing of natural images\cite{avrahami2022blended}使用自然语言界面和数据驱动的图像生成技术进行文本驱动的图像编辑。
+Tigan: Text-based interactive image generation and manipulation\cite{zhou2022tigan}提出了一种基于文本的交互式图像生成和操作框架。
+Shape-aware text-driven layered video editing\cite{lee2023shape}对基于形状感知的文本驱动分层视频编辑方法进行探索。
+Prompt tuning inversion for text-driven image editing using diffusion models\cite{dong2023prompt}使用扩散模型，为基于文本的图像编辑提供一种新的反演方法。
+Lightweight text-driven image editing with disentangled content and attributes\cite{li2023lightweight}提供了通过解耦内容和属性以进行轻量级的基于文本驱动的图像编辑的方法。
 
-\section{项目内容}
+\section{项目内容及创新点}
+\subsection{项目内容}
 \buptfigure[width=0.7\textwidth]{pictures/arch.png}{}{arch_TMP}
 
 % 该项目主要实现了GUI、middleware，并对Stable Diffusion和ChatGLM2-6B进行修改与适配。
@@ -111,12 +141,199 @@
 
 middleware部分使用Golang语言构建了一个后端服务。这个服务不仅接入了Stable Diffusion、ChatGLM2-6B、OpenAI的API，还将这些API进行了有效的整合，向GUI提供了一致风格的API接口。这种设计不仅提升了GUI调用多方API的便利性，也通过统一的配置和管理，极大地增强了系统的可维护性和稳定性。
 
-\chapter{总体方案设计} % 2300
-\section{GUI}
+通过整合深度学习和大语言模型技术，本项目不仅能够提供更高质量的图像编辑结果，还能为用户提供更加自然的交互方式，极大地提升了图像编辑的效率和体验。此外，系统设计中还考虑了扩展性和未来技术的整合，预留了接口以适应未来可能的升级，以适应快速发展的技术需求。
+
+\subsection{项目创新点}
+本项目的方案设计充分考虑了技术实现的可行性与用户操作的便捷性，力求在满足复杂功能需求的同时，保证系统的易用性和稳定性。
+本项目将复杂的模型调用参数抽象为用户可理解的模版与设置，建立了一个基于JSON的指令机制打通了大语言模型与图像生成模型，同时对多种主流大语言模型和图像编辑模型进行适配预留有接口，可随着大语言模型和图像生成模型技术的发展快速迭代。
+通过系统化的设计和技术的整合，本项目实现了一个高效且用户友好的多模态交互式图像编辑系统。
+
+\section{论文结构}
+本论文的论文结构如下：
+\begin{itemize}
+    \item \textbf{绪论：}详细描述项目的背景与其重要性，对当前主题在国内外的研究现状进行描述，并列出本项目的主要内容和创新之处。
+    \item \textbf{相关技术研究：}
+    \begin{itemize}
+        \item 扩散模型及其应用
+        \item 大语言模型及其发展
+        \item 系统开发工具和方法
+    \end{itemize}
+    \item \textbf{基于LLM的交互式多模态图像编辑系统的设计与实现：}
+    \begin{itemize}
+        \item GUI的构建
+        \item Middleware的构建
+        \item LLM的微调
+        \item 使用Stable Diffusion及其扩展
+    \end{itemize}
+    \item \textbf{系统实现效果与使用：}
+    \begin{itemize}
+        \item 实现的系统性能
+        \item 系统使用方法
+    \end{itemize}
+    \item \textbf{项目管理与维护：}
+    \begin{itemize}
+        \item 代码管理
+        \item 自动化测试
+        \item 持续集成与持续部署
+    \end{itemize}
+    \item \textbf{总结及未来展望：}
+    \begin{itemize}
+        \item 项目总结
+        \item 未来研究方向和潜在发展
+    \end{itemize}
+\end{itemize}
+
+\chapter{相关技术研究}
+\section{扩散模型}
+扩散模型是近年来发展起来的一种新型生成模型，与传统的生成对抗网络（GANs）和变分自编码器（VAEs）相比，扩散模型在生成图像的质量和多样性方面展现出了卓越的性能。其基本原理是模拟从高质量数据分布到高熵噪声分布的逐步转变过程，然后再逆向这一过程以生成新的数据。
+扩散模型的工作流程可以分为两个阶段：前向扩散过程和反向生成过程。在前向扩散过程中，模型逐渐将数据中的信息转化为噪声，这一过程通常通过向数据中逐步加入高斯噪声来实现。在反向生成过程中，模型则需要学习如何从噪声状态恢复出原始数据的分布，这一过程通常通过训练一个参数化的神经网络来完成，网络的目标是最小化原始数据与生成数据之间的差异。
+扩散模型的关键优势在于其生成的图像具有较高的质量和自然性，这是因为模型在生成过程中能够更好地控制噪声的去除过程，并逐步精细化图像的细节。此外，扩散模型在训练过程中相对稳定，不易出现生成对抗网络中常见的模式崩溃问题。
+扩散模型的基本框架如下：
+
+前向过程（Forward Process)也称为扩散过程，是一个定义良好的马尔可夫链过程，它逐步将原始数据 \( x_0 \) 加入高斯噪声，最终转化为纯噪声 \( x_T \)。这个过程可以表示为：
+\[ x_t = \sqrt{\alpha_t} x_{t-1} + \sqrt{1 - \alpha_t} \epsilon, \]
+其中 \( \epsilon \sim \mathcal{N}(0, I) \) 是高斯噪声，\( \alpha_t \) 是时间步 \( t \) 的噪声级别。
+
+反向过程（Reverse Process）是前向过程的逆过程，目标是从纯噪声状态 \( x_T \) 逐步重构出原始数据 \( x_0 \)。这是通过训练一个参数化模型 \( \epsilon_\theta(x_t, t) \) 来估计每一步的噪声完成的。反向过程的迭代公式为：
+\[ x_{t-1} = \frac{1}{\sqrt{\alpha_t}} \left(x_t - \frac{1-\alpha_t}{\sqrt{1-\alpha_t^2}} \epsilon_\theta(x_t, t)\right). \]
+
+对于扩散模型的优化，扩散模型的训练目标是最小化真实噪声和模型估计噪声之间的差异，通常使用均方误差（MSE）损失函数：
+\[ L(\theta) = \mathbb{E}_{x_0, \epsilon, t}\left[ \|\epsilon - \epsilon_\theta(x_t, t)\|^2 \right], \]
+其中 \( x_t \) 通过前向过程从 \( x_0 \) 生成，而 \( \epsilon \) 是加入的噪声。
+
+Stable Diffusion\cite{rombach2022high} 是一种基于扩散模型的深度学习图像生成模型，它能够根据文本描述生成高质量的图像。
+这个模型采用了条件生成技术，允许用户通过文本指令来引导图像的生成，使其在艺术创作、媒体娱乐、广告和数字营销等多个领域具有广泛的应用。
+其核心在于从噪声逆向还原生成高质量的图片。
+
+由于本项目对于图像生成模型的要求较高且需求复杂，为了便于结合Stable Diffusion模型和其他前沿研究成果及开源社区项目，本项目在构建Stable Diffusion模块时
+以开源项目stable-diffusion-webui\footnote{https://github.com/AUTOMATIC1111/stable-diffusion-webui}为基础，
+结合sd-webui-controlnet和sd-webui-roop等扩展，通过 API 为middleware提供服务。当Stable Diffusion模型不可用时，系统则会调用OpenAI的DALL-E 2模型。DALL-E 2 是一个先进的图像生成模型，其可以根据用户提供的文本描述生成详细、高质量的图像。DALL-E 2 的核心优势在于其创造力和多样性，能够在遵循描述的同时，创造出独特和富有创意的视觉内容。
+
+\section{基于扩散模型的可控图像生成}
+ControlNet\cite{zhang2023adding}是一种新的神经网络架构，用于在大型预训练的文本到图像扩散模型中添加空间条件控制。ControlNet的核心是利用预训练模型的深层和健壮的编码层作为强大的支撑，学习多种条件控制。该网络通过零初始化的卷积层（zero convolutions）连接，这些层从零开始逐步增长参数，确保训练初期不会引入有害的噪声。
+通过使用ControlNet，用户可以更精细地控制图像生成过程，使生成的图像更贴近用户的具体需求，尤其是在空间布局和细节表达上。这种方法能够有效地减少试错循环，提高图像生成的效率和质量。其算法可概括为算法1。
+\begin{algorithm}
+	\begin{spacing}{1.3}
+		\floatname{algorithm}{算法}
+		\caption{ControlNet条件控制扩散模型} 
+		\label{alg:controlnet}
+		\renewcommand{\algorithmicrequire}{\textbf{输入：}}
+		\renewcommand{\algorithmicensure}{\textbf{输出：}} 
+		\begin{algorithmic}[1] 
+			\Require 条件影像$\bm{c}$, 文本提示$t$, 预训练的扩散模型$M$
+			\Ensure 条件控制下生成的图像
+			\State 初始化ControlNet $CN$，连接至模型$M$
+			\State 将条件影像$\bm{c}$转换为特征空间向量 $\bm{cf} \gets E(\bm{c})$
+			\State 在$M$的每个编码块中插入$CN$
+			\State 对于$M$中的每一层：
+			\State \hspace{\algorithmicindent} 应用零初始化的卷积层$Z$来融合$\bm{cf}$
+			\State \hspace{\algorithmicindent} 对融合后的特征进行编码以控制图像生成
+			\State 使用$M$生成图像，根据$\bm{cf}$和$t$进行条件控制
+			\State 输出由ControlNet条件控制的生成图像
+		\end{algorithmic}
+	\end{spacing}
+\end{algorithm}
+
+\section{大语言模型}
+大语言模型是人工智能领域中的一项核心技术，主要用于处理和理解自然语言。这些模型通过学习大量文本数据，能够生成文本、回答问题、翻译语言等。随着算力的提升和语料的增加，大语言模型已经取得了显著的进步，并在多个应用场景中展现出了巨大的潜力。
+近几年，随着深度学习技术的发展，尤其是Transformers架构的提出，大语言模型的性能得到了质的飞跃。Transformers架构能够有效处理长距离依赖问题，并在许多自然语言处理任务中设定了新的性能标准，GPT（Generative Pre-trained Transformer）、BERT（Bidirectional Encoder Representations from Transformers）等主流模型，通过大规模的语料进行预训练，对语言的深层次结构和语义的理解能力有了显著的提升，在应用方面展现出广泛的适用性，包括但不限于文本生成、对话系统、语言翻译、内容摘要和情感分析等。
+
+GPT-3.5 Turbo 是 OpenAI 开发的一款先进的自然语言处理模型，属于 GPT-3 系列的增强版本，在处理大量文本和生成文本方面表现出色，适用于聊天机器人、内容创作、文本摘要等应用。GPT-3.5 Turbo 优化了处理速度和响应时间，提高了交互效率。
+GPT-4\cite{achiam2023gpt} 是 GPT-3 的后续版本，代表了最新一代的语言预测和生成技术，其在模型结构和训练数据量上进行了大幅扩展，能够更准确地理解和生成复杂的文本，在理解上下文、维持一致性以及生成更自然的语言方面具有显著优势。
+GPT-4V 是 GPT-4 的一个特殊版本，专门优化用于视觉任务，比如图像标注、视觉问答等，其结合了文本和视觉处理能力，能够更好地理解和生成与图像相关的文本内容。
+
+ChatGLM2-6B是由清华大学开发的第二代开源双语（中英）对话模型，基于ChatGLM-6B的成功经验并引入了多项新特性和性能提升。
+这款模型经过大规模预训练，实现了显著的性能提升，并在多个数据集上表现出色。
+ChatGLM2-6B支持更长的对话上下文，并提高了推理速度和降低了显存占用，
+使得即使在资源有限的环境下也能有效运行。本项目使用ChatGLM2-6B模型，使用开源项目LLaMA-Factory\footnote{https://github.com/hiyouga/LLaMA-Factory}，
+利用本项目提供的数据自动生成功能所生成的数据集，使用LoRA\cite{hu2021lora}方法对模型进行微调以在本项目所需的任务中获得更佳的表现。微调后的模型通过fastapi提供 API 服务。
+
+LoRA通过在每个Transformer层中注入可训练的低秩矩阵对权重进行更新，而不是更新整个权重矩阵。这种方法不仅减少了模型的存储和计算成本，还保持了与完全微调相当的模型性能。其算法可概括为算法2。
+\begin{algorithm}
+    \begin{spacing}{1.3}
+        \floatname{algorithm}{算法}
+        \caption{LoRA: 低秩适应大型语言模型} 
+        \label{alg:LoRA}
+        \renewcommand{\algorithmicrequire}{\textbf{输入：}}
+        \renewcommand{\algorithmicensure}{\textbf{输出：}} 
+        \begin{algorithmic}[1] 
+            \Require 预训练模型权重 $W_0 \in \mathbb{R}^{d \times k}$，输入 $x$, 低秩 $r$
+            \Ensure 适应后的输出
+            \State 初始化低秩矩阵 $A \in \mathbb{R}^{d \times r}$ 和 $B \in \mathbb{R}^{r \times k}$
+            \State 设定更新权重 $\Delta W = BA$
+            \State 冻结预训练权重 $W_0$
+            \State \textbf{for} 每一层Transformer \textbf{do}
+            \State \hspace{\algorithmicindent} 使用 $W = W_0 + \Delta W$ 进行前向传播
+            \State \hspace{\algorithmicindent} 优化 $A$ 和 $B$ 来最小化损失函数
+            \State \textbf{end for}
+            \State 输出调整后的模型结果
+        \end{algorithmic}
+    \end{spacing}
+\end{algorithm}
+
+\section{系统开发工具}
+beego是一个使用Go语言开发的开源Web框架，它支持快速开发各种应用程序，包括API、Web应用和后端服务。该框架设计灵感来源于Tornado、Sinatra和Flask，但结合了Go的特定特性如接口（interface）和结构体嵌入（struct embedding），从而提供了高效的性能和简便的操作​ 。
+本项目使用beego框架构建了middleware组件提供了多个API服务，以便GUI可以高效地使用各种模型和工具。
+
+\section{本章小结}
+在本章中，我们深入探讨了与多模态图像编辑系统相关的关键技术，首先详细介绍了扩散模型的工作原理及其在图像生成中的应用，接着讨论了大语言模型的相关信息与LoRA微调技术，最后概述了系统开发中使用的主要工具和方法。本章不仅为理解系统的技术基础提供了理论支撑，也为后续章节中系统设计和实现的详细讨论奠定了基础。
+
+
+
+
+
+
+% middleware是项目的核心组件，通过整合多个平台的API，为GUI提供统一的、简单易接入的API服务。其主要特点包括但不限于：
+% 1. API整合：middleware整合了多个平台的API，包括图像生成模型、语言模型等，使得GUI可以通过统一的接口调用不同功能模块；
+% 2. 统一风格：middleware设计了统一的API风格和路由规范，使得GUI可以轻松使用API服务，提高开发效率；
+% 3. 简单易接入：middleware提供了简单易用的API服务，GUI无需关注具体实现细节，只需按照简单的请求规范调用API即可；
+% 4. 稳定性和可靠性：middleware基于Golang语言实现，具有高效的并发处理能力和稳定的运行性能，保证了API服务的稳定性和可靠性；
+% 5. 易于维护：middleware采用了Beego框架，具有清晰的代码结构和模块化设计，易于维护和扩展，保证了项目的长期可持续发展。
+% 其向GUI提供的主要API如 表2-2 所示：
+% \begin{bupttable}{middleware 主要API}{table_gui_modules}
+%     \begin{tabular}{|l|l|l|}
+%         \hline \textbf{API} & \textbf{路由} & \textbf{描述} \\
+%         \hline PostSDTxt2Img & /v1/pics/txt2img & 通过Stable Diffusion模型生成图片  \\
+%         \hline PostSDImg2Img & /v1/pics/img2img & 通过Stable Diffusion模型修改图片 \\
+%         \hline PostDALLE2Edit & /v1/pics/openai/img2img & 通过DALL-E2模型修改图片  \\
+% 		\hline GetLoras & /v1/pics/loras & 获取可用的LoRA模型列表  \\
+% 		\hline PostHuggingFaceImgSegment & /v1/pics/huggingface/segment & 获取图像分割结果  \\
+% 		\hline PostGPT3Dot5Turbo & /v1/chat/gpt3dot5turbo & 调用GPT3.5Turbo  \\
+% 		\hline PostGPT4Turbo & /v1/chat/gpt4 & 调用GPT4Turbo  \\
+% 		\hline PostChatGLM2\_6B & /v1/chat/glm2\_6b & 调用ChatGLM2-6B  \\
+% 		\hline PostGPT4V & /v1/chat/gpt4v & 调用GPT4V  \\
+%         \hline
+%     \end{tabular}
+% \end{bupttable}
+
+\chapter{基于LLM的交互式多模态图像编辑系统的需求分析}
+\section{系统业务与用户角色分析}
+本项目的目标是构建一个基于LLM的交互式多模态图像编辑系统，提供一个高效、直观的图像编辑平台，结合大语言模型和图像生成技术，提供一个友好的图形用户界面，使非技术用户也能轻松使用复杂的图像编辑功能。项目需支持用户通过自然语言指令进行复杂的图像编辑操作。
+系统需能够理解和解析用户的自然语言指令，将其转换为具体的图像编辑任务，
+并利用最新的图像生成模型如Stable Diffusion根据由用户的指令生成的相关参数修改图像。
+
+本项目的目标用户群体包括设计师、营销专业人员、教育工作者和普通消费者。设计师可以利用系统快速实现创意构思，改善设计流程的效率。营销专业人员可以使用该系统快速调整广告图像，以适应不同的市场需求。教育工作者可以使用此系统来创建或修改教学资料中的图像，使教学内容更加生动有趣。普通消费者则可以利用系统提供的易于使用的平台，探索个人图像编辑和创意表达。
+
+\section{系统功能需求分析}
+项目旨在整合最新的深度学习模型技术，如Stable Diffusion和大语言模型，以实现高效生成高质量图像并理解用户自然语言指令。图形用户界面(GUI)设计应简洁直观，包含预览功能，提升用户体验。中间件（middleware）需高效处理GUI请求，并向模型API转发，确保系统稳定性和响应速度。系统应能高效处理复杂的图像编辑任务，并考虑多种使用场景和用户需求，以保证广泛应用和良好用户体验。
+
+\chapter{基于LLM的交互式多模态图像编辑系统的设计与实现}
+在本项目中，图形用户界面（GUI）扮演了至关重要的角色。它是用户与系统交互的前端界面，不仅需要具备直观操作的特性，还应支持复杂的图像处理功能，因此本项目将简洁且直观考虑为GUI设计中的重点，通过图形化元素如按钮、图标和菜单等，允许用户以非常直观的方式进行交互，用户可以通过简单的点击操作来完成与系统的交互。GUI还集成了一些预览功能，用户可以查看遮罩效果，有效提升用户体验和操作的精确性。
+
+middleware在本系统中起到了桥梁的作用，它负责处理来自GUI的请求，并向对应的部署在云平台或OpenAI的模型调用API转发。为了保证系统的响应速度和稳定性，middleware采用了高效的Golang语言结合beego框架进行构建。它整合了包括Stable Diffusion、ChatGLM2-6B及OpenAI提供的API等多种服务，通过提供统一风格的API接口，极大地简化了GUI与模型之间的交互复杂度。这种设计不仅提高了开发效率，也便于系统的后期维护和升级。
+
+深度学习模型是本项目的核心技术之一，特别是在图像生成和文本交互方面。项目中采用了最新的扩散模型技术——Stable Diffusion，它通过学习大量的图像数据，能够生成高质量的图像内容。此外，项目还引入了大语言模型（如GPT系列和ChatGLM2-6B）来处理和理解用户的自然语言指令，实现更加智能的图像编辑功能。用户可以通过简单的语言描述，如“将背景更换为海滩”，系统能够自动解析这些指令并进行相应的图像编辑。
+
+整合GUI、middleware和深度学习模型的总体方案设计，使本项目能够高效处理复杂的图像编辑任务，同时保持用户操作的简便性。系统的设计考虑到了多种使用场景和用户的不同需求，确保了广泛的应用性和良好的用户体验。
+
+\section{本章小结}
+本章主要对基于LLM的交互式多模态图像编辑系统进行了需求分析。系统旨在提供一个高效、直观的图像编辑平台，结合大语言模型和图像生成技术，使用户能够轻松使用复杂的图像编辑功能。项目的目标用户群体包括设计师、营销专业人员、教育工作者和普通消费者，每个用户群体都可以从系统中获得不同的价值。系统需支持用户通过自然语言指令进行图像编辑操作，并能理解和解析这些指令，利用最新的图像生成模型进行图像修改。在功能上，系统需要整合多个深度学习模型、设计直观的GUI界面、高效处理请求的中间件，并考虑多种使用场景和用户需求，以保证系统的稳定性、高效性和良好的用户体验。
+
+\section{GUI的构建} % 1674+226 + 257 + 139 = 2296
 图形用户界面是现代软件项目中不可或缺的组成部分，它极大地提升了应用程序的可访问性和用户体验。GUI通过可视化元素如按钮、图标和菜单等，允许用户以直观的方式与系统进行交互，简化了操作过程并降低了用户的使用门槛。
 本项目所构建的GUI为用户提供了一个交互方式简单且功能强大的图形用户界面，通过图形化的方式展示信息和选择，使得用户能够通过简单的点击或触摸来执行命令或更改设置。它减少了对复杂指令的依赖，从而使用户可以通过直观的方式与系统进行交互，对于非技术用户尤为重要。
 GUI虽然承担计算任务较少，但却是承载本项目结构与逻辑的关键部分。通过使用符合规则的指令作为中枢，
-GUI打通了大语言模型和图像生成模型之间的壁垒，使基于LLM的创新交互式图像编辑系统成为可能。GUI的模块构成如 表2-1 ：
+GUI打通了大语言模型和图像生成模型之间的壁垒，使基于LLM的创新交互式图像编辑系统成为可能。GUI的模块构成如 表4-1 ：
 \begin{bupttable}{GUI模块}{table_gui_modules}
     \begin{tabular}{|l|l|}
         \hline \textbf{模块} & \textbf{描述} \\
@@ -140,82 +357,18 @@ GUI打通了大语言模型和图像生成模型之间的壁垒，使基于LLM�
 其会循环地从给定的图片集中随机选择图片继续分割，将分割后的结果和特定的prompt通过GPT3.5Turbo生成对应的修改建议，
 再将分割的结果、生成的建议通过GPT3.5Turbo生成指令。
 
-\section{middleware}
-middleware是项目的核心组件，通过整合多个平台的API，为GUI提供统一的、简单易接入的API服务。其主要特点包括但不限于：
-1. API整合：middleware整合了多个平台的API，包括图像生成模型、语言模型等，使得GUI可以通过统一的接口调用不同功能模块；
-2. 统一风格：middleware设计了统一的API风格和路由规范，使得GUI可以轻松使用API服务，提高开发效率；
-3. 简单易接入：middleware提供了简单易用的API服务，GUI无需关注具体实现细节，只需按照简单的请求规范调用API即可；
-4. 稳定性和可靠性：middleware基于Golang语言实现，具有高效的并发处理能力和稳定的运行性能，保证了API服务的稳定性和可靠性；
-5. 易于维护：middleware采用了Beego框架，具有清晰的代码结构和模块化设计，易于维护和扩展，保证了项目的长期可持续发展。
-其向GUI提供的主要API如 表2-2 所示：
-\begin{bupttable}{middleware 主要API}{table_gui_modules}
-    \begin{tabular}{|l|l|l|}
-        \hline \textbf{API} & \textbf{路由} & \textbf{描述} \\
-        \hline PostSDTxt2Img & /v1/pics/txt2img & 通过Stable Diffusion模型生成图片  \\
-        \hline PostSDImg2Img & /v1/pics/img2img & 通过Stable Diffusion模型修改图片 \\
-        \hline PostDALLE2Edit & /v1/pics/openai/img2img & 通过DALL-E2模型修改图片  \\
-		\hline GetLoras & /v1/pics/loras & 获取可用的LoRa模型列表  \\
-		\hline PostHuggingFaceImgSegment & /v1/pics/huggingface/segment & 获取图像分割结果  \\
-		\hline PostGPT3Dot5Turbo & /v1/chat/gpt3dot5turbo & 调用GPT3.5Turbo  \\
-		\hline PostGPT4Turbo & /v1/chat/gpt4 & 调用GPT4Turbo  \\
-		\hline PostChatGLM2\_6B & /v1/chat/glm2\_6b & 调用ChatGLM2-6B  \\
-		\hline PostGPT4V & /v1/chat/gpt4v & 调用GPT4V  \\
-        \hline
-    \end{tabular}
-\end{bupttable}
-
-\section{Stable Diffusion}
-Stable Diffusion 是一种基于扩散模型的深度学习图像生成模型，它能够根据文本描述生成高质量的图像。
-这个模型采用了条件生成技术，允许用户通过文本指令来引导图像的生成，使其在艺术创作、媒体娱乐、广告和数字营销等多个领域具有广泛的应用。
-其核心在于从噪声逆向还原生成高质量的图片。
-
-sd-webui-controlnet\footnote{https://github.com/Mikubill/sd-webui-controlnet}使用了ControlNet\cite{zhang2023adding}的原理，
-旨在增强原有 Stable Diffusion 模型的图像生成控制能力。通过集成一个额外的控制网络（ControlNet），
-允许用户精确指导图像的具体内容，显著提升了生成图像的细节质量和一致性。
-
-sd-webui-roop\footnote{https://github.com/s0md3v/sd-webui-roop}基于DeepFake\cite{van2021deepfake}，
-允许用户在图片中进行面部替换，简化了面部交换的过程，无需训练特定的模型，大大降低了使用复杂度。
-
-由于本项目对于图像生成模型的要求较高且需求复杂，为了便于结合Stable Diffusion模型和其他前沿研究成果及开源社区项目，本项目在构建Stable Diffusion模块时
-以开源项目stable-diffusion-webui\footnote{https://github.com/AUTOMATIC1111/stable-diffusion-webui}为基础，
-结合sd-webui-controlnet和sd-webui-roop等扩展，通过 API 为middleware提供服务。
-
-\section{OpenAI}
-OpenAI\footnote{https://openai.com}是一家成立于2015年的非盈利人工智能研究机构，由Elon Musk、Sam Altman等人联合创立，总部位于美国旧金山。该机构的主要目标是推进人工智能的安全发展，并确保AI技术的利益能够普及全人类，
-其在AI领域具有多项突破性成就，其中最著名的产品当属GPT（Generative Pre-trained Transformer）系列，这是一系列的自然语言处理模型，能够生成连贯和相关性强的文本。GPT模型已经更新多代，目前最新的为GPT-4。此外，OpenAI还推出了DALL·E系列，这是一种基于GPT的图像生成模型，能够根据文本描述生成图像。
-
-本项目使用了OpenAI的GPT3.5Turo、GPT4Turbo、GPT4V、DALL-E2等模型，通过 API 调用OpenAI的模型。
-
-GPT-3.5 Turbo 是 OpenAI 开发的一款先进的自然语言处理模型，属于 GPT-3 系列的增强版本。这个模型在处理大量文本和生成文本方面表现出色，适用于聊天机器人、内容创作、文本摘要等应用。GPT-3.5 Turbo 优化了处理速度和响应时间，提高了交互效率。
-
-GPT-4\cite{achiam2023gpt} 是 GPT-3 的后续版本，代表了最新一代的语言预测和生成技术。它在模型结构和训练数据量上进行了大幅扩展，使其能够更准确地理解和生成复杂的文本。GPT-4 在理解上下文、维持一致性以及生成更自然的语言方面具有显著优势。
-
-GPT-4V 是 GPT-4 的一个特殊版本，专门优化用于视觉任务，比如图像标注、视觉问答等。这个版本结合了文本和视觉处理能力，能够更好地理解和生成与图像相关的文本内容。
-
-DALL-E 2 是一个先进的图像生成模型，专门设计用来创建新颖的图像和艺术作品。它可以根据用户提供的文本描述生成详细、高质量的图像。DALL-E 2 的核心优势在于其创造力和多样性，能够在遵循描述的同时，创造出独特和富有创意的视觉内容。
-
-\section{ChatGLM2-6B}
-ChatGLM2-6B是由清华大学开发的第二代开源双语（中英）对话模型，基于ChatGLM-6B的成功经验并引入了多项新特性和性能提升。
-这款模型经过大规模预训练，实现了显著的性能提升，并在多个数据集上表现出色。
-ChatGLM2-6B支持更长的对话上下文，并提高了推理速度和降低了显存占用，
-使得即使在资源有限的环境下也能有效运行。
-
-本项目使用ChatGLM2-6B模型，使用开源项目LLaMA-Factory\footnote{https://github.com/hiyouga/LLaMA-Factory}，
-利用本项目提供的数据自动生成功能所生成的数据集，使用LoRa\cite{hu2021lora}方法对模型进行微调以在本项目所需的任务中获得更佳的表现。微调后的模型通过fastapi提供 API 服务。
-
-\chapter{GUI的构建} % 1674+226 + 257 + 139 = 2296
-在本项目中，GUI作为关键组成部分，虽仅承担极少的计算任务，却在结构与逻辑上起着至关重要的作用。
-它通过使用标准化的指令连接大语言模型和图像生成模型，实现了基于LLM的创新交互式图像编辑系统。
-用户首先上传原始图片至BaseImage模块进行预览，之后可通过Chat模块与大语言模型进行交互，获取编辑指令。
-用户可以在Operation Board模块中选择单独或批量执行这些指令。
-若对自动生成的遮罩不满意，可在Edit Image模块中手动调整。
-此外，Auto模块允许用户批量处理多张图片，自动生成数据以微调大语言模型。
-该过程包括图片的自动分割、利用GPT3.5Turbo生成编辑建议及相应的执行指令。
-这样的设计不仅提升了系统的效率，也优化了用户的交互体验。
-\section{图像自动遮罩与优化}
+% 在本项目中，GUI作为关键组成部分，虽仅承担极少的计算任务，却在结构与逻辑上起着至关重要的作用。
+% 它通过使用标准化的指令连接大语言模型和图像生成模型，实现了基于LLM的创新交互式图像编辑系统。
+% 用户首先上传原始图片至BaseImage模块进行预览，之后可通过Chat模块与大语言模型进行交互，获取编辑指令。
+% 用户可以在Operation Board模块中选择单独或批量执行这些指令。
+% 若对自动生成的遮罩不满意，可在Edit Image模块中手动调整。
+% 此外，Auto模块允许用户批量处理多张图片，自动生成数据以微调大语言模型。
+% 该过程包括图片的自动分割、利用GPT3.5Turbo生成编辑建议及相应的执行指令。
+% 这样的设计不仅提升了系统的效率，也优化了用户的交互体验。
+\subsection{图像自动遮罩与优化}
 由于本项目需要提供对图像进行部分修改的功能，所以需要在使用图像生成模型进行图像编辑时需要提供一个遮罩以明确需要修改的部分和不需要修改的部分。
 为了自动生成符合要求的遮罩，本项目借助图像分割和大语言模型的辅助，可通过两种方式生成自动遮罩：基于关键词对自动生成遮罩和基于已给出的点自动填充生成遮罩。
-两种方法都会首先使用图像分割模型对图像进行分割（如图3-1），然后根据给出的要求对相应的部分进行遮罩生成原始的遮罩。受制于图像分割模型在边缘上的表现并不理想，
+两种方法都会首先使用图像分割模型对图像进行分割（如图4-1），然后根据给出的要求对相应的部分进行遮罩生成原始的遮罩。受制于图像分割模型在边缘上的表现并不理想，
 需要对特定的分割部分进行处理以提高遮罩的质量，因此最后会通过本项目设计的优化算法生成最终的遮罩。
 \begin{figure}[!htbp]
     \centering
@@ -232,9 +385,9 @@ ChatGLM2-6B支持更长的对话上下文，并提高了推理速度和降低了
     \label{Fig:Segment} % 整个组图的标签名
 \end{figure}
 
-\subsection{图像自动遮罩}
+\subsubsection{图像自动遮罩}
 基于关键词自动生成遮罩的方法会根据关键词和图像分割结果生成自动原始的遮罩，该功能会遍历每个给出的关键词，
-若关键词与分割结果之一吻合，则会对相应的分割区域进行遮罩，生成原始的遮罩（如图3-2）。
+若关键词与分割结果之一吻合，则会对相应的分割区域进行遮罩，生成原始的遮罩（如图4-2）。
 \begin{figure}[!htbp]
     \centering
     \subfloat[]{ %[]对齐方式，t为top，b为bottom，留空即可
@@ -251,7 +404,7 @@ ChatGLM2-6B支持更长的对话上下文，并提高了推理速度和降低了
 \end{figure}
 
 基于已给出的点自动填充生成遮罩的方法会根据在图片中标记的点和图像分割结果生成自动原始的遮罩，该功能会遍历每个给出的点，
-将该点所在的部分全部进行遮罩，最后生成原始的遮罩（如图3-3）。
+将该点所在的部分全部进行遮罩，最后生成原始的遮罩（如图4-3）。
 \begin{figure}[!htbp]
     \centering
     \subfloat[]{
@@ -267,14 +420,14 @@ ChatGLM2-6B支持更长的对话上下文，并提高了推理速度和降低了
     \label{Fig:Point} 
 \end{figure}
 
-\subsection{图像遮罩性能优化}
+\subsubsection{图像遮罩性能优化}
 LRU（Least Recently Used）缓存是一种常用的缓存淘汰算法，用于在有限的缓存空间中管理数据。它的核心思想是优先淘汰最长时间未被使用的数据项。
 functools.lru\_cache是python标准库中functools模块提供的一个装饰器，它实现了LRU缓存机制。该装饰器可以非常方便地被添加到任何想要进行缓存的参数可哈希的函数上，自动地保存最近执行的函数调用结果并在后续相同的调用中直接返回缓存的结果，避免重复计算的开销。
 
 由于在本项目中图像遮罩存在一张图片多次调用的特点，本项目使用了LRU缓存实现性能优化。由于python中PIL.Image.Image对象不可哈希，缓存分割结果时将图像转为base64字符串进行映射。
-\subsection{对自动生成的遮罩进行优化}
+\subsubsection{对自动生成的遮罩进行优化}
 由于分割模型性能的限制，生成的原始遮罩可能在某些细节上表现不佳而影响图像编辑模型的结果，因此设计了一个算法对自动生成的遮罩
-进行优化。该算法可以根据配置文件的设置，对特定的未被遮罩的部分在遮罩的边缘进行收缩。
+进行优化。算法3可以根据配置文件的设置，对特定的未被遮罩的部分在遮罩的边缘进行收缩。
 
 \begin{algorithm} 
 	\begin{spacing}{1.3}
@@ -297,7 +450,7 @@ functools.lru\_cache是python标准库中functools模块提供的一个装饰器
 	\end{spacing}
 \end{algorithm}
 
-由于该算法仅会对遮罩边缘上的像素进行卷积且在设计时充分考虑到了内存中像素的存储顺序的原因，虽然需要复杂的处理过程，但经过多次的迭代后算法的时间复杂度降低至$O(mnr)$（$m$,$n$表示图片的长宽，$r$表示设置的优化强度）。算法实现的效果如 图3-4 所示，可见在发丝附近遮罩的质量得到了明显的改善。
+由于该算法仅会对遮罩边缘上的像素进行卷积且在设计时充分考虑到了内存中像素的存储顺序的原因，虽然需要复杂的处理过程，但经过多次的迭代后算法的时间复杂度降低至$O(mnr)$（$m$,$n$表示图片的长宽，$r$表示设置的优化强度）。算法实现的效果如 图4-4 所示，可见在发丝附近遮罩的质量得到了明显的改善。
 \begin{figure}[!htbp]
     \centering
     \subfloat[]{ %[]对齐方式，t为top，b为bottom，留空即可
@@ -312,22 +465,22 @@ functools.lru\_cache是python标准库中functools模块提供的一个装饰器
     \caption{遮罩优化结果：\protect\subref{Fig:MaskOrigin}原始遮罩，\protect\subref{Fig:MaskOptimized}算法优化后的遮罩} %注意须使用\protect\subref{}进行标号引用
     \label{Fig:MaskOptimize} % 整个组图的标签名
 \end{figure}
-\newpage
 
-\section{多模态}
+
+\subsection{多模态}
 如何打通大语言模型和图像生成模型是本项目的关键。本项目通过特定的prompt和图像分割结果，使用大语言模型生成JSON格式的指令并校验，并支持多轮对话。
-用户可有选择性地执行生成的指令或执行全部指令。系统首先会按照给定的规则对指令进行预处理和排序，然后通过指令生成请求参数来调用图像生成模型。多模态任务的实现方式如图3-5。
+用户可有选择性地执行生成的指令或执行全部指令。系统首先会按照给定的规则对指令进行预处理和排序，然后通过指令生成请求参数来调用图像生成模型。多模态任务的实现方式如图4-5。
 \buptfigure[width=1\textwidth]{pictures/multimodal.png}{}{multimodal_TMP}
 
-\subsection{JSON指令生成}
+\subsubsection{JSON指令生成}
 JSON（JavaScript Object Notation）是一种轻量级的数据交换格式，易于人阅读和编写，同时也易于机器解析和生成。
 它基于JavaScript的一个子集，但独立于语言，被广泛应用于许多编程语言中。JSON主要用于网络应用间浏览器与服务器之间的数据传输。
 在JSON中，数据以键值对的形式存在，可以表示数组、布尔值、数字、对象或字符串。由于其简洁性和易于交互的特性，JSON已成为Web应用中数据交换的主流技术。
 由于JSON应用范围广且大语言模型JSON处理能力较强，本项目采用此格式来承载大语言模型和图像生成模型的联系。
 
 通过特定的prompt和图像分割结果以及用户输入的修改意图，本项目可使用GPT3.5Turbo、GPT4Turbo、
-微调后的ChatGLM2-6B生成JSON指令。例：当图像分割结果为$Background, Hair, Upper-clothes, Dress, Face, Right-arm$，用户输入为
-“将背景更换为蓝天白云，将衣服更改为白色的T-shirt”时，生成的JSON指令如 代码3-1 所示。
+微调后的ChatGLM2-6B生成JSON指令。例：当图像分割结果为Background, Hair, Upper-clothes, Dress, Face, Right-arm，用户输入为
+“将背景更换为蓝天白云，将衣服更改为白色的T-shirt”时，生成的JSON指令如 代码4-1 所示。
 
 \begin{lstlisting}[language=Python, caption=生成的指令, label=plus, tabsize=2]  
     [
@@ -338,8 +491,8 @@ JSON（JavaScript Object Notation）是一种轻量级的数据交换格式，�
     ]
 \end{lstlisting} 
 
-\subsection{JSON指令校验}
-由于大语言模型生成指令不稳定，需要对生成指令的合规性进行校验。校验规则存储为一个JSON文件，以修改非面部和面部的指令为例，校验规则如 代码3-2 所示：
+\subsubsection{JSON指令校验}
+由于大语言模型生成指令不稳定，需要对生成指令的合规性进行校验。校验规则存储为一个JSON文件，以修改非面部和面部的指令为例，校验规则如 代码4-2 所示：
 \begin{lstlisting}[language=Python, caption=指令校验规则, label=plus, tabsize=2]  
     {
     "face": {
@@ -365,7 +518,7 @@ JSON（JavaScript Object Notation）是一种轻量级的数据交换格式，�
     }
 }
 \end{lstlisting} 
-指令校验的算法如 算法-2 所示。
+指令校验的算法如 算法5 所示。
 \begin{algorithm} 
 	\begin{spacing}{1.3}
 		\floatname{algorithm}{算法}
@@ -385,7 +538,7 @@ JSON（JavaScript Object Notation）是一种轻量级的数据交换格式，�
 	\end{spacing}
 \end{algorithm}
 
-\subsection{多指令处理}
+\subsubsection{多指令处理}
 由于一次执行可能会涉及到多个指令，会遇到指令重复、指令优先性等问题，所以会对需要执行的指令进行合并与排序。
 指令合并的算法如下：
 \begin{algorithm} 
@@ -408,9 +561,9 @@ JSON（JavaScript Object Notation）是一种轻量级的数据交换格式，�
 	\end{spacing}
 \end{algorithm}
 
-\subsection{图像模型请求参数生成}
+\subsubsection{图像模型请求参数生成}
 图像模型请求参数生成较为复杂，对于某个参数，其可能来源于GUI中可修改的设置，可能来源于指令，可能来源于模版，否则设置为默认参数。
-由于每个参数来说，其来源的优先性可能不一致，因此设计了 算法-4 来生成图像模型请求参数。
+由于每个参数来说，其来源的优先性可能不一致，因此设计了 算法6 来生成图像模型请求参数。
 \begin{algorithm} 
 	\begin{spacing}{1.3}
 		\floatname{algorithm}{算法}
@@ -433,35 +586,33 @@ JSON（JavaScript Object Notation）是一种轻量级的数据交换格式，�
 	\end{spacing}
 \end{algorithm}
 
-\section{图像修改建议}
+\subsection{图像修改建议}
 本项目提供了根据图像自动生成图像建议的功能。由于传统的大语言模型只能接受文本输入，因此本项目采用了GPT4V来自动生成图像修改建议。
 
 GPT-4V是由OpenAI开发的多模态大型语言模型，是GPT系列基础模型的第四代。该模型具有视觉能力，可以将图片作为输入，进行各种任务，例如描述图片中的幽默、总结截图文本、回答包含图表的考试题目等。
 
 用户通过GUI界面的Advise按键，可以生成建议并将其转换为指令。
 
-\chapter{middleware的构建} % 641 + 94 + 19 = 754
+\section{middleware的构建} % 641 + 94 + 19 = 754
 在本项目中，middleware作为核心组件，通过整合来自不同平台的API，为GUI提供了统一且易于接入的API服务。
 其整合了多个图像生成和大语言语言模型，通过统一的接口设计，使得GUI能够方便地调用所需的功能。
 此外，middleware采用了Golang语言和Beego框架，不仅保证了API服务的高并发处理能力和稳定性，
 还通过模块化的设计提高了系统的可维护性和可扩展性。主要API服务包括Stable Diffusion和DALL-E2模型、
 图像分割模型，以及多种大语言模型。这样的架构设计不仅优化了开发效率，也确保了系统的稳定运行和长期发展。
-\section{对多个平台的API进行配置和整合}
+\subsection{对多个平台的API进行配置和整合}
 middleware通过整合不同平台如图像生成模型、语言模型等的API，使得GUI开发者可以通过一个统一的接口调用多种功能。
 这种整合不仅包括API的聚合，还涉及统一API调用的风格和路由规范，不仅保证了API服务的高稳定性和可靠性，还便于日后的维护和扩展。例如，无论是调用ChatGLM2-6B模型还是多种GPT模型，
 GUI都能通过相同的结构化请求方式访问不同的服务。
 
 
-\section{使用beego框架提供API服务}
-beego是一个使用Go语言开发的开源Web框架，它支持快速开发各种应用程序，包括API、Web应用和后端服务。该框架设计灵感来源于Tornado、Sinatra和Flask，但结合了Go的特定特性如接口（interface）和结构体嵌入（struct embedding），从而提供了高效的性能和简便的操作​ 。
-
+\subsection{使用beego框架提供API服务}
 本项目使用beego框架构建了middleware组件提供了多个API服务，以便GUI可以高效地使用各种模型和工具。
-$PostSDTxt2Img$和$PostSDImg2Img$是通过Stable Diffusion模型来生成或修改图像的API，这使得用户能够通过简单的API调用，进行复杂的图像生成和编辑操作。$GetLoras$这个API用于获取Stable Diffusion模型可用的LoRa模型列表。
-$PostDALLE2Edit$提供了利用DALL-E2模型修改图片的功能，这进一步扩展了图像处理的能力，在Stable Diffusion模型不可用时作为替代。
+$PostSDTxt2Img$和$PostSDImg2Img$是通过Stable Diffusion模型来生成或修改图像的API，这使得用户能够通过简单的API调用，进行复杂的图像生成和编辑操作。$GetLoras$这个API用于获取Stable Diffusion模型可用的LoRA模型列表。
+$PostDALLE2Edit$利用DALL-E2模型修改图片，这进一步扩展了图像处理的能力，在Stable Diffusion模型不可用时作为替代。
 $PostHuggingFaceImgSegment$ API通过可在部署在本地的分割模型不可用时通过调用Hugging Face上的图像分割模型API来实现图像分割。
 在文本处理方面，$PostGPT3Dot5Turbo$、$PostGPT4Turbo$和$PostGPT4V$等API利用OpenAI的不同版本GPT模型来处理指令理解和生成任务，$PostChatGLM2\_6B$可调用微调后的ChatGLM2-6B模型来进行指令生成。
 
-\chapter{LLM的微调} % 1820 + 119 + 197 = 2136
+\section{LLM的微调} % 1820 + 119 + 197 = 2136
 大语言模型（LLM）的微调是一种在预训练模型基础上通过特定数据集进一步训练的过程，用于优化模型在特定任务或场景中的表现。特别是对于参数量较小的LLM，微调不仅可以提升其性能，还能增强其针对具体任务的适应性和泛化能力。
 微调的一个主要优势是性能提升，即使是较小的模型，通过针对性的微调，可以在特定任务上实现甚至超过大型模型未经微调时的性能，可见微调能够根据具体需求调整模型的行为，使其更加专注于特定的输出目标。
 微调技术提供了一种有效途径，通过少量的定制化数据提升模型的应用性能，特别是在参数量较小的模型中，这种优势尤为显著。
@@ -469,55 +620,76 @@ $PostHuggingFaceImgSegment$ API通过可在部署在本地的分割模型不可�
 原始的ChatGLM2-6B模型已经通过大规模数据预训练，具备了强大的语言理解和生成能力，但受制于参数量较小，其在本项目需要高精准度的指令生成任务上表现不佳，因此本项目通过自动生成并进行筛选的高质量指令生成微调数据集对ChatGLM2-6B进行微调以进一步提升模型在指令生成任务的表现。
 
 本项目利用开源项目LLaMA-Factory\footnote{https://github.com/hiyouga/LLaMA-Factory}和本项目中自动生成的指令生成任务数据集对ChatGLM2-6B模型进行微调。
-\section{LLM微调数据集生成与性能评估方法}
-\subsection{微调数据集生成}
+\subsection{LLM微调数据集生成与性能评估方法}
+\subsubsection{微调数据集生成}
 在大语言模型（LLM）的微调过程中，数据集的功能和作用至关重要。微调数据集不仅提供了模型训练所需的具体数据，还直接影响了模型微调后的性能和适应性。
 对于参数量较小的模型，高质量的微调数据集尤其重要，因为这些模型通常缺乏足够的参数量来从大规模数据中学习复杂的特征。通过高质量的微调数据集，参数量较小的大语言模型可以有效地提高这些模型的学习效率和最终性能。
 构造高质量的微调数据集涉及两个关键步骤：数据收集和数据预处理。数据收集需要确保获得足够多的、具有代表性的数据，这些数据能够覆盖模型在实际应用中可能遇到的各种情况。数据预处理是将收集到的原始数据转换成模型可以直接处理的格式，这可能包括数据清洗、特征提取、标签编码等。
 
 由于没有适用于本任务的开源数据集，本项目尝试建立一个自动化工作流程，
-通过利用ATR Dataset\footnote{https://github.com/lemondan/HumanParsing-Dataset}调用多个模型和一定的校验规则来生成所需的数据并整合为一个数据集。数据集生成的流程如 图5-1。
+通过利用ATR Dataset\footnote{https://github.com/lemondan/HumanParsing-Dataset}调用多个模型和一定的校验规则来生成所需的数据并整合为一个数据集。数据集生成的流程如 图4-6。
 同时，在系统使用过程中产生的数据可设置是否保存，这些数据也会在运行数据集生成脚本添加到数据集中。
 \buptfigure[width=0.65\textwidth]{pictures/dataset.png}{}{dataset_TMP}
 
 通过建立的自动化工作流程，本项目创建了一个包含3000个样本的数据集，数据集中的每一项数据都经过合法性校验以保证数据集的质量。数据集的格式满足LLaMA-Factory的要求并可使用此数据集对ChatGLM2-6B进行微调。
-\subsection{LLM指令生成任务性能评估方法}
+\subsubsection{LLM指令生成任务性能评估方法}
 性能评估是大语言模型（LLM）开发和应用的关键环节，尤其是在模型的实用性和可靠性方面。有效的评估方法可以帮助研究者和开发者了解模型在特定任务上的表现，从而进行进一步的优化和调整。
 
 由于需要一种直观的性能评估方法来对不同的大语言模型在指令生成任务上的性能进行评估，本项目采用生成指令的合法率对不同的大语言模型在指令生成任务上的性能进行评估。
 
 
-\section{ChatGLM2-6B针对指令生成任务的微调}
-LoRA: Low-Rank Adaptation of Large Language Models\cite{hu2021lora}这篇论文提出了一种新颖且高效的$LoRa$微调方法，用于微调大型预训练语言模型以适应特定任务。传统的微调方法往往需要重新训练模型的所有参数，而全参数训练的方法在模型参数规模庞大时需要巨大的量。
-$LoRA$保持预训练模型权重不变，通过仅修改模型参数的一个小子集来进行微调，在模型的每层插入可训练的秩分解矩阵，只优化代表适应模型所需的最小可能变化的秩分解矩阵，大大减少了显存和计算开销。与全参数微调相比可训练参数的数量显著减少，并将显存需求减少了三倍。
+\subsection{ChatGLM2-6B针对指令生成任务的微调}
+LoRA: Low-Rank Adaptation of Large Language Models\cite{hu2021lora}这篇论文提出了一种新颖且高效的$LoRA$微调方法，用于微调大型预训练语言模型以适应特定任务。传统的微调方法往往需要重新训练模型的所有参数，而全参数训练的方法在模型参数规模庞大时需要巨大的量。算法主要通过在Transformer模型的每一层中注入低秩的分解矩阵来更新权重，而不改动预训练的权重，其具体算法描述见算法7。
+\begin{algorithm}
+	\begin{spacing}{1.3}
+		\floatname{algorithm}{算法}
+		\caption{LoRA: 大型语言模型的低秩适配} 
+		\label{LoRA_model}
+		\renewcommand{\algorithmicrequire}{\textbf{输入：}}
+		\renewcommand{\algorithmicensure}{\textbf{输出：}} 
+			\begin{algorithmic}[1] 
+				\Require 预训练权重矩阵 $W_0 \in \mathbb{R}^{d \times d}$, 输入 $x$, 秩 $r$
+				\Ensure 调整后的输出 $h$
+				\State 初始化低秩矩阵 $A \in \mathbb{R}^{r \times d}$ 和 $B \in \mathbb{R}^{d \times r}$
+				\State 冻结预训练权重 $W_0$
+				\For {对于每个训练步骤：}
+				    \State 计算更新矩阵 $\Delta W = BA$
+				    \State 应用更新：$W = W_0 + \Delta W$
+				    \State 计算输出：$h = Wx$
+				\EndFor
+				\State 优化参数 $A$ 和 $B$ 以最小化损失函数
+			\end{algorithmic}
+	\end{spacing}
+\end{algorithm}
 
-本项目使用生成的指令生成任务数据集结合$LoRa$方法，通过开源项目LLaMA-Factory\footnote{https://github.com/hiyouga/LLaMA-Factory}对ChatGLM2-6B模型进行微调。
-LoRA微调在大语言模型上的训练损失随训练步数变化的情况如 图5-2所示。从图中可以看出，最初损失值很高，但随着训练步数的增加，损失值迅速下降，特别是在前50步之内下降最为显著。
+
+本项目使用生成的指令生成任务数据集结合$LoRA$方法，通过开源项目LLaMA-Factory\footnote{https://github.com/hiyouga/LLaMA-Factory}对ChatGLM2-6B模型进行微调。
+LoRA微调在大语言模型上的训练损失随训练步数变化的情况如 图4-7所示。从图中可以看出，最初损失值很高，但随着训练步数的增加，损失值迅速下降，特别是在前50步之内下降最为显著。
 在经过约50步之后，损失下降的速度开始放缓，但仍然持续下降，表明模型继续从训练数据中学习。在约200步之后，损失曲线趋于平缓，说明模型已经接近收敛，额外的训练步骤在减少损失方面的效果变得有限。
 图中还展示了一个平滑处理的损失曲线，更清晰地显示了训练过程的整体趋势，而不是每一步的波动。
 \buptfigure[width=0.6\textwidth]{pictures/training_loss}{step-loss图}{pic_step_loss}
 
-\section{各个LLM在本任务下的性能评估}
-结合本项目的LLM指令生成任务性能评估方法，本项目对不同的大语言模型进行了指令生成任务性能评估。各个模型的性能表现如 表5-1 和 图5-3 所示。
+\subsection{各个LLM在本任务下的性能评估}
+结合本项目的LLM指令生成任务性能评估方法，本项目对不同的大语言模型进行了指令生成任务性能评估。各个模型的性能表现如 表4-2 和 图4-8 所示。
 \begin{bupttable}{LLM 指令生成性能}{table_llm_scores}
     \begin{tabular}{|l|l|l|}
         \hline \textbf{模型} & \textbf{测试样本数} & \textbf{合格率} \\
         \hline GPT3.5Turbo & 100 & 97\% \\
         \hline GPT4Turbo & 100 & 99\% \\
-        \hline GhatGLM-6B(Origin) & 100 & 6\% \\
-        \hline GhatGLM-6B(LoRa trained 50 steps) & 1000 & 19.1\% \\
-        \hline GhatGLM-6B(LoRa trained 60 steps) & 1000 & 43.7\% \\
-        \hline GhatGLM-6B(LoRa trained 80 steps) & 1000 & 77.8\% \\
-        \hline GhatGLM-6B(LoRa trained 100 steps) & 1000 & 88.1\% \\
-        \hline GhatGLM-6B(LoRa trained 150 steps) & 1000 & 93.9\% \\
-        \hline GhatGLM-6B(LoRa trained 200 steps) & 1000 & 95.8\% \\
-        \hline GhatGLM-6B(LoRa trained 250 steps) & 1000 & 95.2\% \\
-        \hline GhatGLM-6B(LoRa trained 300 steps) & 1000 & 96.7\% \\
+        \hline ChatGLM2-6B(Origin) & 100 & 6\% \\
+        \hline ChatGLM2-6B(LoRA trained 50 steps) & 1000 & 19.1\% \\
+        \hline ChatGLM2-6B(LoRA trained 60 steps) & 1000 & 43.7\% \\
+        \hline ChatGLM2-6B(LoRA trained 80 steps) & 1000 & 77.8\% \\
+        \hline ChatGLM2-6B(LoRA trained 100 steps) & 1000 & 88.1\% \\
+        \hline ChatGLM2-6B(LoRA trained 150 steps) & 1000 & 93.9\% \\
+        \hline ChatGLM2-6B(LoRA trained 200 steps) & 1000 & 95.8\% \\
+        \hline ChatGLM2-6B(LoRA trained 250 steps) & 1000 & 95.2\% \\
+        \hline ChatGLM2-6B(LoRA trained 300 steps) & 1000 & 96.7\% \\
         \hline
     \end{tabular}
 \end{bupttable}
 
-\buptfigure[width=0.7\textwidth]{pictures/model_performance}{LLM 指令生成性能}{model_performance_TMP}
+\buptfigure[width=0.7\textwidth]{pictures/5e56eff9-d478-4134-9d08-b1084e92f408}{LLM 指令生成性能}{model_performance_TMP}
 
 
 可观察到原始的ChatGLM2-6B模型在未经过微调时，在指令生成任务中的合格率仅为6\%。
@@ -526,10 +698,24 @@ LoRA微调在大语言模型上的训练损失随训练步数变化的情况如 
 而在经过200步的微调后，合格率达到95.8\%，并在300步训练后稳定在96\%左右。
 与ChatGLM2-6B相比，GPT3.5Turbo和GPT4Turbo在无需额外训练的情况下即可达到分别为97\%和99\%的高合格率。
 
-\chapter{Stable Diffusion及扩展的使用} % 439 + 106 + 37 = 582
-\section{Stable Diffusion API的使用}
+\section{Stable Diffusion及扩展的使用} % 439 + 106 + 37 = 582
+Stable Diffusion是一种基于深度学习的图像生成模型，能够根据文本描述生成高质量的图像。该模型利用条件生成技术，允许用户通过简单的文本指令来引导图像的生成过程。这种技术在艺术创作、媒体娱乐、广告以及数字营销等多个领域显示了广泛的应用潜力。
+
+除了Stable Diffusion的基础功能外，本项目还集成了多个扩展，如ControlNet和roop。ControlNet允许用户对生成的图像进行更精确的控制，通过这种方式ControlNet增强了图像的细节质量和一致性，使生成的图像更贴近用户的具体需求。
+roop专注于提供面部替换功能，这一功能特别适用于需要在图像中修改人物面部特征的场景。roop通过简单的操作接口，使得用户能够轻松地将一张人脸图像替换到另一张人脸上，而不需要复杂的图像处理知识背景。
+
+sd-webui-controlnet\footnote{https://github.com/Mikubill/sd-webui-controlnet}使用了ControlNet的原理，
+旨在增强原有 Stable Diffusion 模型的图像生成控制能力。通过集成一个额外的控制网络（ControlNet），
+允许用户精确指导图像的具体内容，显著提升了生成图像的细节质量和一致性。
+
+sd-webui-roop\footnote{https://github.com/s0md3v/sd-webui-roop}基于DeepFake\cite{van2021deepfake}，
+允许用户在图片中进行面部替换，简化了面部交换的过程，无需训练特定的模型，大大降低了使用复杂度。
+
+系统还提供了丰富的参数调整选项，如调整噪声去除强度。这些功能为用户提供了广泛的自定义空间，可以根据具体的应用场景调整生成效果，以满足不同的视觉表达需求。Stable Diffusion模型及其扩展的结合使用，为本项目的图像编辑方面提供了强大的功能和更高的灵活性。
+
+\subsection{Stable Diffusion API的使用}
 本项目通过将开源项目stable-diffusion-webui\footnote{https://github.com/AUTOMATIC1111/stable-diffusion-webui}部署在揽睿星舟机器学习平台\footnote{https://www.lanrui-ai.com}，通过API来调用Stable Diffusion模型，
-主要使用的参数见表6-1。
+主要使用的参数见表4-3。
 \begin{bupttable}{主要使用的Stable Diffusion webui img2img API 参数}{sdapi_params}
     \begin{tabular}{|l|l|l|}
         \hline \textbf{参数} & \textbf{描述} & \textbf{形式} \\
@@ -553,10 +739,10 @@ LoRA微调在大语言模型上的训练损失随训练步数变化的情况如 
         \hline
     \end{tabular}
 \end{bupttable}
-\newpage
-\section{ControlNet的使用及效果}
+
+\subsection{ControlNet的使用及效果}
 sd-webui-controlnet\footnote{https://github.com/Mikubill/sd-webui-controlnet}是一个用于stable-diffusion-webui的扩展，允许用户通过添加额外的条件来控制扩散模型的行为，从而增强生成图像的精确度和控制性。这一扩展可以实时添加到原始的 Stable Diffusion 模型中，不需要进行合并处理。
-本项目使用该插件以保持原始图像的主要轮廓和布局不受改变，其实现的效果如图6-1。
+本项目使用该插件以保持原始图像的主要轮廓和布局不受改变，其实现的效果如图4-9。
 \begin{figure}[!htbp]
     \centering
     \subfloat[]{ %[]对齐方式，t为top，b为bottom，留空即可
@@ -576,9 +762,9 @@ sd-webui-controlnet\footnote{https://github.com/Mikubill/sd-webui-controlnet}是
     \caption{ControNet效果：\protect\subref{Fig:InitImage}原始图像，\protect\subref{Fig:NoCanny}未使用ControlNet，\protect\subref{Fig:Canny}使用ControlNet} %注意须使用\protect\subref{}进行标号引用
     \label{Fig:ControlNet} % 整个组图的标签名
 \end{figure}
-\section{roop的使用及效果}
+\subsection{roop的使用及效果}
 roop\footnote{https://github.com/s0md3v/sd-webui-roop}是一个用于stable-diffusion-webui的扩展，提供面部替换的功能。这个扩展需要一张原始图像和目标图像，并能将原始图像的面部替换到目标图像上。
-其实现的效果如图6-2。
+其实现的效果如图4-10。
 \begin{figure}[!htbp]
     \centering
     \subfloat[]{ %[]对齐方式，t为top，b为bottom，留空即可
@@ -599,33 +785,32 @@ roop\footnote{https://github.com/s0md3v/sd-webui-roop}是一个用于stable-diff
     \label{Fig:Roop} % 整个组图的标签名
 \end{figure}
 
+\section{本章小结}
+本章中详细介绍了基于大语言模型（LLM）的交互式多模态图像编辑系统的设计与实现。本章首先阐述了图形用户界面（GUI）的构建过程，接着描述了中间件的开发过程，其作为系统的调度核心，负责协调各个组件的交互，本章还探讨了LLM的微调技术及其在本系统中的应用，以及如何利用Stable Diffusion模型和其他技术来增强图像编辑的功能。这些元素共同构成了一个高效、直观的图像编辑系统。
 \chapter{系统实现效果与使用} % 1196
+系统实现的核心在于其高度集成的图形用户界面（GUI），该界面不仅简洁易用，还充分支持复杂的图像处理操作。GUI设计考虑了用户的操作习惯，提供了直观的图像上传、编辑和预览功能。用户可以通过简单的点击和拖拽操作，实现图像的上传和编辑。GUI还集成了多个图像生成模型和大语言模型并提供控制选项，如模型选择、参数调整等，使用户能够根据具体需求调整图像处理流程。
 \section{系统实现效果}
-系统实现了一个简单易用的GUI，可通过特定端口进行访问。GUI的总体效果如图7-1所示。
+系统实现了一个简单易用的GUI，可通过特定端口进行访问。GUI的总体效果如图5-1所示。
 \buptfigure[width=0.8\textwidth]{pictures/gui}{GUI总体效果}{gui_TMP}
 
-可使用GUI的Auto模块进行LLM微调数据生成和LLM指令生成任务性能测试，其实现效果如图7-2所示。
+可使用GUI的Auto模块进行LLM微调数据生成和LLM指令生成任务性能测试，其实现效果如图5-2所示。
 \buptfigure[width=0.7\textwidth]{pictures/gui_auto}{Auto模块}{gui_auto_TMP}
 
-可使用GUI的Manual模块查看GUI使用方法，其实现效果如图7-3所示。
+可使用GUI的Manual模块查看GUI使用方法，其实现效果如图5-3所示。
 \buptfigure[width=0.7\textwidth]{pictures/gui_manual}{Manual模块}{gui_manual_TMP}
 
-使用GUI进行基于LLM的交互式图像编辑时，系统主要模块效果如图7-4所示。
-\buptfigure[width=0.7\textwidth]{pictures/gui_multimodal}{交互式图像编辑}{gui_multimodal_TMP}
-
-
-
-\newpage
+使用GUI进行基于LLM的交互式图像编辑时，系统主要模块效果如图5-4所示。
+\buptfigure[width=0.6\textwidth]{pictures/gui_multimodal}{交互式图像编辑}{gui_multimodal_TMP}
 
 \section{系统使用方法}
 \subsection{系统部署}
 本项目提供了多种常用的项目部署方式，包括使用Docker、Kubernetes，以适应不同的用户需求和操作环境。
-如果选择通过Docker进行部署，用户可以根据需求选择不同的镜像。通过运行命令\texttt{docker run --name multimodal -p 27777:80 binciluo/multimodal:latest}，可以在本地部署图像分割模型。
-如果希望通过Hugging Face API使用图像分割功能以在性能受限的设备上运行，则可以使用命令\texttt{docker run --name multimodal -p 27777:80 binciluo/multimodal:mini\_latest}。
-部署完成后，用户可通过访问本地地址\texttt{127.0.0.1:27777}来使用服务。
-对于Kubernetes部署，用户需要先切换到包含Kubernetes配置文件的目录，使用\texttt{kubectl apply -f pod.yaml}命令部署服务（对于使用Arm架构的用户，则需使用\texttt{kubectl apply -f pod\_arm.yaml}）。非Linux用户需运行\texttt{kubectl port-forward mm-service-pod -n default 27777:27777}以访问服务。服务可通过\texttt{127.0.0.1:27777}地址访问。
+如果选择通过Docker进行部署，用户可以根据需求选择不同的镜像。通过运行命令docker run --name multimodal -p 27777:80 binciluo/multimodal:latest，可以在本地部署图像分割模型。
+如果希望通过Hugging Face API使用图像分割功能以在性能受限的设备上运行，则可以使用命令docker run --name multimodal -p 27777:80 binciluo/multimodal:mini\_latest。
+部署完成后，用户可通过访问本地地址127.0.0.1:27777来使用服务。
+对于Kubernetes部署，用户需要先切换到包含Kubernetes配置文件的目录，使用kubectl apply -f pod.yaml命令部署服务（对于使用Arm架构的用户，则需使用kubectl apply -f pod\_arm.yaml）。非Linux用户需运行kubectl port-forward mm-service-pod -n default 27777:27777以访问服务。服务可通过127.0.0.1:27777地址访问。
 
-项目还支持本地直接运行。用户需要先安装Golang和Beego框架，然后安装Python所需的依赖包。首先安装Golang，接着通过命令\texttt{go install github.com/beego/bee/v2@latest}安装Beego，然后运行\texttt{pip install -r gradio\_web/requirements.txt}安装Python依赖。最终，通过运行脚本\texttt{runner.sh}启动服务，或者设置环境变量\texttt{SEG\_MODEL\_ENV='local'}并运行\texttt{runner\_local.sh}脚本以在本地使用图像分割模型。
+项目还支持本地直接运行。用户需要先安装Golang和Beego框架，然后安装Python所需的依赖包。首先安装Golang，接着通过命令go install github.com/beego/bee/v2@latest安装Beego，然后运行pip install -r gradio\_web/requirements.txt安装Python依赖。最终，通过运行脚本runner.sh启动服务，或者设置环境变量SEG\_MODEL\_ENV='local'并运行runner\_local.sh脚本以在本地使用图像分割模型。
 
 \subsection{GUI使用说明}
 1. 上传基础图像：
@@ -655,6 +840,8 @@ roop\footnote{https://github.com/s0md3v/sd-webui-roop}是一个用于stable-diff
 9. 对LLM指令生成合格率进行测试
 您可在Auto模块中的Test LLM选择测试集并指定测试样本数量和线程数以对LLM指令生成合格率进行测试。
 
+\section{本章小结}
+在本章中，我们展示了基于LLM的交互式多模态图像编辑系统的实际运行效果和用户使用方法，验证了系统设计的有效性。此外，本章提供了详细的用户操作指南，确保用户能够充分利用系统功能进行图像编辑。
 
 \chapter{项目管理与维护} % 1755 + 149 + 26 = 1930
 \section{代码管理}
@@ -662,10 +849,10 @@ Git是一个开源的分布式版本控制系统，它允许多个开发者在�
 其兼具高性能与灵活性，能处理从小到大的项目，让开发者能够在本地机器上工作，并保持代码的多个版本，
 以便在不同的分支上进行试验和开发新功能的同时不影响主代码库。
 
-GitHub\footnote{https://github.com}作为一个基于Git的代码托管和协作平台，为开发者提供了一个强大而便捷的环境来管理代码和协作。
-它不仅能够追踪和记录代码的变更历史，确保代码的完整性和回溯能力，还能通过分支管理支持多线程的工作流，允许多个开发者同时推进不同的功能。
-GitHub的pull请求机制促进了团队成员之间的代码审查和讨论，这不仅提高了代码质量，也加强了团队协作。此外，GitHub的集成系统支持持续集成和持续部署流程，
-与各种开发工具链的无缝连接，使得项目管理更加高效。通过开源项目的公开，GitHub还为开发者提供了一个展示和交流的平台，促进了知识共享和技术交流。
+GitHub\footnote{https://github.com}是一个基于Git的代码托管和协作平台，其能为开发者提供了一个强大而便捷的环境来管理代码和协作，
+不仅能够追踪和记录代码的变更历史，确保代码的完整性和回溯能力，还能通过分支管理支持多线程的工作流，允许多个开发者同时推进不同的功能。
+GitHub的pull请求机制促进了团队成员之间的代码审查和讨论，不仅提高了代码质量，也加强了团队协作能力。GitHub的集成系统支持持续集成和持续部署流程，
+与各种开发工具链的无缝连接，使得项目管理更加高效。由于其承载了众多开源项目，GitHub成为开发者的一个展示和交流的平台，促进了知识共享和技术交流。
 
 为了便于进行代码管理和版本控制，本项目在GitHub上创建了一个仓库\footnote{https://github.com/BinciLuo/multimodal-service}，结合GitHub的其他功能，将其发展成了功能完整、文档详细的开源项目。
 
@@ -704,6 +891,8 @@ CD扩展了CI的概念，不仅自动化测试，还包括自动化部署过程�
 其区别为标准镜像使用本地的模型进行图像分割而Mini模型使用HuggingFace\footnote{https://huggingface.co}的API进行图像分割。
 这些镜像将在构建完成后被标记并推送到DockerHub上的账户下，确保最新的容器镜像版本可供部署和分发。此自动化流程加快了软件的交付速度，保证了镜像的最新状态和可用性。名为“Docker Image CI for ARM64”的Action通过相同的方式实现了适用于arm64架构的镜像的构建与发布。
 
+\section{本章小结}
+在本章中，我们探讨了项目管理与维护的关键策略和实践，确保了基于LLM的交互式多模态图像编辑系统的长期可持续性和高效运行。本章详细介绍了项目的代码管理方式、自动化测试的重要性以及持续集成与部署的实施方法。这些管理和维护策略不仅提高了开发过程的效率，也确保了系统在实际部署后的稳定性和可靠性，为未来可能的功能扩展和技术升级打下了坚实的基础。
 
 \chapter{总结及未来展望} % 1555
 \section{总结}
@@ -716,7 +905,7 @@ GUI既为用户提供了足够简单易用的自动化操作，也能让用户�
 项目的中间件（middleware）部分是整个系统的枢纽。它整合了多个不同平台、不同请求格式、不同返回格式的API，包括图像生成模型如Stable Diffusion、DALL-E2和大语言模型如ChatGLM2-6B、GPT-3.5 Turbo和GPT-4 Turbo。
 中间件（middleware）的设计保证了这些模型的高效协同工作，支持了GUI所需的从文本交互到图像编辑的一系列高级功能。此外，中间件（middleware）还处理所有后端逻辑，包括图像数据的处理、一对多且互相隔离的服务、以及用户请求的响应，确保了系统的快速响应和高可靠性。
 
-系统创新地引入了基于LoRa的大语言模型微调，通过训练专门的LoRa模型，原在本任务下表现较差的ChatGLM2-6B模型能够理解复杂的用户输入并精准地将其转化为指令，然后自动对指令进行抽取并执行高质量的图像编辑任务。
+系统创新地引入了基于LoRA的大语言模型微调，通过训练专门的LoRA模型，原在本任务下表现较差的ChatGLM2-6B模型能够理解复杂的用户输入并精准地将其转化为指令，然后自动对指令进行抽取并执行高质量的图像编辑任务。
 微调数据集的自动生成是其中的一个重要环节，系统采用了结合多个模型输出和验证规则的自动化工作流程。在已有的图像数据集下，利用现有的图像分割模型和文本生成模型，自动地生成图像编辑的要求、指令，并进行数据合格校验，生成了大量高质量的训练数据。
 系统设计了自动化的测试流程对各个大语言模型的指令生成能力进行评估，并对ChatGLM2-6B的多个微调模型和GPT3.5 turbo、GPT4 Turbo进行评估，以便对不同的模型的指令生成能力进行量化。从结果中可观察到GPT3.5 turbo、GPT4 Turbo在不进行微调的情况下就已经具有很强的能力，而参数量较小、初始能力极弱的ChatGLM2-6B模型在微调后在指令生成上也能达到接近GPT3.5 turbo的能力。
 
@@ -726,9 +915,9 @@ GUI既为用户提供了足够简单易用的自动化操作，也能让用户�
 在这些新技术的加持下，通过一定的方法对大语言模型和图像生成模型进行链接，从而使基于LLM的交互式图像编辑系统成为可能。
 本项目尝试了基于特定指令链接大语言模型和图像生成模型的方法，并搭建了基础框架且得到了优异的效果。
 
-尽管大语言模型和图像生成技术的结合带来了许多机遇，但也存在不少技术和伦理方面的挑战。如何确保生成的内容的准确性和适当性，防止生成有偏见或不当信息的风险，是需要重点关注的问题。数据的隐私和安全问题也必须得到妥善处理，确保用户信息的保护同时不妨碍技术的有效应用。
+大语言模型和图像生成技术的结合带来了许多机遇，但也存在不少技术和伦理方面的挑战。如何确保生成的内容的准确性和适当性，防止生成有偏见或不当信息的风险，数据隐私和安全成为重点关注的问题，必须妥善处理，确保内容合规性和用户信息收到保护的同时不妨碍技术的有效应用。
 
-随着深度学习技术的继续发展和优化，未来的交互式技术将更加智能和高效。大语言模型和图像生成技术的结合不仅能提升用户体验，还将开启全新的应用领域，为创新和改进现有服务提供强大动力。面对这些前景，行业和研究者需要共同努力，解决挑战，释放这些技术的全部潜力。
+随着深度学习技术的继续发展，未来的交互式技术必将更加智能和高效。大语言模型和图像生成技术的结合不仅能提升用户在图像编辑领域的体验，还将开启全新的应用，为创新和改进现有服务提供强大动力。面对这些前景，行业和研究者需要共同努力，解决挑战，释放这些技术的全部潜力。
 
 
 % \chapter{基础模块示例}
