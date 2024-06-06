@@ -13,8 +13,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% Begin Documents %%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 % 毕业设计（论文）按下列顺序要求统一装订：
-% 封面→诚信声明、关于论文使用授权的说明(一页)→任务书→成绩评定表→中文摘要(含关键词)→外文摘要(含关键词)
-% →目录→正文→参考文献→致谢→附录→外文资料及译文→开题报告→中期进展情况检查表→教师指导毕业设计(论文)记录表
+% 封面→诚信声明、关于论文使用授权的说明(一页)→成绩评定表→中文摘要(含关键词)→外文摘要(含关键词)
+% →目录→正文→参考文献→致谢→附录→外文资料及译文→任务书→开题报告→中期进展情况检查表→教师指导毕业设计(论文)记录表
 % →提前进行毕业设计环节申请审批表(如有)→校外完成本科毕业设计（论文）审批表(如有)→变更指导教师申请表(如有)。
 
 % 封面
@@ -25,13 +25,9 @@
 \blankmatter
 \includepdf[pages=-]{docs/Statement.pdf} 
 
-% 任务书
-\blankmatter
-\includepdf[pages=-]{docs/task.pdf}  
-
 % 成绩评定表
 \blankmatter
-\includepdf[pages=-]{docs/ScoreTable.pdf}  
+\includepdf[pages=-]{docs/ScoreTableScan.pdf}  
 
 
 
@@ -81,7 +77,7 @@ Generating images from captions with attention\cite{mansimov2015generating}介�
 Object-based image editing\cite{barrett2002object}介绍了基于对象的图像编辑技术，允许用户直接在对象层面而不是像素层面进行编辑。
 Faceshop: Deep sketch-based face image editing\cite{portenier2018faceshop}提供了一种利用深度学习来进行面部图像编辑的方法。
 Image-based modeling and photo editing\cite{oh2001image}探讨了基于图像的建模与照片编辑技术，特别强调了分层编辑和实体分离技术的应用。
-Invertible conditional gans for image editing\cite{perarnau2016invertible}探索了可逆条件GANs在图像编辑中的应用，这种模型结合了编码器和cGAN，可对真实图像进行精确修改。
+Invertible conditional gans for image editing\cite{perarnau2016invertible}探索了可逆Conditional GANs在图像编辑中的应用，这种模型结合了编码器和cGAN，可对真实图像进行精确修改。
 In-domain gan inversion for real image editing\cite{zhu2020domain}研究了在领域GAN反转技术在真实图像编辑中的应用，通过GAN学习特定图像域的编辑操作。
 Poisson image editing\cite{di2016poisson}探讨了泊松图像编辑技术，该技术能够无缝地将图像区域融合和编辑，并提供高质量的编辑效果。
 Image editing in the contour domain\cite{elder1998image}提出了一种在轮廓域进行图像编辑的方法，这种方法直接在轮廓层面而不是像素层面进行操作。
@@ -112,7 +108,7 @@ Lightweight text-driven image editing with disentangled content and attributes\c
 
 \section{项目内容及创新点}
 \subsection{项目内容}
-\buptfigure[width=0.7\textwidth]{pictures/arch.png}{}{arch_TMP}
+\buptfigure[width=0.5\textwidth]{pictures/arch.png}{项目整体结构}{arch_TMP}
 
 % 该项目主要实现了GUI、Middleware，并对Stable Diffusion和ChatGLM2-6B进行修改与适配。
 % 各个模块之间的关系如 图1-1 所示。
@@ -225,7 +221,7 @@ Stable Diffusion\cite{rombach2022high} 是一种基于扩散模型的深度学�
 \section{基于扩散模型的可控图像生成}
 ControlNet\cite{zhang2023adding}是一种新的神经网络架构，用于在大型预训练的文本到图像扩散模型中添加空间条件控制。ControlNet的核心是利用预训练模型的深层和健壮的编码层作为强大的支撑，学习多种条件控制。该网络通过零初始化的卷积层（zero convolutions）连接，这些层从零开始逐步增长参数，确保训练初期不会引入有害的噪声。
 通过使用ControlNet，用户可以更精细地控制图像生成过程，使生成的图像更贴近用户的具体需求，尤其是在空间布局和细节表达上。这种方法能够有效地减少试错循环，提高图像生成的效率和质量。其与Stable Diffusion结合的方式如图2-1所示（图片摘自论文Adding Conditional Control to Text-to-Image Diffusion Models\cite{zhang2023adding}）。
-\buptfigure[width=0.5\textwidth]{pictures/SDCN.png}{}{SDCN_TMP}
+\buptfigure[width=0.5\textwidth]{pictures/SDCN.png}{ControlNet与Stable Diffusion结合}{SDCN_TMP}
 
 
 
@@ -471,7 +467,7 @@ functools.lru\_cache是python标准库中functools模块提供的一个装饰器
 \subsection{多模态}
 如何打通大语言模型和图像生成模型是本项目的关键。本项目通过特定的prompt和图像分割结果，使用大语言模型生成JSON格式的指令并校验，并支持多轮对话。
 用户可有选择性地执行生成的指令或执行全部指令。系统首先会按照给定的规则对指令进行预处理和排序，然后通过指令生成请求参数来调用图像生成模型。多模态任务的实现方式如图4-5。
-\buptfigure[width=1\textwidth]{pictures/multimodal.png}{}{multimodal_TMP}
+\buptfigure[width=0.7\textwidth]{pictures/multimodal.png}{多模态实现方式}{multimodal_TMP}
 
 \subsubsection{JSON指令生成}
 JSON（JavaScript Object Notation）是一种轻量级的数据交换格式，易于人阅读和编写，同时也易于机器解析和生成。
@@ -493,33 +489,7 @@ JSON（JavaScript Object Notation）是一种轻量级的数据交换格式，�
 \end{lstlisting} 
 
 \subsubsection{JSON指令校验}
-由于大语言模型生成指令不稳定，需要对生成指令的合规性进行校验。校验规则存储为一个JSON文件，以修改非面部和面部的指令为例，校验规则如 代码4-2 所示：
-\begin{lstlisting}[language=Python, caption=指令校验规则, label=plus, tabsize=2]  
-    {
-    "face": {
-        "paras_type": [
-            "<class 'str'>"
-        ],
-        "paras_enum": null,
-        "paras_min": null,
-        "paras_max": null,
-        "combine": true,
-        "priority": 1
-    },
-    "change": {
-        "paras_type": [
-            "<class 'list'>",
-            "<class 'str'>"
-        ],
-        "paras_enum": null,
-        "paras_min": null,
-        "paras_max": null,
-        "combine": true,
-        "priority": 1
-    }
-}
-\end{lstlisting} 
-指令校验的算法如 算法6 所示。
+由于大语言模型生成指令不稳定，需要对生成指令的合规性进行校验。校验规则存储为一个JSON文件，以修改非面部和面部的指令为例，指令校验的算法如 算法6 所示，其中校验规则如 代码 附-1 所示。
 \begin{algorithm} 
 	\begin{spacing}{1.3}
 		\floatname{algorithm}{算法}
@@ -630,7 +600,7 @@ $PostHuggingFaceImgSegment$ API通过可在部署在本地的分割模型不可�
 由于没有适用于本任务的开源数据集，本项目尝试建立一个自动化工作流程，
 通过利用ATR Dataset\footnote{https://github.com/lemondan/HumanParsing-Dataset}调用多个模型和一定的校验规则来生成所需的数据并整合为一个数据集。数据集生成的流程如 图4-6。
 同时，在系统使用过程中产生的数据可设置是否保存，这些数据也会在运行数据集生成脚本添加到数据集中。
-\buptfigure[width=0.65\textwidth]{pictures/dataset.png}{}{dataset_TMP}
+\buptfigure[width=0.65\textwidth]{pictures/dataset.png}{数据集自动生成流程}{dataset_TMP}
 
 通过建立的自动化工作流程，本项目创建了一个包含3000个样本的数据集，数据集中的每一项数据都经过合法性校验以保证数据集的质量。数据集的格式满足LLaMA-Factory的要求并可使用此数据集对ChatGLM2-6B进行微调。
 \subsubsection{LLM指令生成任务性能评估方法}
@@ -1206,8 +1176,33 @@ GUI既为用户提供了足够简单易用的自动化操作，也能让用户�
 \makeatother
 
 
-% \chapter*{附\qquad{}录}
-% \phantomsection\addcontentsline{toc}{chapter}{附\qquad{}录}
+\chapter*{附\qquad{}录}
+\phantomsection\addcontentsline{toc}{chapter}{附\qquad{}录}
+\begin{lstlisting}[language=Python, caption=指令校验规则, label=plus, tabsize=2]  
+    {
+    "face": {
+        "paras_type": [
+            "<class 'str'>"
+        ],
+        "paras_enum": null,
+        "paras_min": null,
+        "paras_max": null,
+        "combine": true,
+        "priority": 1
+    },
+    "change": {
+        "paras_type": [
+            "<class 'list'>",
+            "<class 'str'>"
+        ],
+        "paras_enum": null,
+        "paras_min": null,
+        "paras_max": null,
+        "combine": true,
+        "priority": 1
+    }
+}
+\end{lstlisting} 
 
 % \phantomsection\addcontentsline{toc}{section}{附录1\quad{}缩略语表}
 % \section*{附录1\quad{}缩略语表}
@@ -1272,87 +1267,556 @@ GUI既为用户提供了足够简单易用的自动化操作，也能让用户�
 % \end{center}
 
 
-% % Translated Article
-% \newpage\backmatter
-% \thispagestyle{empty}
-% \phantomsection\addcontentsline{toc}{chapter}{外\quad{}文\quad{}资\quad{}料}
-% % 原文第一页，PDF缩放比例为0.95，可以自行调整
-% \includepdf[pages=1, scale=0.95, pagecommand=\begin{center}\translationtitlefont{外\quad{}文\quad{}资\quad{}料}\end{center}]{docs/translation.pdf}
-% % 原文剩余部分
-% \includepdf[pages=2-, scale=0.95]{docs/translation.pdf}
+% Translated Article
+\newpage\backmatter
+\thispagestyle{empty}
+\phantomsection\addcontentsline{toc}{chapter}{外\quad{}文\quad{}资\quad{}料}
+% 原文第一页，PDF缩放比例为0.95，可以自行调整
+\includepdf[pages=1, scale=0.95, pagecommand=\begin{center}\translationtitlefont{外\quad{}文\quad{}资\quad{}料}\end{center}]{docs/ControlNet.pdf}
+% 原文剩余部分
+\includepdf[pages=2-, scale=0.95]{docs/ControlNet.pdf}
 
-% % Translation
-% \setcounter{chapter}{0}
-% \renewcommand{\thefigure}{~外\arabic{chapter}-\arabic{figure}~}
-% \renewcommand{\theequation}{~外\arabic{chapter}-\arabic{equation}~}
-% \renewcommand{\thetable}{~外\arabic{chapter}-\arabic{table}~}
-% \renewcommand{\thelstlisting}{~外\arabic{chapter}-\arabic{lstlisting}~}
+% Translation
+\setcounter{chapter}{0}
+\renewcommand{\thefigure}{~外\arabic{chapter}-\arabic{figure}~}
+\renewcommand{\theequation}{~外\arabic{chapter}-\arabic{equation}~}
+\renewcommand{\thetable}{~外\arabic{chapter}-\arabic{table}~}
+\renewcommand{\thelstlisting}{~外\arabic{chapter}-\arabic{lstlisting}~}
 
-% \begin{center}
-% \phantomsection\addcontentsline{toc}{chapter}{外\quad{}文\quad{}译\quad{}文}
-% \translationtitlefont{外\quad{}文\quad{}译\quad{}文}
-% \end{center}
-% \vspace{8mm}
-% \thispagestyle{empty}
+\begin{center}
+\phantomsection\addcontentsline{toc}{chapter}{外\quad{}文\quad{}译\quad{}文}
+\translationtitlefont{外\quad{}文\quad{}译\quad{}文}
+\end{center}
+\vspace{8mm}
+\thispagestyle{empty}
 
 
-% \begin{center}
-% \sanhao\heiti\textbf{真假新闻的在线传播}
+\begin{center}
+\sanhao\heiti\textbf{向文本到图像扩散模型添加条件控制}
 
-% \xiaosihao\songti{Soroush Vosoughi, Deb Roy, Sinan Aral}
+\xiaosihao\songti{Lvmin Zhang, Anyi Rao, Maneesh Agrawala}
 
-% \xiaosihao\songti{麻省理工学院}
-% \end{center}
+\xiaosihao\songti{斯坦福大学}
+\end{center}
 
-% \songti{}
-% \begingroup % 限制两个let语句的作用范围在外文译文部分
-% \let\clearpage\relax
-% \let\cleardoublepage\relax
+\songti{}
+\begingroup % 限制两个let语句的作用范围在外文译文部分
+\let\clearpage\relax
+\let\cleardoublepage\relax
 
 %以下是排版示例，在这里为了使章节编号不出现在目录中，使用了无编号的样式，代价是这些数字都要自己书写。
 
-% \chapter*{第一章\quad{}概述}
-% %每一个chapter后记得以下两行
-% \newtranschapter
+\buptfigure[width=1\textwidth]{pictures/trans_img1.png}{}{trans_img1}
+\chapter*{第一章\quad{}引言}
+\newtranschapter
+我们许多人都有过想要捕捉视觉灵感的时刻，希望将其呈现为独特的图像。随着文本到图像扩散模型的出现，我们现在可以通过输入文本提示创建视觉上令人惊叹的图像。然而，这些文本到图像模型在图像空间组成控制方面存在局限性；仅通过文本提示来精确表达复杂的布局、姿势、形状和形式可能很困难。生成准确匹配我们心中图像的图像通常需要多次的试验和错误，通过编辑提示、检查生成的图像并重新编辑提示来完成。
 
-% \section*{1.1\quad{}概述}
-% 决策、合作、通信和市场领域的基础理论全都将对真实或准确度的概念化作为几乎一切人类努力的核心。然而，不论是真实信息还是虚假信息都会于在线媒体上迅速传播。定义什么是真、什么是假成了一种常见的政治策略，而不是基于一些各方同意的事实的争论。我们的经济也难免遭受虚假信息传播的影响。虚假流言会影响股价和大规模投资的动向，例如，在一条声称巴拉克·奥巴马在爆炸中受伤的推文发布后，股市市值蒸发了1300亿美元。的确，从自然灾害到恐怖袭击，我们对一切事情的反应都受到了扰乱。
+我们能否通过让用户提供附加图像来直接指定他们期望的图像组成，从而实现更精细的空间控制?在计算机视觉和机器学习中，这些附加图像（例如边缘图、人类姿势骨架、分割图、深度、法线等）通常被视为图像生成过程中的条件。图像到图像翻译模型学习从条件图像到目标图像的映射。研究社区也采取了一些步骤，通过空间掩码、图像编辑指令、个性化微调等控制文本到图像模型。虽然一些问题（例如生成图像变化、修补）可以通过无训练技术解决，如限制去噪扩散过程或编辑注意层激活，但更多问题（如深度到图像、姿势到图像）需要端到端学习和数据驱动的解决方案。
 
-% 新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
+在端到端方式中学习大型文本到图像扩散模型的条件控制是具有挑战性的。特定条件的训练数据量可能显著小于用于一般文本到图像训练的数据。例如，用于各种特定问题（如对象形状/法线、人体姿势提取等）的最大数据集通常约为10万，这比用于训练稳定扩散的LAION-5B数据集小5万倍。直接微调或继续训练大型预训练模型可能导致过拟合和灾难性遗忘。研究人员已经表明，通过限制可训练参数的数量或排名，可以减轻这种遗忘。对于我们的问题，设计更深或更定制化的神经架构可能是处理具有复杂形状和多样化高级语义的自然条件图像的必要条件。
 
-% \begin{equation}
-% \label{PCA_goal_appx1}
-% \begin{aligned}
-% \max_{\substack{\bm{W}}}  &  tr(\bm{W}^\mathrm{T}\bm{X}\bm{X}^ \mathrm{T}\bm{W})
-% \end{aligned}
-% \end{equation}
+本文提出了ControlNet，这是一种端到端神经网络架构，可以为大型预训练的文本到图像扩散模型（在我们的实现中为稳定扩散）学习条件控制。ControlNet通过锁定其参数并同时制作其编码层的可训练副本来保留大型模型的质量和能力。这种架构将大型预训练模型视为学习多样化条件控制的强大骨干。可训练副本和原始锁定模型通过零卷积层连接，权重初始化为零，使其在训练过程中逐步增长。这种架构确保在训练开始时不会向大型扩散模型的深层特征添加有害噪声，并保护可训练副本中的大规模预训练骨干不受此类噪声的损害。
 
-% 我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字s。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。我只是为了把第二章挤到下一页而凑的字。
+我们的实验表明，ControlNet可以通过各种条件输入（包括Canny边缘、Hough线、用户涂鸦、人类关键点、分割图、形状法线、深度等）控制稳定扩散。我们测试了单个条件图像的使用，有或没有文本提示，并演示了我们的方法如何支持多个条件的组合。此外，我们报告了ControlNet在不同大小数据集上的训练是稳健和可扩展的，并且在某些任务（如深度到图像条件）中，在单个NVIDIA RTX 3090Ti GPU上的训练结果可以与在大型计算集群上训练的工业模型竞争。最后，我们进行了消融研究，研究了我们模型每个组件的贡献，并通过用户研究将我们的模型与几个强大的条件图像生成基准进行了比较。
 
-% \newpage %每一章需要另起一页，为了灵活，我没有把它固定在样式中，你可以根据需求添加分页符
-% \chapter*{第二章\quad{}我也不知道是什么}
-% \newtranschapter
+总结来说，（1）我们提出了ControlNet，这是一种神经网络架构，可以通过高效微调向预训练的文本到图像扩散模型添加空间定位的输入条件；（2）我们提出了预训练的ControlNet，用于控制稳定扩散，条件包括Canny边缘、Hough线、用户涂鸦、人类关键点、分割图、形状法线、深度和卡通线条图；（3）通过消融实验与几种替代架构进行比较，以及针对不同任务的几个先前基准的用户研究验证了该方法。
 
-% 新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
+\newpage
 
-% 新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
+\chapter*{第二章\quad{}相关工作}
+\newtranschapter
 
-% 新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
+\section*{2.1\quad{}微调神经网络}
+微调神经网络的一种方法是直接使用附加的训练数据继续训练它。但是这种方法可能导致过拟合、模式崩溃和灾难性遗忘。广泛的研究集中在开发避免这些问题的微调策略上。
 
-% \begin{equation}
-% \label{PCA_goal_appx2}
-% \begin{aligned}
-% \max_{\substack{\bm{W}}}  &  tr(\bm{W}^\mathrm{T}\bm{X}\bm{X}^ \mathrm{T}\bm{W})
-% \end{aligned}
-% \end{equation}
+HyperNetwork是一种起源于自然语言处理（NLP）领域的方法，旨在训练一个小型递归神经网络来影响一个更大网络的权重。它已经应用于生成对抗网络（GANs）中的图像生成。Heathen等人和Kurumuz实现了Stable Diffusion的HyperNetworks，用于改变其输出图像的艺术风格。
 
-% 新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
+Adapter方法 广泛应用于NLP，用于通过嵌入新模块层将预训练的Transformer模型自定义为其他任务。在计算机视觉中，适配器用于增量学习和域适应。这种技术通常与CLIP一起使用，以将预训练的骨干模型转移到不同任务中。最近，适配器在视觉Transformer中取得了成功的结果。与我们同时进行的工作中，T2I-Adapter将Stable Diffusion适应于外部条件。
 
-% 新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
+加法学习 通过冻结原始模型权重并使用学习的权重掩码添加少量新参数来避免遗忘。Side-Tuning使用一个侧枝模型通过线性混合冻结模型和添加网络的输出来学习额外的功能，具有预定义的混合权重计划。
 
-% 新的社交网络技术在使信息的传播速度变快和规模变大的同时，也便利了不实信息（即不准确或有误导性的信息）的传播。然而，尽管我们对信息和新闻的获取越来越多地收到这些新技术的引导，但我们仍然对他们在虚假信息传播上的作用知之甚少。尽管媒体对假新闻传播的轶事分析给予了相当多的关注，但仍然几乎没有针对不实信息扩散或其发布源头的大规模实证调查。目前，虚假信息传播的研究仅仅局限于小的、局部的样本的分析上，而这些分析忽略了两个最重要的科学问题：真实信息和虚假信息的传播有什么不同？哪些人类判断中的因素可以解释这些不同？
+低秩适配 通过使用低秩矩阵学习参数的偏移量来防止灾难性遗忘，基于观察到许多过参数化模型位于低内在维度子空间中。
 
-% \endgroup
+零初始化层 被ControlNet用于连接网络块。神经网络的研究广泛讨论了网络权重的初始化和操作。例如，高斯初始化权重比零初始化风险更小。最近，Nichol等人讨论了在扩散模型中缩放卷积层初始权重以改善训练的方式，他们的“零模块”实现是将权重缩放为零的极端情况。Stability的模型卡片也提到了在神经层中使用零权重。在ProGAN、StyleGAN和Noise2Noise中也讨论了初始卷积权重的操作。
+
+\section*{2.2\quad{}图像扩散}
+图像扩散模型 首次由Sohl-Dickstein等人引入，最近已应用于图像生成。潜在扩散模型（LDM） 在潜在图像空间中执行扩散步骤，从而降低计算成本。文本到图像扩散模型通过预训练的语言模型（如CLIP）将文本输入编码为潜在向量，达到最先进的图像生成结果。Glide 是一个支持图像生成和编辑的文本引导扩散模型。Disco Diffusion 使用clip指导处理文本提示。Stable Diffusion 是潜在扩散的大规模实现。Imagen 直接使用金字塔结构扩散像素而不使用潜在图像。商业产品包括DALL-E2 和Midjourney。
+
+控制图像扩散模型 促进个性化、自定义或任务特定的图像生成。图像扩散过程直接提供对颜色变化和修补的一些控制。文本引导的控制方法集中于调整提示、操作CLIP特征和修改交叉注意力。MakeAScene 将分割掩码编码为标记以控制图像生成。SpaText 将分割掩码映射到本地化的标记嵌入。GLIGEN 在扩散模型的注意力层中学习新参数以进行定位生成。Textual Inversion 和DreamBooth 可以通过微调图像扩散模型并使用一小组用户提供的示例图像来个性化生成的内容。基于提示的图像编辑提供了实际的工具来操作提示生成的图像。Voynov等人提出了一种优化方法，通过草图拟合扩散过程。同时进行的工作研究了控制扩散模型的各种方法。
+\buptfigure[width=0.7\textwidth]{pictures/trans_img2.png}{}{trans_img2}
+\section*{2.3\quad{}图像到图像转换}
+Conditional GANs和Transformers可以学习不同图像域之间的映射。例如，Taming Transformer是一种视觉TRANSFORMER方法；Palette是一种从头开始训练的条件扩散模型；PITI是一种基于预训练的条件扩散模型，用于图像到图像的翻译。操作预训练的GAN可以处理特定的图像到图像任务，例如，StyleGANs可以通过额外的编码器进行控制，还有更多的应用研究在以下文献中：[3, 22, 38, 39, 55, 60, 65, 71]。
+\newpage
+
+
+\chapter*{第三章\quad{}方法}
+\newtranschapter
+ControlNet是一种神经网络架构，可以通过空间定位的任务特定图像条件增强大型预训练的文本到图像扩散模型。我们首先在第3.1节介绍ControlNet的基本结构，然后在第3.2节描述我们如何将ControlNet应用于图像扩散模型Stable Diffusion。我们在第3.3节详细说明我们的训练，并在第3.4节详细介绍推理期间的几个额外考虑，例如组合多个ControlNet。
+
+\section*{3.1\quad{}ControlNet}
+ControlNet将附加条件注入神经网络的块中（如图 外2-1所示）。在此，我们使用术语“网络块”指代一组常见组合在一起形成神经网络单元的神经层，例如resnet块、conv-bn-relu块、多头注意力块、变压器块等。假设F(·; Θ)是这样一个训练好的神经块，其参数为Θ，它将输入特征图x转换为另一个特征图y，如下所示：
+\[ y = F(x; \Theta) \]
+
+在我们的设置中，x和y通常是2D特征图，即x ∈ Rh×w×c，其中{h, w, c}分别表示图的高度、宽度和通道数（如图 外2-1a所示）。
+
+为了向这样的预训练神经块添加ControlNet，我们冻结原始块的参数Θ，并同时克隆该块以创建一个具有参数Θc的可训练副本（如图 外2-1b所示）。可训练副本接受一个外部条件向量c作为输入。当这种结构应用于大型模型（如Stable Diffusion）时，锁定的参数保留了通过数十亿图像训练的生产就绪模型，而可训练副本重用这样的大规模预训练模型，以建立处理多样化输入条件的深度、稳健且强大的骨干。
+
+可训练副本通过零卷积层与锁定模型连接，记为Z(·; ·)。具体来说，Z(·; ·)是一个1×1卷积层，权重和偏置初始化为零。为了构建ControlNet，我们使用两个零卷积实例，参数分别为Θz1和Θz2。完整的ControlNet计算如下：
+\[ y_{c} = F(x; \Theta) + Z(F(x + Z(c; \Theta{z1}); \Theta{c}); \Theta{z2}) \]
+
+其中yc是ControlNet块的输出。在第一次训练步骤中，由于零卷积层的权重和偏置参数初始化为零，方程（2）中的两个Z(·; ·)项都等于零，因此：
+\[ y_{c} = y \]
+
+这样，在训练开始时，有害噪声无法影响可训练副本中神经网络层的隐藏状态。此外，由于Z(c; Θz1) = 0且可训练副本也接收输入图像x，可训练副本是完全功能性的，并保留了大型预训练模型的能力，使其能够作为进一步学习的强大骨干。零卷积通过在初始训练步骤中消除梯度中的随机噪声来保护这个骨干。我们在补充材料中详细介绍了零卷积的梯度计算。
+
+\section*{3.2\quad{}用于文本到图像扩散的ControlNet}
+我们使用Stable Diffusion作为示例，展示如何将ControlNet添加到大型预训练扩散模型中。Stable Diffusion本质上是一个U-Net结构，包含一个编码器、中间块和一个带跳过连接的解码器。编码器和解码器各包含12个块，整个模型包含25个块，包括中间块。在25个块中，有8个是下采样或上采样卷积层，其他17个是主要块，每个包含4个resnet层和2个视觉Transformer（ViTs）。每个ViT包含几个交叉注意力和自注意力机制。例如，在图 外3-1a中，“SD编码器块A”包含4个resnet层和2个ViT，而“×3”表示该块重复三次。文本提示使用CLIP文本编码器进行编码，扩散时间步使用位置编码的时间编码器进行编码。
+
+ControlNet结构应用于U-net的每个编码器级别（如图 外3-1b所示）。特别是，我们使用ControlNet创建Stable Diffusion的12个编码块和1个中间块的可训练副本。12个编码块分为4种分辨率（64×64, 32×32, 16×16, 8×8），每个分辨率重复3次。输出被添加到U-net的12个跳过连接和1个中间块中。由于Stable Diffusion是典型的U-net结构，这种ControlNet架构可能适用于其他模型。
+
+我们连接ControlNet的方式在计算上是高效的——由于锁定的副本参数被冻结，微调时无需计算原始锁定编码器的梯度。这种方法加快了训练速度，节省了GPU内存。经测试，在单个NVIDIA A100 PCIE 40GB上，使用ControlNet优化Stable Diffusion比不使用ControlNet优化Stable Diffusion在每次训练迭代中仅多消耗约23%的GPU内存和34%的时间。
+
+图像扩散模型学习逐步去噪图像并生成来自训练域的样本。去噪过程可以在像素空间或从训练数据编码的潜在空间中进行。Stable Diffusion使用潜在图像作为训练域，因为在该空间中工作已被证明可以稳定训练过程。具体来说，Stable Diffusion使用类似于VQ-GAN的预处理方法，将512×512像素空间图像转换为较小的64×64潜在图像。为了将ControlNet添加到Stable Diffusion，我们首先将每个输入条件图像（例如边缘、姿势、深度等）从输入大小512×512转换为与Stable Diffusion大小匹配的64×64特征空间向量。特别是，我们使用一个小型网络E(·)，由四个卷积层组成，卷积核大小为4×4，步幅为2×2（使用ReLU激活，分别使用16、32、64、128通道，高斯权重初始化，并与完整模型一起训练），将图像空间条件ci编码为特征空间条件向量cf，如下所示：
+\[ c_{f} = E(c_{i}) \]
+
+然后将条件向量$c_{f}$传递到ControlNet中。
+\buptfigure[width=0.7\textwidth]{pictures/trans_img3.png}{}{trans_img3}
+
+\section*{3.3\quad{}训练}
+给定输入图像 \(z_0\)，图像扩散算法逐渐向图像添加噪声并生成一个噪声图像 \(z_t\)，其中 \(t\) 表示添加噪声的次数。给定一组条件，包括时间步 \(t\)、文本提示 \(c_t\) 以及任务特定条件 \(c_f\)，图像扩散算法学习一个网络 \(\epsilon_\theta\) 来预测添加到噪声图像 \(z_t\) 的噪声，公式如下：
+
+\[ L = E_{z_0,t,c_t,c_f,\epsilon \sim N(0,1)} \left[ \|\epsilon - \epsilon_\theta(z_t, t, c_t, c_f)\|^2_2 \right] \]
+
+其中 \(L\) 是整个扩散模型的总体学习目标。这个学习目标直接用于使用 ControlNet 进行微调扩散模型。
+
+在训练过程中，我们随机将50\%的文本提示 \(c_t\) 替换为空字符串。这种方法提高了 ControlNet 直接识别输入条件图像（例如边缘、姿势、深度等）中语义的能力，以替代提示。
+
+在训练过程中，由于零卷积不会向网络添加噪声，模型应该始终能够预测高质量的图像。我们观察到，模型不是逐步学习控制条件，而是突然成功地遵循输入条件图像；通常在不到10,000次优化步骤内。正如图 外3-2所示，我们称之为“突然收敛现象”。
+
+\section*{3.4\quad{}推理}
+
+我们可以通过几种方式进一步控制 ControlNet 的额外条件如何影响去噪扩散过程。
+
+无分类器引导分辨率加权。Stable Diffusion 依赖于一种称为无分类器引导（Classifier-Free Guidance, CFG）[29] 的技术来生成高质量图像。CFG 的公式为：
+
+\[ \epsilon_{prd} = \epsilon_{uc} + \beta_{cfg} (\epsilon_c - \epsilon_{uc}) \]
+
+其中 \(\epsilon_{prd}\)、\(\epsilon_{uc}\)、\(\epsilon_c\)、\(\beta_{cfg}\) 分别是模型的最终输出、无条件输出、条件输出和用户指定的权重。当通过 ControlNet 添加条件图像时，它可以同时添加到 \(\epsilon_{uc}\) 和 \(\epsilon_c\)，也可以只添加到 \(\epsilon_c\)。在具有挑战性的情况下，例如没有提示时，同时添加到 \(\epsilon_{uc}\) 和 \(\epsilon_c\) 会完全移除 CFG 引导（图 外3-3b）；仅使用 \(\epsilon_c\) 会使引导非常强（图 外3-3c）。我们的解决方案是首先将条件图像添加到 \(\epsilon_c\)，然后根据每个块的分辨率将一个权重 \(w_i\) 乘以 Stable Diffusion 和 ControlNet 之间的每个连接，其中 \(w_i = 64/h_i\)，\(h_i\) 是第 \(i\) 个块的大小，例如 \(h_1 = 8\)、\(h_2 = 16\)、...、\(h_{13} = 64\)。通过降低 CFG 引导强度，我们可以实现图 外3-3d所示的结果，我们称之为 CFG 分辨率加权。
+
+组合多个 ControlNet。为了将多个条件图像（例如 Canny 边缘和姿势）应用于一个 Stable Diffusion 实例，我们可以直接将相应 ControlNet 的输出添加到 Stable Diffusion 模型中（图 外3-4）。对于这样的组合，不需要额外的加权或线性插值。
+
+\buptfigure[width=0.7\textwidth]{pictures/trans_img4.png}{}{trans_img4}
+\buptfigure[width=0.7\textwidth]{pictures/trans_img5.png}{}{trans_img5}
+\buptfigure[width=0.7\textwidth]{pictures/trans_img6.png}{}{trans_img6}
+\buptfigure[width=1\textwidth]{pictures/trans_img7.png}{}{trans_img7}
+
+
+
+\newpage
+% TODO:
+\chapter*{第四章\quad{}方法}
+\newtranschapter
+我们在Stable Diffusion中实现了ControlNet，以测试各种条件，包括Canny边缘[11]、深度图[69]、法线图[87]、M-LSD线[24]、HED软边缘[91]、ADE20K分割[96]、Openpose[12]和用户手绘草图。有关每种条件的示例以及详细的训练和推理参数，请参见补充材料。
+\section*{4.1\quad{} 质量结果}
+图 外0-1展示了在几种提示设置下生成的图像。图 外3-5展示了在没有提示的情况下，我们在各种条件下的结果，其中ControlNet能够稳健地解释多样化输入条件图像中的内容语义。
+\section*{4.2\quad{} 消融研究}
+我们通过以下两种方法研究了ControlNet的替代结构：（1）用高斯权重初始化的标准卷积层替换零卷积层，（2）用单个卷积层替换每个块的可训练副本，我们称之为ControlNet-lite。有关这些消融结构的详细信息，请参见补充材料。
+
+我们提供了4种提示设置，以测试现实世界用户的可能行为：（1）无提示；（2）不足的提示，未完全覆盖条件图像中的对象，例如本文的默认提示“高质量、详细和专业的图像”；（3）改变条件图像语义的冲突提示；（4）描述必要内容语义的完美提示，例如“漂亮的房子”。图 外4-1a显示，ControlNet在所有4种设置中均成功。轻量级的ControlNet-lite（图 外4-1c）不够强大，无法解释条件图像，在不足和无提示条件下失败。当替换零卷积时，ControlNet的性能下降到与ControlNet-lite差不多，表明在微调过程中破坏了可训练副本的预训练骨干（图 外4-1b）。
+\buptfigure[width=1\textwidth]{pictures/trans_img8.png}{}{trans_img8}
+
+\section*{4.3\quad{} 定量评估}
+用户研究。我们采样了20幅未见过的手绘草图，然后将每幅草图分配给5种方法：PITI[89]的草图模型，默认边缘引导比例（\(\beta = 1.6\)）的Sketch-Guided Diffusion（SGD）[88]，相对较高边缘引导比例（\(\beta = 3.2\)）的SGD[88]，上述ControlNet-lite和ControlNet。我们邀请12名用户根据“显示图像的质量”和“草图的保真度”分别对这20组5个结果进行排名。通过这种方式，我们获得了100个质量排名和100个条件保真度排名。我们使用平均人类排名（AHR）作为偏好指标，用户对每个结果的排名从1到5（低分较差）。平均排名如表 外4-1所示。
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{l c c}
+        \hline
+        \textbf{方法} & \textbf{结果质量 ↑} & \textbf{条件保真度 ↑} \\
+        \hline
+        PITI [89](sketch) & 1.10 ± 0.05 & 1.02 ± 0.01 \\
+        Sketch-Guided [88] (\(\beta = 1.6\)) & 3.21 ± 0.62 & 2.31 ± 0.57 \\
+        Sketch-Guided [88] (\(\beta = 3.2\)) & 2.52 ± 0.44 & 3.28 ± 0.72 \\
+        ControlNet-lite & 3.93 ± 0.59 & 4.09 ± 0.46 \\
+        ControlNet & \textbf{4.22 ± 0.43} & \textbf{4.28 ± 0.45} \\
+        \hline
+    \end{tabular}
+    \caption{用户排名平均值（AUR）评估结果质量和条件保真度。我们报告了不同方法的用户偏好排名（1到5，分数越低越差）。}
+    \label{tab:user-ranking}
+\end{table}
+
+
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|l|c|}
+        \hline
+        \textbf{方法} & \textbf{IoU} \\
+        \hline
+        ADE20K (GT) & 0.58 ± 0.10 \\
+        VQGAN [19] & 0.21 ± 0.15 \\
+        LDM [72] & 0.31 ± 0.09 \\
+        PITI [89] & 0.26 ± 0.16 \\
+        ControlNet-lite & 0.32 ± 0.12 \\
+        ControlNet & \textbf{0.35 ± 0.14} \\
+        \hline
+    \end{tabular}
+    \caption{在ADE20K数据集上的语义分割标签重建评估，使用Intersection over Union（IoU ↑）。}
+    \label{tab:ade20k-eval}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \textbf{方法} & \textbf{FID ↓} & \textbf{CLIP-score ↑} & \textbf{CLIP-aes ↑} \\
+        \hline
+        Stable Diffusion & 6.09 & 0.26 & 6.32 \\
+        VQGAN [19](seg.)* & 26.28 & 0.17 & 5.14 \\
+        LDM [72](seg.)* & 25.35 & 0.18 & 5.15 \\
+        PITI [89](seg.)* & 19.74 & 0.20 & 5.77 \\
+        ControlNet-lite & 17.92 & 0.26 & 6.30 \\
+        ControlNet & \textbf{15.27} & 0.26 & 6.31 \\
+        \hline
+    \end{tabular}
+    \caption{图像生成条件语义分割的评估。我们报告了FID、CLIP文本图像分数和CLIP美学分数。我们还报告了没有分割条件的Stable Diffusion的性能。用“*”标记的方法是从头训练的。}
+    \label{tab:fid-clip-eval}
+\end{table}
+
+与工业模型的比较。Stable Diffusion V2 Depth-to-Image（SDv2-D2I）[83]使用大型NVIDIA A100集群、数千GPU小时和超过1200万训练图像进行训练。我们为SD V2训练了一个ControlNet，使用相同的深度条件，但只用了20万训练样本、单个NVIDIA RTX 3090Ti和5天的训练。我们使用每个SDv2-D2I和ControlNet生成的100幅图像来教12名用户区分这两种方法。随后，我们生成200幅图像，并要求用户辨别每幅图像是由哪种模型生成的。用户的平均准确率为0.52 ± 0.17，表明这两种方法的结果几乎无法区分。
+
+条件重建和FID分数。我们使用ADE20K[96]的测试集来评估条件保真度。最先进的分割方法OneFormer[35]在真实标签集上实现了0.58的交并比（IoU）。我们使用不同的方法生成带有ADE20K分割的图像，然后应用One-Former再次检测这些分割，以计算重建的IoU（表 外4-2）。此外，我们使用弗雷歇特嵌入距离（FID）[28]来测量使用不同分割条件方法随机生成的512×512图像集的分布距离，以及表 外4-3中的文本图像CLIP分数[66]和CLIP美学分数[79]。有关详细设置，请参见补充材料。
+
+\section*{4.4\quad{} 与以前方法的比较}
+图 外4-2展示了基准方法和我们方法（Stable Diffusion + ControlNet）的视觉比较。特别是，我们展示了PITI[89]、Sketch-Guided Diffusion[88]和Taming Transformers[19]的结果。（请注意，PITI的骨干是OpenAI GLIDE[57]，其视觉质量和性能不同。）我们观察到，ControlNet可以稳健地处理多样化的条件图像，并实现清晰锐利的结果。
+\buptfigure[width=0.7\textwidth]{pictures/trans_img9.png}{}{trans_img9}
+
+\section*{4.5\quad{} 讨论}
+训练数据集大小的影响。我们在图 外4-3中展示了ControlNet训练的稳健性。即使在有限的1000张图像下，训练也不会崩溃，并且允许模型生成可识别的狮子。当提供更多数据时，学习是可扩展的。
+
+解释内容的能力。我们在图 外4-4中展示了ControlNet从输入条件图像中捕捉语义的能力。
+
+向社区模型的转移。由于ControlNet不改变预训练SD模型的网络拓扑结构，它可以直接应用于Stable Diffusion社区中的各种模型，例如Comic Diffusion[61]和Protogen 3.4[16]，如图 外4-5所示。
+\buptfigure[width=0.7\textwidth]{pictures/trans_img10.png}{}{trans_img10}
+\buptfigure[width=0.7\textwidth]{pictures/trans_img11.png}{}{trans_img11}
+\buptfigure[width=0.7\textwidth]{pictures/trans_img12.png}{}{trans_img12}
+
+\newpage
+\chapter*{第五章\quad{}结论}
+\newtranschapter
+ControlNet是一种神经网络结构，用于学习大型预训练文本到图像扩散模型的条件控制。它重用了源模型的大规模预训练层，构建了一个深度且强大的编码器，以学习特定条件。原始模型和可训练副本通过“零卷积”层连接，这些层在训练期间消除了有害噪声。广泛的实验验证了ControlNet能够在单一或多重条件下，有或没有提示的情况下，有效地控制Stable Diffusion。在多样化条件数据集上的结果表明，ControlNet结构可能适用于更广泛的条件，并促进相关应用。
+
+\newpage
+\chapter*{致谢}
+\newtranschapter
+本工作部分由斯坦福人本AI研究院和布朗媒体创新研究所支持。
+\newpage
+\chapter*{引用}
+\noindent
+[1] Sadia Afrin. Weight initialization in neural network, inspired by andrew ng, https://medium.-
+\noindent
+com/@safrin1128/weightinitialization-in-neural-network-inspired-by-andrew-nge0066dc4a566, 2020.
+
+\noindent
+[2] Armen Aghajanyan, Sonal Gupta, and Luke Zettlemoyer. Intrinsic dimensionality explains the effectiveness of language model fine-tuning. In Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing, pages 7319–7328, Online, Aug. 2021.
+
+\noindent
+[3] Yuval Alaluf, Or Patashnik, and Daniel Cohen-Or. Only a matter of style: Age transformation using a style-based regression model. ACM Transactions on Graphics (TOG), 40(4), 2021.
+
+\noindent
+[4] YuvalAlaluf,OmerTov,RonMokady,RinonGal,andAmit Bermano. Hyperstyle: Stylegan inversion with hypernetworks for real image editing. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 18511–18521, 2022.
+
+\noindent
+[5] Alembics.Discodiffusion,https://github.com/alembics/disco-diffusion, 2022.
+
+\noindent
+[6] Omri Avrahami, Thomas Hayes, Oran Gafni, Sonal Gupta, Yaniv Taigman, Devi Parikh, Dani Lischinski, Ohad Fried, and Xi Yin. Spatext: Spatio-textual representation for controllable image generation. arXiv preprint arXiv:2211.14305, 2022.
+
+\noindent
+[7] Omri Avrahami, Dani Lischinski, and Ohad Fried. Blended diffusion for text-driven editing of natural images. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 18208–18218, 2022.
+
+\noindent
+[8] Omer Bar-Tal, Lior Yariv, Yaron Lipman, and Tali Dekel. Multidiffusion: Fusing diffusion paths for controlled image generation. arXiv preprint arXiv:2302.08113, 2023.
+
+\noindent
+[9] Dina Bashkirova, Jose Lezama, Kihyuk Sohn, Kate Saenko, and Irfan Essa. Masksketch: Unpaired structure-guided masked image generation. arXiv preprint arXiv:2302.05496, 2023.
+
+\noindent
+[10] Tim Brooks, Aleksander Holynski, and Alexei A Efros. Instructpix2pix: Learning to follow image editing instructions. arXiv preprint arXiv:2211.09800, 2022.
+
+\noindent
+[11] John Canny. A computational approach to edge detection. IEEE Transactions on Pattern Analysis and Machine Intelligence, (6):679–698, 1986.
+
+\noindent
+[12] Z. Cao, G. Hidalgo Martinez, T. Simon, S. Wei, and Y. A. Sheikh. Openpose: Realtime multi-person 2d pose estimation using part affinity fields. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2019.
+
+\noindent
+[13] HantingChen,YunheWang,TianyuGuo,ChangXu,Yiping Deng, Zhenhua Liu, Siwei Ma, Chunjing Xu, Chao Xu, and Wen Gao. Pre-trained image processing transformer. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 12299–12310, 2021.
+
+\noindent
+[14] Zhe Chen, Yuchen Duan, Wenhai Wang, Junjun He, Tong Lu, Jifeng Dai, and Yu Qiao. Vision transformer adapter for dense predictions. International Conference on Learning Representations, 2023.
+
+\noindent
+[15] Yunjey Choi, Minje Choi, Munyoung Kim, Jung-Woo Ha, Sunghun Kim, and Jaegul Choo. Stargan: Unified generative adversarial networks for multi-domain image-to-image translation. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 8789–8797, 2018.
+
+\noindent
+[16] darkstorm2150. Protogen x3.4 (photorealism) official release, https://civitai.com/models/3666/protogen-x34-photorealism-official-release, 2022.
+
+\noindent
+[17] Prafulla Dhariwal and Alexander Nichol. Diffusion models beat gans on image synthesis. Advances in Neural Information Processing Systems, 34:8780–8794, 2021.
+
+\noindent
+[18] TanM.Dinh,AnhTuanTran,RangNguyen,andBinh-Son Hua. Hyperinverter: Improving stylegan inversion via hypernetwork. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 11389– 11398, 2022.
+
+\noindent
+[19] Patrick Esser, Robin Rombach, and Bjorn Ommer. Taming transformers for high-resolution image synthesis. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 12873–12883, 2021.
+
+\noindent
+[20] Oran Gafni, Adam Polyak, Oron Ashual, Shelly Sheynin, Devi Parikh, and Yaniv Taigman. Make-a-scene: Scenebased text-to-image generation with human priors. In European Conference on Computer Vision (ECCV), pages 89–106. Springer, 2022.
+
+\noindent
+[21] Rinon Gal, Yuval Alaluf, Yuval Atzmon, Or Patashnik, Amit H Bermano, Gal Chechik, and Daniel Cohen-Or. An image is worth one word: Personalizing text-to-image generation using textual inversion. arXiv preprint arXiv:2208.01618, 2022.
+
+\noindent
+[22] RinonGal,OrPatashnik,HaggaiMaron,AmitHBermano, Gal Chechik, and Daniel Cohen-Or. Stylegan-nada: Clip guided domain adaptation of image generators. ACM Transactions on Graphics (TOG), 41(4):1–13, 2022.
+
+\noindent
+[23] Peng Gao, Shijie Geng, Renrui Zhang, Teli Ma, Rongyao Fang, Yongfeng Zhang, Hongsheng Li, and Yu Qiao. Clip adapter: Better vision-language models with feature adapters. arXiv preprint arXiv:2110.04544, 2021.
+
+\noindent
+[24] Geonmo Gu, Byungsoo Ko, SeoungHyun Go, Sung-Hyun Lee, Jingeun Lee, and Minchul Shin. Towards light-weight and real-time line segment detection. In Proceedings of the AAAI Conference on Artificial Intelligence, 2022.
+
+\noindent
+[25] David Ha, Andrew M. Dai, and Quoc V. Le. Hypernetworks. In International Conference on Learning Representations, 2017.
+
+\noindent
+[26] Heathen. Hypernetwork style training, a tiny guide, stable-diffusion-webui, https://github.com/automatic1111/stable-diffusion-webui/discussions/2670, 2022.
+
+\noindent
+[27] Amir Hertz, Ron Mokady, Jay Tenenbaum, Kfir Aberman, Yael Pritch, and Daniel Cohen-Or. Prompt-to-prompt image editing with cross attention control. arXiv preprint arXiv:2208.01626, 2022.
+
+\noindent
+[28] Martin Heusel, Hubert Ramsauer, Thomas Unterthiner, Bernhard Nessler, and Sepp Hochreiter. Gans trained by a two time-scale update rule converge to a local nash equilibrium. In I. Guyon, U. Von Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017.
+
+\noindent
+[29] Jonathan Ho and Tim Salimans. Classifier-free diffusion guidance, 2022.
+
+\noindent
+[30] Neil Houlsby, Andrei Giurgiu, Stanislaw Jastrzebski, Bruna Morrone, Quentin De Laroussilhe, Andrea Gesmundo, Mona Attariyan, and Sylvain Gelly. Parameter-efficient transfer learning for nlp. In International Conference on Machine Learning, pages 2790–2799, 2019.
+
+\noindent
+[31] Edward J Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, and Weizhu Chen. Lora: Low-rank adaptation of large language models. arXiv preprint arXiv:2106.09685, 2021.
+
+\noindent
+[32] Lianghua Huang, Di Chen, Yu Liu, Shen Yujun, Deli Zhao, and Zhou Jingren. Composer: Creative and controllable image synthesis with composable conditions. 2023.
+
+\noindent
+[33] Nisha Huang, Fan Tang, Weiming Dong, Tong-Yee Lee, and Changsheng Xu. Region-aware diffusion for zero-shot textdriven image editing. arXiv preprint arXiv:2302.11797, 2023.
+
+\noindent
+[34] Phillip Isola, Jun-Yan Zhu, Tinghui Zhou, and Alexei A Efros. Image-to-image translation with conditional adversarial networks. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 1125–1134, 2017.
+
+\noindent
+[35] Jitesh Jain, Jiachen Li, MangTik Chiu, Ali Hassani, Nikita Orlov, and Humphrey Shi. OneFormer: One Transformer to Rule Universal Image Segmentation. 2023.
+
+\noindent
+[36] Tero Karras, Timo Aila, Samuli Laine, and Jaakko Lehtinen. Progressive growing of gans for improved quality, stability, and variation. International Conference on Learning Representations, 2018.
+
+\noindent
+[37] Tero Karras, Samuli Laine, and Timo Aila. A style-based generator architecture for generative adversarial networks. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 4401–4410, 2019.
+
+\noindent
+[38] Tero Karras, Samuli Laine, and Timo Aila. A style-based generator architecture for generative adversarial networks. IEEE Transactions on Pattern Analysis, 2021.
+
+\noindent
+[39] Oren Katzir, Vicky Perepelook, Dani Lischinski, and Daniel Cohen-Or. Multi-level latent space structuring for generative control. arXiv preprint arXiv:2202.05910, 2022.
+
+\noindent
+[40] Bahjat Kawar, Shiran Zada, Oran Lang, Omer Tov, Huiwen Chang, Tali Dekel, Inbar Mosseri, and Michal Irani. Imagic: Text-based real image editing with diffusion models. arXiv preprint arXiv:2210.09276, 2022.
+
+\noindent
+[41] Gwanghyun Kim, Taesung Kwon, and Jong Chul Ye. Diffusionclip: Text-guided diffusion models for robust image manipulation. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 2426– 2435, 2022.
+
+\noindent
+[42] Diederik Kingma, Tim Salimans, Ben Poole, and Jonathan Ho. Variational diffusion models. Advances in Neural Information Processing Systems, 34:21696–21707, 2021.
+
+\noindent
+[43] Kurumuz. Novelai improvements on stable diffusion, https://blog.novelai.net/novelai-improvements-on-stable-diffusion-e10d38db82ac, 2022.
+
+\noindent
+[44] Yann LeCun, Yoshua Bengio, and Geoffrey Hinton. Deep learning. Nature, 521(7553):436–444, May 2015.
+
+\noindent
+[45] Y. Lecun, L. Bottou, Y. Bengio, and P. Haffner. Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86(11):2278–2324, 1998.
+
+\noindent
+[46] Jaakko Lehtinen, Jacob Munkberg, Jon Hasselgren, Samuli Laine, Tero Karras, Miika Aittala, and Timo Aila. Noise2noise: Learning image restoration without clean data. Proceedings of the 35th International Conference on Machine Learning, 2018.
+
+\noindent
+[47] Chunyuan Li, Heerad Farkhoor, Rosanne Liu, and Jason Yosinski. Measuring the intrinsic dimension of objective landscapes. International Conference on Learning Representations, 2018.
+
+\noindent
+[48] Yuheng Li, Haotian Liu, Qingyang Wu, Fangzhou Mu, Jian-wei Yang, Jianfeng Gao, Chunyuan Li, and Yong Jae Lee. Gligen: Open-set grounded text-to-image generation. 2023.
+
+\noindent
+[49] Yanghao Li, Hanzi Mao, Ross Girshick, and Kaiming He. Exploring plain vision transformer backbones for object detection. arXiv preprint arXiv:2203.16527, 2022.
+
+\noindent
+[50] Yanghao Li, Saining Xie, Xinlei Chen, Piotr Dollar, Kaiming He, and Ross Girshick. Benchmarking detection transfer learning with vision transformers. arXiv preprint arXiv:2111.11429, 2021.
+
+\noindent
+[51] Arun Mallya, Dillon Davis, and Svetlana Lazebnik. Piggy back: Adapting a single network to multiple tasks by learning to mask weights. In European Conference on Computer Vision (ECCV), pages 67–82, 2018.
+
+\noindent
+[52] Arun Mallya and Svetlana Lazebnik. Packnet: Adding multiple tasks to a single network by iterative pruning. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 7765–7773, 2018.
+
+\noindent
+[53] Chenlin Meng, Yutong He, Yang Song, Jiaming Song, Jiajun Wu, Jun-Yan Zhu, and Stefano Ermon. Sdedit: Guided image synthesis and editing with stochastic differential equations. In International Conference on Learning Representations, 2021.
+
+\noindent
+[54] Midjourney. https://www.midjourney.com/, 2023.
+
+\noindent
+[55] Ron Mokady, Omer Tov, Michal Yarom, Oran Lang, Inbar Mosseri, Tali Dekel, Daniel Cohen-Or, and Michal Irani. Self-distilled stylegan: Towards generation from internet photos. In ACM SIGGRAPH 2022 Conference Proceedings, pages 1–9, 2022.
+
+\noindent
+[56] Chong Mou, Xintao Wang, Liangbin Xie, Jian Zhang, Zhongang Qi, Ying Shan, and Xiaohu Qie. T2i-adapter: Learning adapters to dig out more controllable ability for text-to-image diffusion models. arXiv preprint arXiv:2302.08453, 2023.
+
+\noindent
+[57] Alex Nichol, Prafulla Dhariwal, Aditya Ramesh, Pranav Shyam, Pamela Mishkin, Bob McGrew, Ilya Sutskever, and Mark Chen. GLIDE: towards photorealistic image generation and editing with text-guided diffusion models. CoRR, 2021.
+
+\noindent
+[58] Alex Nichol, Prafulla Dhariwal, Aditya Ramesh, Pranav Shyam, Pamela Mishkin, Bob McGrew, Ilya Sutskever, and Mark Chen. Glide: Towards photorealistic image generation and editing with text-guided diffusion models. 2022.
+
+\noindent
+[59] Alexander Quinn Nichol and Prafulla Dhariwal. Improved denoising diffusion probabilistic models. In International Conference on Machine Learning, pages 8162–8171. PMLR, 2021.
+
+\noindent
+[60] Yotam Nitzan, Kfir Aberman, Qiurui He, Orly Liba, Michal Yarom, Yossi Gandelsman, Inbar Mosseri, Yael Pritch, and Daniel Cohen-Or. Mystyle: A personalized generative prior. arXiv preprint arXiv:2203.17272, 2022.
+
+\noindent
+[61] ogkalu. Comic-diffusion v2, trained on 6 styles at once, https://huggingface.co/ogkalu/comic-diffusion, 2022.
+
+\noindent
+[62] OpenAI. Dall-e-2, https://openai.com/product/dall-e-2, 2023.
+
+\noindent
+[63] TaesungPark,Ming-YuLiu,Ting-ChunWang,andJun-Yan Zhu. Semantic image synthesis with spatially-adaptive normalization. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 2337–2346, 2019.
+
+\noindent
+[64] Gaurav Parmar, Krishna Kumar Singh, Richard Zhang, Yijun Li, Jingwan Lu, and Jun-Yan Zhu. Zero-shot image-to-image translation. arXiv preprint arXiv:2302.03027, 2023.
+
+\noindent
+[65] Or Patashnik, Zongze Wu, Eli Shechtman, Daniel Cohen-Or, and Dani Lischinski. Styleclip: Text-driven manipulation of stylegan imagery. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), pages 2085–2094, October 2021.
+
+\noindent
+[66] Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, et al. Learning transferable visual models from natural language supervision. In International Conference on Machine Learning, pages 8748–8763. PMLR, 2021.
+
+\noindent
+[67] Aditya Ramesh, Prafulla Dhariwal, Alex Nichol, Casey Chu, and Mark Chen. Hierarchical text-conditional image generation with clip latents. arXiv preprint arXiv:2204.06125, 2022.
+
+\noindent
+[68] Aditya Ramesh, Mikhail Pavlov, Gabriel Goh, Scott Gray, Chelsea Voss, Alec Radford, Mark Chen, and Ilya Sutskever. Zero-shot text-to-image generation. In International Conference on Machine Learning, pages 8821–8831. PMLR, 2021.
+
+\noindent
+[69] Rene ́ Ranftl, Katrin Lasinger, David Hafner, Konrad Schindler, and Vladlen Koltun. Towards robust monocular depth estimation: Mixing datasets for zero-shot cross-dataset transfer. IEEE Transactions on Pattern Analysis and Machine Intelligence, 44(3):1623–1637, 2020.
+
+\noindent
+[70] Sylvestre-Alvise Rebuffi, Hakan Bilen, and Andrea Vedaldi. Efficient parametrization of multi-domain deep neural networks. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 8119–8127, 2018.
+
+\noindent
+[71] Elad Richardson, Yuval Alaluf, Or Patashnik, Yotam Nitzan, Yaniv Azar, Stav Shapiro, and Daniel Cohen-Or. Encoding in style: a stylegan encoder for image-to-image translation. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 2021.
+
+\noindent
+[72] Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, and Bjo ̈rn Ommer. High-resolution image synthesis with latent diffusion models. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 10684–10695, 2022.
+
+\noindent
+[73] Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-net: Convolutional networks for biomedical image segmentation. In Medical Image Computing and Computer-Assisted Intervention MICCAI International Conference, pages 234–241, 2015.
+
+\noindent
+[74] Amir Rosenfeld and John K Tsotsos. Incremental learning through deep adaptation. IEEE Transactions on Pattern Analysis and Machine Intelligence, 42(3):651–663, 2018.
+
+\noindent
+[75] Nataniel Ruiz, Yuanzhen Li, Varun Jampani, Yael Pritch, Michael Rubinstein, and Kfir Aberman. Dreambooth: Fine tuning text-to-image diffusion models for subject-driven generation. arXiv preprint arXiv:2208.12242, 2022.
+
+\noindent
+[76] David E. Rumelhart, Geoffrey E. Hinton, and Ronald J. Williams. Learning representations by back-propagating errors. Nature, 323(6088):533–536, Oct. 1986.
+
+\noindent
+[77] Chitwan Saharia, William Chan, Huiwen Chang, Chris Lee, Jonathan Ho, Tim Salimans, David Fleet, and Mohammad Norouzi. Palette: Image-to-image diffusion models. In ACM SIGGRAPH 2022 Conference Proceedings, SIGGRAPH ’22, New York, NY, USA, 2022.
+
+\noindent
+[78] Chitwan Saharia, William Chan, Saurabh Saxena, Lala Li, Jay Whang, Emily Denton, Seyed Kamyar Seyed Ghasemipour, Burcu Karagol Ayan, S Sara Mahdavi, Rapha Gontijo Lopes, et al. Photorealistic text-to-image diffusion models with deep language understanding. arXiv preprint arXiv:2205.11487, 2022.
+
+\noindent
+[79] Christoph Schuhmann, Romain Beaumont, Richard Vencu, Cade W Gordon, Ross Wightman, Mehdi Cherti, Theo Coombes, Aarush Katta, Clayton Mullis, Mitchell Wortsman, Patrick Schramowski, Srivatsa R Kundurthy, Katherine Crowson, Ludwig Schmidt, Robert Kaczmarczyk, and Jenia Jitsev. LAION-5b: An open large-scale dataset for training next generation image-text models. In Thirty-sixth Conference on Neural Information Processing Systems Datasets and Benchmarks Track, 2022.
+
+\noindent
+[80] Joan Serra, Didac Suris, Marius Miron, and Alexandros Karatzoglou. Overcoming catastrophic forgetting with hard attention to the task. In International Conference on Machine Learning, pages 4548–4557. PMLR, 2018.
+
+\noindent
+[81] Jascha Sohl-Dickstein, Eric Weiss, Niru Maheswaranathan, and Surya Ganguli. Deep unsupervised learning using nonequilibrium thermodynamics. In International Conference on Machine Learning, pages 2256–2265. PMLR, 2015.
+
+\noindent
+[82] Stability. Stable diffusion v1.5 model card, https://huggingface.co/runwayml/stable-diffusion-v1-5, 2022.
+
+\noindent
+[83] Stability. Stable diffusion v2 model card, stable-diffusion-2-depth, https://huggingface.co/stabilityai/stable-diffusion-2-depth, 2022.
+
+\noindent
+[84] Asa Cooper Stickland and Iain Murray. Bert and pals: Projected attention layers for efficient adaptation in multi-task learning. In International Conference on Machine Learning, pages 5986–5995, 2019.
+
+\noindent
+[85] Yi-Lin Sung, Jaemin Cho, and Mohit Bansal. Vl-adapter: Parameter-efficient transfer learning for vision-and-language tasks. arXiv preprint arXiv:2112.06825, 2021.
+
+\noindent
+[86] NarekTumanyan,MichalGeyer,ShaiBagon,andTaliDekel. Plug-and-play diffusion features for text-driven image-to-image translation. arXiv preprint arXiv:2211.12572, 2022.
+
+\noindent
+[87] Igor Vasiljevic, Nick Kolkin, Shanyi Zhang, Ruotian Luo, Haochen Wang, Falcon Z Dai, Andrea F Daniele, Mohammadreza Mostajabi, Steven Basart, Matthew R Walter, et al. Diode: A dense indoor and outdoor depth dataset. arXiv preprint arXiv:1908.00463, 2019.
+
+\noindent
+[88] Andrey Voynov, Kfir Abernan, and Daniel Cohen-Or. Sketch guided text-to-image diffusion models. 2022.
+
+\noindent
+[89] Tengfei Wang, Ting Zhang, Bo Zhang, Hao Ouyang, Dong Chen, Qifeng Chen, and Fang Wen. Pretraining is all you need for image-to-image translation. 2022.
+
+\noindent
+[90] Ting-ChunWang,Ming-YuLiu,Jun-YanZhu,AndrewTao, Jan Kautz, and Bryan Catanzaro. High-resolution image synthesis and semantic manipulation with conditional gans. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 8798–8807, 2018.
+
+\noindent
+[91] Saining Xie and Zhuowen Tu. Holistically-nested edge detection. In Proceedings of the IEEE International Conference on Computer Vision (ICCV), pages 1395–1403, 2015.
+
+\noindent
+[92] Jeffrey O. Zhang, Alexander Sax, Amir Zamir, Leonidas J. Guibas, and Jitendra Malik. Side-tuning: Network adaptation via additive side networks. In European Conference on Computer Vision (ECCV), pages 698–714. Springer, 2020.
+
+\noindent
+[93] PanZhang,BoZhang,DongChen,LuYuan,andFangWen. Cross-domain correspondence learning for exemplar-based image translation. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 5143–5153, 2020.
+
+\noindent
+[94] Renrui Zhang, Rongyao Fang, Peng Gao, Wei Zhang, Kun chang Li, Jifeng Dai, Yu Qiao, and Hongsheng Li. Tip adapter: Training-free clip-adapter for better vision-language modeling. arXiv preprint arXiv:2111.03930, 2021.
+
+\noindent
+[95] Jiawei Zhao, Florian Scha ̈fer, and Anima Anandkumar. Zero initialization: Initializing residual networks with only zeros and ones. arXiv, 2021.
+
+\noindent
+[96] BoleiZhou,HangZhao,XavierPuig,SanjaFidler,AdelaBarriuso, and Antonio Torralba. Scene parsing through ade20k dataset. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 633–641, 2017.
+
+\noindent
+[97] XingranZhou,BoZhang,TingZhang,PanZhang,Jianmin Bao, Dong Chen, Zhongfei Zhang, and Fang Wen. Cocosnet v2: Full-resolution correspondence learning for image translation. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 11465– 11475, 2021.
+
+\noindent
+[98] Jun-YanZhu,TaesungPark,PhillipIsola,andAlexeiAEfros. Unpaired image-to-image translation using cycle-consistent adversarial networks. In Computer Vision (ICCV), 2017 IEEE International Conference on, 2017.
+
+\noindent
+[99] Jun-YanZhu,RichardZhang,DeepakPathak,TrevorDarrell, Alexei A Efros, Oliver Wang, and Eli Shechtman. Toward multimodal image-to-image translation. Advances in Neural Information Processing Systems, 30, 2017.
+
+% TODO:
+\endgroup
+
+% 任务书
+\blankmatter
+\phantomsection\addcontentsline{toc}{chapter}{任\quad{}务\quad{}书}
+\includepdf[pages=-]{docs/task.pdf}  
 
 % 开题报告
 \blankmatter
