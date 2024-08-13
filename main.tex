@@ -64,47 +64,47 @@
 极大地提升生成图像的质量和编辑效率。用户可以通过简单的语言指令，如“增加图片亮度”或“改变背景为海滩”，
 直接与编辑系统交互，系统能够理解这些指令并即时作出响应。
 
-通过整合深度学习和语言模型技术，我们有望构建出一个全新的交互式图像编辑系统，其不仅能够提供更高质量的图像编辑结果，更能够提供给用户更加自然的交互方式，为该领域的专业人士和普通用户都带好的图像编辑体验。
+通过整合深度学习和语言模型技术，本文有望构建出一个全新的交互式图像编辑系统，其不仅能够提供更高质量的图像编辑结果，更能够提供给用户更加自然的交互方式，为该领域的专业人士和普通用户都带好的图像编辑体验。
 \subsection{项目意义}
 通过融合先进的图像生成技术与大语言模型，本项目希望能搭建一个基于LLM的交互式图像编辑系统，提供更为易用、精准且高效的图像编辑工具，提升媒体娱乐、数字营销以及智能医疗等多个行业的图像处理能力。
 通过实现更加智能化和用户友好型的编辑系统，为广大用户带来前所未有的图像编辑体验。这样的研究与开发，为图像编辑技术的未来提供了一种可能性和一条新的探索和实践路径。
 \section{国内外研究现状}
-Multimodal image synthesis and editing: A survey\cite{zhan2022multimodal}这篇论文对多模态图像合成和编辑的进展进行了综述，讨论如何有效地结合多种模态信息来创造和编辑图像。该论文提出了一种分类体系，根据数据模态和模型架构进行分类，并详细介绍了多模态图像合成和编辑的各种方法。该论文还讨论了基准数据集、评价指标以及当前研究中的挑战，并提出了未来的研究方向，强调在图像合成和编辑任务中引入跨模态指导的重要性和潜力。
+基于大型语言模型(LLM)的交互式多模态图像编辑是近年来图像处理和生成领域的一个重要研究方向，通过将语言模型与视觉模型相结合，这种技术能够实现更自然和直观的图像编辑方式，使用户能够用自然语言描述所需的编辑效果，并通过智能系统自动执行这些操作。这一领域的快速发展不仅提升了图像编辑的便捷性还开辟了新的应用场景，如内容创作、个性化设计以及虚拟现实等。Zhan等人\cite{zhan2022multimodal}对多模态图像合成和编辑的进展进行了综述，讨论如何有效地结合多种模态信息来创造和编辑图像，提出了一种分类体系，根据数据模态和模型架构进行分类，并详细介绍了多模态图像合成和编辑的各种方法，讨论了基准数据集、评价指标以及当前研究中的挑战，并提出了未来的研究方向，强调在图像合成和编辑任务中引入跨模态指导的重要性和潜力。
 \subsection{图像编辑}
 ImageBART\cite{esser2021imagebart}是一种基于自回归变换的图像生成和编辑模型，灵感来源于自然语言处理中的 BART(Bidirectional and Auto-Regressive Transformers)\cite{lewis2019bart},其结合了自回归和编码-解码架构，用于高效地生成和编辑图像。
 EditGAN\cite{ling2021editgan}提出了一种高精度的语义图像编辑方法，允许用户通过修改图像的详细部分分割掩模来编辑图像，其基于生成对抗网络（GAN）构建，只需要少量标记样本即可进行训练，实现了高效的编辑。
-Generating images from captions with attention\cite{mansimov2015generating}介绍了一个能从自然语言描述中生成图像的模型，这个模型在关注描述中的相关词汇的同时利用深度循环注意力编写器（DRAW）迭代地在画布上绘制图像。
-Object-based image editing\cite{barrett2002object}介绍了基于对象的图像编辑技术，允许用户直接在对象层面而不是像素层面进行编辑。
-Faceshop: Deep sketch-based face image editing\cite{portenier2018faceshop}提供了一种利用深度学习来进行面部图像编辑的方法。
-Image-based modeling and photo editing\cite{oh2001image}探讨了基于图像的建模与照片编辑技术，特别强调了分层编辑和实体分离技术的应用。
-Invertible conditional gans for image editing\cite{perarnau2016invertible}探索了可逆Conditional GANs在图像编辑中的应用，这种模型结合了编码器和cGAN，可对真实图像进行精确修改。
-In-domain gan inversion for real image editing\cite{zhu2020domain}研究了在领域GAN反转技术在真实图像编辑中的应用，通过GAN学习特定图像域的编辑操作。
-Poisson image editing\cite{di2016poisson}探讨了泊松图像编辑技术，该技术能够无缝地将图像区域融合和编辑，并提供高质量的编辑效果。
-Image editing in the contour domain\cite{elder1998image}提出了一种在轮廓域进行图像编辑的方法，这种方法直接在轮廓层面而不是像素层面进行操作。
-Diffusion maps for edge-aware image editing\cite{farbman2010diffusion}使用扩散映射技术进行边缘感知图像编辑以在保持边缘清晰的同时平滑颜色和纹理。
+Mansimov等人\cite{mansimov2015generating}介绍了一个能从自然语言描述中生成图像的模型，这个模型在关注描述中的相关词汇的同时利用深度循环注意力编写器（DRAW）迭代地在画布上绘制图像。
+Barrett等人\cite{barrett2002object}介绍了基于对象的图像编辑技术，允许用户直接在对象层面而不是像素层面进行编辑。
+Portenier等人\cite{portenier2018faceshop}提供了一种利用深度学习来进行面部图像编辑的方法。
+Oh等人\cite{oh2001image}探讨了基于图像的建模与照片编辑技术，特别强调了分层编辑和实体分离技术的应用。
+Perarnau等人\cite{perarnau2016invertible}探索了可逆Conditional GANs在图像编辑中的应用，这种模型结合了编码器和cGAN，可对真实图像进行精确修改。
+Zhu等人\cite{zhu2020domain}研究了在领域GAN反转技术在真实图像编辑中的应用，通过GAN学习特定图像域的编辑操作。
+Di Martino等人\cite{di2016poisson}探讨了泊松图像编辑技术，该技术能够无缝地将图像区域融合和编辑，并提供高质量的编辑效果。
+Elder等人\cite{elder1998image}提出了一种在轮廓域进行图像编辑的方法，这种方法直接在轮廓层面而不是像素层面进行操作。
+Farbman等人\cite{farbman2010diffusion}使用扩散映射技术进行边缘感知图像编辑以在保持边缘清晰的同时平滑颜色和纹理。
 \subsection{大语言模型微调}
-Parameter-efficient fine-tuning of large-scale pre-trained language models\cite{ding2023parameter}介绍了Delta-tuning技术，它在不改变预训练大模型（PLMs）架构的基础上，通过微调少量参数来适应新任务。其主要包括以下方法：增加式、指定式和重新参数化方法，以及在变换器层添加适配器模块的实际应用，这些方法比全参数微调更节省计算资源，提高了模型的适应性和效率。
-How fine can fine-tuning be? learning efficient language models\cite{radiya2020fine}分析了微调过程的效率，对在保持性能的同时减少计算成本的方法进行探索。
-\# InsTag: Instruction Tagging for Analyzing Supervised Fine-tuning of Large Language Models\cite{lu2023instag}使用指令标签分析监督式微调过程，以提高大型语言模型在特定任务上的性能。
-Scaling federated learning for fine-tuning of large language models\cite{hilmkil2021scaling}应用联邦学习方法来微调大型语言模型，以提高模型在多个数据源上的通用性和隐私保护。
-Longlora: Efficient fine-tuning of long-context large language models\cite{chen2023longlora}针对长上下文的大型语言模型进行高效微调，以提升模型对长距离依赖信息的处理能力。
-Fine-tuning pre-trained language models effectively by optimizing subnetworks adaptively\cite{zhang2022fine}通过自适应优化子网络来有效微调预训练语言模型，以提高模型的灵活性和适应新任务的能力。
-Llm-adapters: An adapter family for parameter-efficient fine-tuning of large language models\cite{hu2023llm}提出一种用于大型语言模型参数高效微调的适配器家族，以减少模型调整过程中的资源消耗。
-Language models are few-shot learners\cite{brown2020language}探讨语言模型在小样本学习中的表现，并分析其微调和适应新任务的能力。
-Fine-tuning language models with just forward passes\cite{malladi2024fine}提出一种仅通过前向传播进行微调的新方法，以简化语言模型的调整过程。
-\subsection{多模态图像编辑方法}
-PixelTone: A Multimodal Interface for Image Editing\cite{laput2013pixeltone}介绍了一种结合语音和直接操作的多模态照片编辑界面，旨在简化移动设备上的图像编辑任务，通过自然语言和草图来定位图像中的具体更改区域。研究还开发了一个定制的自然语言解释器，将用户的语言指令映射到具体的图像处理操作上。通过用户研究，验证了接口的有效性，展示了其在简化编辑流程和提高用户互动体验方面的潜力。
-DiffusionCLIP\cite{kim2022diffusionclip}是一种结合了扩散模型和CLIP\cite{radford2021learning}模型的新型图像编辑方法。这种方法利用了扩散模型的生成能力和CLIP的语义理解能力，以实现通过文本描述来精确控制图像的内容和属性的编辑。
-Language-based image editing with recurrent attentive models\cite{chen2018language}提出一种基于语言的图像编辑方法，通过递归注意模型允许用户用自然语言描述来指导图像编辑过程。
-Imagic: Text-based real image editing with diffusion models\cite{kawar2023imagic}利用扩散模型和文本描述来进行真实图像的编辑，并允许细粒度控制和高度个性化的编辑。
-Sequential attention GAN for interactive image editing\cite{cheng2020sequential}介绍了一个用于交互式图像编辑的顺序注意力GAN模型，允许用户通过多轮对话逐步指导图像编辑。
-Towards automatic image editing: Learning to see another you\cite{ghodrati2015towards}研究了自动图像编辑的可能性，通过机器学习方法让系统能够根据用户的需求生成或修改图像。
-Instructpix2pix: Learning to follow image editing instructions\cite{brooks2023instructpix2pix}使用pix2pix模型学习遵循图像编辑指令，使得模型能够根据文字描述自动进行图像编辑。
-Blended diffusion for text-driven editing of natural images\cite{avrahami2022blended}使用自然语言界面和数据驱动的图像生成技术进行文本驱动的图像编辑。
-Tigan: Text-based interactive image generation and manipulation\cite{zhou2022tigan}提出了一种基于文本的交互式图像生成和操作框架。
-Shape-aware text-driven layered video editing\cite{lee2023shape}对基于形状感知的文本驱动分层视频编辑方法进行探索。
-Prompt tuning inversion for text-driven image editing using diffusion models\cite{dong2023prompt}使用扩散模型，为基于文本的图像编辑提供一种新的反演方法。
-Lightweight text-driven image editing with disentangled content and attributes\cite{li2023lightweight}提供了通过解耦内容和属性以进行轻量级的基于文本驱动的图像编辑的方法。
+Ding等人\cite{ding2023parameter}介绍了Delta-tuning技术，它在不改变预训练大模型（PLMs）架构的基础上，通过微调少量参数来适应新任务。其主要包括以下方法：增加式、指定式和重新参数化方法，以及在变换器层添加适配器模块的实际应用，这些方法比全参数微调更节省计算资源，提高了模型的适应性和效率。
+Radiya等人\cite{radiya2020fine}分析了微调过程的效率，对在保持性能的同时减少计算成本的方法进行探索。
+Lu等人\cite{lu2023instag}使用指令标签分析监督式微调过程，以提高大型语言模型在特定任务上的性能。
+Hilmkil等人\cite{hilmkil2021scaling}应用联邦学习方法来微调大型语言模型，以提高模型在多个数据源上的通用性和隐私保护。
+Chen等人\cite{chen2023longlora}针对长上下文的大型语言模型进行高效微调，以提升模型对长距离依赖信息的处理能力。
+Zhang等人\cite{zhang2022fine}通过自适应优化子网络来有效微调预训练语言模型，以提高模型的灵活性和适应新任务的能力。
+Hu等人\cite{hu2023llm}提出一种用于大型语言模型参数高效微调的适配器家族，以减少模型调整过程中的资源消耗。
+Brown等人\cite{brown2020language}探讨语言模型在小样本学习中的表现，并分析其微调和适应新任务的能力。
+Malladi等人\cite{malladi2024fine}提出一种仅通过前向传播进行微调的新方法，以简化语言模型的调整过程。
+\subsection{多模态图像编辑}
+Laput等人\cite{laput2013pixeltone}介绍了一种结合语音和直接操作的多模态照片编辑界面，旨在简化移动设备上的图像编辑任务，通过自然语言和草图来定位图像中的具体更改区域。研究还开发了一个定制的自然语言解释器，将用户的语言指令映射到具体的图像处理操作上。通过用户研究，验证了接口的有效性，展示了其在简化编辑流程和提高用户互动体验方面的潜力。
+Radford等人\cite{radford2021learning}模型的新型图像编辑方法。这种方法利用了扩散模型的生成能力和CLIP的语义理解能力，以实现通过文本描述来精确控制图像的内容和属性的编辑。
+Chen等人\cite{chen2018language}提出一种基于语言的图像编辑方法，通过递归注意模型允许用户用自然语言描述来指导图像编辑过程。
+Kawar等人\cite{kawar2023imagic}利用扩散模型和文本描述来进行真实图像的编辑，并允许细粒度控制和高度个性化的编辑。
+Cheng等人\cite{cheng2020sequential}介绍了一个用于交互式图像编辑的顺序注意力GAN模型，允许用户通过多轮对话逐步指导图像编辑。
+Ghodrati等人\cite{ghodrati2015towards}研究了自动图像编辑的可能性，通过机器学习方法让系统能够根据用户的需求生成或修改图像。
+Brooks等人\cite{brooks2023instructpix2pix}使用pix2pix模型学习遵循图像编辑指令，使得模型能够根据文字描述自动进行图像编辑。
+Avrahami等人\cite{avrahami2022blended}使用自然语言界面和数据驱动的图像生成技术进行文本驱动的图像编辑。
+Zhou等人\cite{zhou2022tigan}提出了一种基于文本的交互式图像生成和操作框架。
+Lee等人\cite{lee2023shape}对基于形状感知的文本驱动分层视频编辑方法进行探索。
+Dong等人\cite{dong2023prompt}使用扩散模型，为基于文本的图像编辑提供一种新的反演方法。
+Li等人\cite{li2023lightweight}提供了通过解耦内容和属性以进行轻量级的基于文本驱动的图像编辑的方法。
 
 \section{项目内容及创新点}
 \subsection{项目内容}
@@ -271,7 +271,7 @@ beego是一个使用Go语言开发的开源Web框架，它支持快速开发各�
 本项目使用beego框架构建了Middleware组件以提供多个API服务，以便GUI可以高效地使用各种模型和工具。
 
 \section{本章小结}
-在本章中，我们深入探讨了与多模态图像编辑系统相关的关键技术，首先详细介绍了扩散模型的工作原理及其在图像生成中的应用，接着讨论了大语言模型的相关信息与LoRA微调技术，最后概述了系统开发中使用的主要工具和方法。本章不仅为理解系统的技术基础提供了理论支撑，也为后续章节中系统设计和实现的详细讨论奠定了基础。
+本章深入探讨了与多模态图像编辑系统相关的关键技术，首先详细介绍了扩散模型的工作原理及其在图像生成中的应用，接着讨论了大语言模型的相关信息与LoRA微调技术，最后概述了系统开发中使用的主要工具和方法。本章不仅为理解系统的技术基础提供了理论支撑，也为后续章节中系统设计和实现的详细讨论奠定了基础。
 
 
 
@@ -330,7 +330,7 @@ Middleware负责处理来自GUI的请求，在本系统中起到了桥梁的作�
 图形用户界面是现代软件项目中不可或缺的组成部分，它极大地提升了应用程序的可访问性和用户体验。GUI通过可视化元素如按钮、图标和菜单等，允许用户以直观的方式与系统进行交互，简化了操作过程并降低了用户的使用门槛。
 本项目所构建的GUI为用户提供了一个交互方式简单且功能强大的图形用户界面，通过图形化的方式展示信息和选择，使得用户能够通过简单的点击或触摸来执行命令或更改设置。
 GUI虽然承担计算任务较少，但却是承载本项目结构与逻辑的关键部分。通过使用符合规则的指令作为中枢，
-GUI打通了大语言模型和图像生成模型之间的壁垒，使基于LLM的创新交互式图像编辑系统成为可能。GUI的模块构成如 表4-1 ：
+GUI打通了大语言模型和图像生成模型之间的壁垒，使基于LLM的创新交互式图像编辑系统成为可能。GUI的模块构成如 表4-1 。
 \begin{bupttable}{GUI模块}{table_gui_modules}
     \begin{tabular}{|l|l|}
         \hline \textbf{模块} & \textbf{描述} \\
@@ -464,7 +464,7 @@ functools.lru\_cache是python标准库中functools模块提供的一个装饰器
 \end{figure}
 
 
-\subsection{多模态}
+\subsection{多模态信息导入}
 如何打通大语言模型和图像生成模型是本项目的关键。本项目通过特定的prompt和图像分割结果，使用大语言模型生成JSON格式的指令并校验，并支持多轮对话。
 用户可有选择性地执行生成的指令或执行全部指令。系统首先会按照给定的规则对指令进行预处理和排序，然后通过指令生成请求参数来调用图像生成模型。多模态任务的实现方式如图4-5。
 \buptfigure[width=0.7\textwidth]{pictures/multimodal.png}{多模态实现方式}{multimodal_TMP}
@@ -475,9 +475,9 @@ JSON（JavaScript Object Notation）是一种轻量级的数据交换格式，�
 在JSON中，数据以键值对的形式存在，可以表示数组、布尔值、数字、对象或字符串。由于其简洁性和易于交互的特性，JSON已成为Web应用中数据交换的主流技术。
 由于JSON应用范围广且大语言模型JSON处理能力较强，本项目采用此格式来承载大语言模型和图像生成模型的联系。
 
-通过特定的prompt和图像分割结果以及用户输入的修改意图，本项目可使用GPT3.5Turbo、GPT4Turbo、
-微调后的ChatGLM2-6B生成JSON指令。例：当图像分割结果为Background, Hair, Upper-clothes, Dress, Face, Right-arm，用户输入为
-“将背景更换为蓝天白云，将衣服更改为白色的T-shirt”时，生成的JSON指令如 代码4-1 所示。
+通过特定的prompt和图像分割结果以及用户输入的修改意图，本项目可使用不同的大语言模型（如GPT3.5Turbo、GPT4Turbo、
+微调后的ChatGLM2-6B）生成JSON指令。例：当图像分割结果为Background, Hair, Upper-clothes, Dress, Face, Right-arm，用户输入为
+“将背景更换为蓝天白云，将衣服更改为白色的T-shirt”时，生成的JSON指令如 代码4-1 所2示。
 
 \begin{lstlisting}[language=Python, caption=生成的指令, label=plus, tabsize=2]  
     [
@@ -812,7 +812,7 @@ roop\footnote{https://github.com/s0md3v/sd-webui-roop}是一个用于stable-diff
 您可在Auto模块中的Test LLM选择测试集并指定测试样本数量和线程数以对LLM指令生成合格率进行测试。
 
 \section{本章小结}
-在本章中，我们展示了基于LLM的交互式多模态图像编辑系统的实际运行效果和用户使用方法，提供了详细的用户操作指南，确保用户能够充分利用系统功能进行图像编辑。
+本章展示了基于LLM的交互式多模态图像编辑系统的实际运行效果和用户使用方法，提供了详细的用户操作指南，确保用户能够充分利用系统功能进行图像编辑。
 
 \chapter{项目管理与维护} % 1755 + 149 + 26 = 1930
 \section{代码管理}
@@ -862,7 +862,7 @@ CD扩展了CI的概念，不仅包括自动化测试，还包括自动化部署�
 这些镜像将在构建完成后被标记并推送到DockerHub账户下，确保最新的容器镜像版本可供部署和分发。此自动化流程加快了软件的交付速度，保证了镜像的最新状态和可用性。名为“Docker Image CI for ARM64”的Action通过相同的方式实现了适用于arm64架构的镜像的构建与发布。
 
 \section{本章小结}
-在本章中，我们探讨了项目管理与维护的关键策略和实践，确保了基于LLM的交互式多模态图像编辑系统的高效开发和长期可持续性发展。本章详细介绍了项目的代码管理方式、自动化测试以及持续集成与部署的实施方法。这些管理和维护策略不仅提高了开发过程的效率，也确保了系统在实际部署后的稳定性和可靠性，为未来可能的功能扩展和技术升级打下了坚实的基础。
+本章探讨了项目管理与维护的关键策略和实践，确保了基于LLM的交互式多模态图像编辑系统的高效开发和长期可持续性发展。本章详细介绍了项目的代码管理方式、自动化测试以及持续集成与部署的实施方法。这些管理和维护策略不仅提高了开发过程的效率，也确保了系统在实际部署后的稳定性和可靠性，为未来可能的功能扩展和技术升级打下了坚实的基础。
 
 \chapter{总结及未来展望} % 1555
 \section{总结}
