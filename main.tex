@@ -218,8 +218,8 @@ Stable Diffusion\cite{rombach2022high} 是一种基于扩散模型的深度学�
 以开源项目stable-diffusion-webui\footnote{https://github.com/AUTOMATIC1111/stable-diffusion-webui}为基础，
 结合sd-webui-controlnet和sd-webui-roop等扩展，通过 API 为Middleware提供服务。当Stable Diffusion模型不可用时，系统则会调用OpenAI的DALL-E 2模型。DALL-E 2 是一个先进的图像生成模型，可以根据用户提供的文本描述生成详细、高质量的图像，其核心优势在于其创造力和多样性，能够在遵循描述的同时，创造出独特和富有创意的视觉内容。
 
-\section{基于扩散模型的可控图像生成}
-ControlNet\cite{zhang2023adding}是一种新的神经网络架构，用于在大型预训练的文本到图像扩散模型中添加空间条件控制。ControlNet的核心是利用预训练模型的深层和健壮的编码层作为强大的支撑，学习多种条件控制。该网络通过零初始化的卷积层（zero convolutions）连接，这些层从零开始逐步增长参数，确保训练初期不会引入有害的噪声。
+% \section{基于扩散模型的可控图像生成}
+ControlNet\cite{zhang2023adding}是一种新的神经网络架构，用于在大型预训练的文本到图像扩散模型中添加空间条件控制。ControlNet的核心是利用预训练模型的深层和健壮的编码层作为强大的支撑，学习多种条件控制。该网络通过零初始化的卷积层（Zero Convolutions）连接，这些层从零开始逐步增长参数，确保训练初期不会引入有害的噪声。
 通过使用ControlNet，用户可以更精细地控制图像生成过程，使生成的图像更贴近用户的具体需求，尤其是在空间布局和细节表达上。这种方法能够有效地减少试错循环，提高图像生成的效率和质量。其与Stable Diffusion结合的方式如图2-1所示（图片摘自论文Adding Conditional Control to Text-to-Image Diffusion Models\cite{zhang2023adding}）。
 \buptfigure[width=0.5\textwidth]{pictures/SDCN.png}{ControlNet与Stable Diffusion结合}{SDCN_TMP}
 
@@ -267,7 +267,7 @@ LoRA通过在每个Transformer层中注入可训练的低秩矩阵对权重进�
 Gradio 是一个开源的 Python 库，旨在简化为机器学习模型创建自定义用户界面的过程。
 本项目使用Gradio框架构建了GUI组件以提供简单易用的交互界面。
 
-beego是一个使用Go语言开发的开源Web框架，它支持快速开发各种应用程序，包括API、Web应用和后端服务。该框架设计灵感来源于Tornado、Sinatra和Flask，结合了Go的接口（interface）和结构体嵌入（struct embedding）等特性，提供了高效的性能和简便的操作​ 。
+beego是一个使用Go语言开发的开源Web框架，它支持快速开发各种应用程序，包括API、Web应用和后端服务。该框架设计灵感来源于Tornado、Sinatra和Flask，结合了Go的接口（Interface）和结构体嵌入（Struct Embedding）等特性，提供了高效的性能和简便的操作​ 。
 本项目使用beego框架构建了Middleware组件以提供多个API服务，以便GUI可以高效地使用各种模型和工具。
 
 \section{本章小结}
@@ -578,10 +578,10 @@ GUI都能通过相同的结构化请求方式访问不同的服务。
 
 \subsection{使用Beego框架提供API服务}
 本项目使用beego框架构建了Middleware组件提供了多个API服务，以便GUI可以高效地使用各种模型和工具。
-$PostSDTxt2Img$和$PostSDImg2Img$是通过Stable Diffusion模型来生成或修改图像的API，这使得用户能够通过简单的API调用，进行复杂的图像生成和编辑操作。$GetLoras$这个API用于获取Stable Diffusion模型可用的LoRA模型列表。
-$PostDALLE2Edit$利用DALL-E2模型修改图片，这进一步扩展了图像处理的能力，在Stable Diffusion模型不可用时作为替代。
-$PostHuggingFaceImgSegment$ API通过可在部署在本地的分割模型不可用时通过调用Hugging Face上的图像分割模型API来实现图像分割。
-在文本处理方面，$PostGPT3Dot5Turbo$、$PostGPT4Turbo$和$PostGPT4V$等API利用OpenAI的不同版本GPT模型来处理指令理解和生成任务，$PostChatGLM2\_6B$可调用微调后的ChatGLM2-6B模型来进行指令生成。
+PostSDTxt2Img和PostSDImg2Img是通过Stable Diffusion模型来生成或修改图像的API，这使得用户能够通过简单的API调用，进行复杂的图像生成和编辑操作。GetLoras这个API用于获取Stable Diffusion模型可用的LoRA模型列表。
+PostDALLE2Edit利用DALL-E2模型修改图片，这进一步扩展了图像处理的能力，在Stable Diffusion模型不可用时作为替代。
+PostHuggingFaceImgSegment通过可在部署在本地的分割模型不可用时通过调用Hugging Face上的图像分割模型API来实现图像分割。
+在文本处理方面，PostGPT3Dot5Turbo、PostGPT4Turbo和PostGPT4V等API利用OpenAI的不同版本GPT模型来处理指令理解和生成任务，PostChatGLM2\_6B可调用微调后的ChatGLM2-6B模型来进行指令生成。
 
 \section{LLM的微调} % 1820 + 119 + 197 = 2136
 大语言模型（LLM）的微调是一种在预训练模型基础上通过特定数据集进一步训练的过程，用于优化模型在特定任务或场景中的表现。特别是对于参数量较小的LLM，微调不仅可以提升其性能，还能增强其针对具体任务的适应性和泛化能力。
@@ -610,7 +610,7 @@ $PostHuggingFaceImgSegment$ API通过可在部署在本地的分割模型不可�
 
 
 \subsection{ChatGLM2-6B针对指令生成任务的微调}
-LoRA: Low-Rank Adaptation of Large Language Models\cite{hu2021lora}这篇论文提出了一种新颖且高效的$LoRA$微调方法，用于微调大型预训练语言模型以适应特定任务。传统的微调方法往往需要重新训练模型的所有参数，而全参数训练的方法在模型参数规模庞大时需要巨大的量。算法主要通过在Transformer模型的每一层中注入低秩的分解矩阵来更新权重，而不改动预训练的权重，其具体算法描述见算法9。
+LoRA: Low-Rank Adaptation of Large Language Models\cite{hu2021lora}这篇论文提出了一种新颖且高效的LoRA微调方法，用于微调大型预训练语言模型以适应特定任务。传统的微调方法往往需要重新训练模型的所有参数，而全参数训练的方法在模型参数规模庞大时需要巨大的量。算法主要通过在Transformer模型的每一层中注入低秩的分解矩阵来更新权重，而不改动预训练的权重，其具体算法描述见算法9。
 \begin{algorithm}
 	\begin{spacing}{1.3}
 		\floatname{algorithm}{算法}
@@ -634,7 +634,7 @@ LoRA: Low-Rank Adaptation of Large Language Models\cite{hu2021lora}这篇论文�
 \end{algorithm}
 
 
-本项目使用生成的指令生成任务数据集结合$LoRA$方法，通过开源项目LLaMA-Factory\footnote{https://github.com/hiyouga/LLaMA-Factory}对ChatGLM2-6B模型进行微调。
+本项目使用生成的指令生成任务数据集结合LoRA方法，通过开源项目LLaMA-Factory\footnote{https://github.com/hiyouga/LLaMA-Factory}对ChatGLM2-6B模型进行微调。
 LoRA微调在大语言模型上的训练损失随训练步数变化的情况如 图4-7所示。从图中可以看出，最初损失值很高，但随着训练步数的增加，损失值迅速下降，特别是在前50步之内下降最为显著。
 在经过约50步之后，损失下降的速度开始放缓，但仍然持续下降，表明模型继续从训练数据中学习。在约200步之后，损失曲线趋于平缓，说明模型已经接近收敛，额外的训练步骤在减少损失方面的效果变得有限。
 图中还展示了一个平滑处理的损失曲线，更清晰地显示了训练过程的整体趋势，而不是每一步的波动。
@@ -870,7 +870,7 @@ CD扩展了CI的概念，不仅包括自动化测试，还包括自动化部署�
 系统的核心在于其能够通过简单的与大语言模型聊天的方式来自动化地生成图像编辑的指令从而调用图像生成模型来执行复杂的图像编辑任务。从系统架构层面，打通大语言模型和图像生成模型需要两个主要组件的协同工作：一个直观的图形用户界面（GUI）和一个功能强大的中间件（Middleware）。
 
 图形用户界面（GUI）的设计充分考虑了易用性和高效性，使得即使是没有图像编辑经验的用户也能够轻松使用。通过各个简洁明了的模块，用户可以执行包括文本交互、图像自动遮罩、更换面部、参数设置等多种任务。
-GUI既为用户提供了足够简单易用的自动化操作，也能让用户对如遮罩生成等高精度要求的操作进行手动的调整。GUI不仅提高了操作的直观性，还通过使用中间件（middlreware）访问一些对资源需求较大的模型，极大地降低了对用户设备性能的需求。
+GUI既为用户提供了足够简单易用的自动化操作，也能让用户对如遮罩生成等高精度要求的操作进行手动的调整。GUI不仅提高了操作的直观性，还通过使用中间件（Middlreware）访问一些对资源需求较大的模型，极大地降低了对用户设备性能的需求。
 
 项目的中间件（Middleware）部分是整个系统的枢纽。它整合了多个不同平台、不同请求格式、不同返回格式的API，包括图像生成模型如Stable Diffusion、DALL-E2和大语言模型如ChatGLM2-6B、GPT-3.5 Turbo和GPT-4 Turbo。
 中间件（Middleware）的设计保证了这些模型的高效协同工作，支持了GUI所需的从文本交互到图像编辑的一系列高级功能。此外，中间件（Middleware）还处理所有后端逻辑，包括一对多且互相隔离的服务、以及用户请求的响应。
